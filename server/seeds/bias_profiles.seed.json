@@ -1,0 +1,15 @@
+[
+  {
+    "agent":"AEGIS","model":"veritas-v6-core","purpose":"screening decision",
+    "stakeholders":[{"group":"student","role":"impacted"}],
+    "potential_harms":[{"type":"disparate_impact"}],
+    "impacted_groups":["youth","ELL"],
+    "mitigations":[{"action":"facilitator review","status":"active"}],
+    "evaluation_notes":"seeded profile","risk_rating":2
+  },
+  {
+    "agent":"TEMPUS","model":"veritas-v6-core","purpose":"weekly checkpoint",
+    "stakeholders":[{"group":"system","role":"operator"}],
+    "evaluation_notes":"Scheduled CVT checkpoint","risk_rating":0
+  }
+]

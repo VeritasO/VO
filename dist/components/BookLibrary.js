@@ -1,0 +1,11 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.BookLibrary = BookLibrary;
+const jsx_runtime_1 = require("react/jsx-runtime");
+const library_1 = require("../doctrine/library");
+function BookLibrary() {
+    return ((0, jsx_runtime_1.jsxs)("div", { className: "p-6", children: [(0, jsx_runtime_1.jsxs)("div", { className: "flex justify-between items-center mb-6", children: [(0, jsx_runtime_1.jsx)("h2", { className: "text-2xl font-bold", children: "Doctrinal Library" }), (0, jsx_runtime_1.jsxs)("div", { className: "text-sm text-gray-600", children: ["Version ", library_1.doctrine.version, " \u2022 ", library_1.doctrine.books.length, " books \u2022 ", library_1.doctrine.codifications.length, " codifications"] })] }), (0, jsx_runtime_1.jsx)("div", { className: "grid gap-4 mb-8", children: library_1.doctrine.books.map((book) => ((0, jsx_runtime_1.jsxs)("div", { className: "border border-gray-200 rounded-lg p-4 bg-white shadow-sm", children: [(0, jsx_runtime_1.jsxs)("div", { className: "flex justify-between items-start mb-2", children: [(0, jsx_runtime_1.jsx)("h3", { className: "font-semibold text-lg", children: book.title }), (0, jsx_runtime_1.jsx)("span", { className: `px-2 py-1 rounded text-xs ${book.status === "active" ? "bg-green-100 text-green-800" :
+                                        book.status === "draft" ? "bg-yellow-100 text-yellow-800" :
+                                            "bg-gray-100 text-gray-800"}`, children: book.status })] }), (0, jsx_runtime_1.jsx)("p", { className: "text-gray-600 text-sm mb-3", children: book.description }), (0, jsx_runtime_1.jsxs)("div", { className: "text-xs text-gray-500", children: ["Chapters: ", book.chapters.join(" • ")] })] }, book.id))) }), library_1.doctrine.codifications.length > 0 && ((0, jsx_runtime_1.jsxs)("div", { children: [(0, jsx_runtime_1.jsx)("h3", { className: "text-lg font-semibold mb-4", children: "Recent Codifications" }), (0, jsx_runtime_1.jsx)("div", { className: "space-y-2", children: library_1.doctrine.codifications.slice(-5).map((codification, index) => ((0, jsx_runtime_1.jsx)("div", { className: "text-sm bg-gray-50 p-3 rounded border-l-4 border-blue-500", children: codification }, index))) })] }))] }));
+}
+//# sourceMappingURL=BookLibrary.js.map

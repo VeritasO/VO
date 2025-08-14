@@ -1,0 +1,17 @@
+{
+  "system_dials": {
+    "headwinds": [
+      {"label":"RJ school policy controversy","value":65,"note":"Media & policy pressure"},
+      {"label":"Staffing & training gaps","value":40}
+    ],
+    "evidence": [
+      {"label":"RCT youth felonies","value":80},
+      {"label":"CoSA reintegration","value":75}
+    ]
+  },
+  "aegis_fairness_drift_series": [
+    {"week":"2025-07-07","value":42},
+    {"week":"2025-07-14","value":55},
+    {"week":"2025-07-21","value":61}
+  ]
+}

@@ -1,0 +1,102 @@
+{
+  "version": "1.0",
+  "mode": "standard",
+  "schedule": {
+    "standard": "0 9 * * MON",
+    "high_growth": "0 9 * * MON,THU",
+    "emergency": "manual"
+  },
+  "domains": ["AEGIS", "KAIROS", "LYRA", "ORION", "THALEA", "VESTA", "MIRRA", "JUNO", "SENTINEL"],
+  "queries": {
+    "AEGIS": [
+      "Summarize 3 recent (≤12mo) studies on sentencing disparities or algorithmic bias; extract methods, region, sample size, and equity implications.",
+      "Identify 2 government/NGO fairness audits of justice programs; note key findings, limitations, and recommended fixes."
+    ],
+    "KAIROS": [
+      "Surface 3 new findings on grief/trauma pacing in restorative processes; include cultural variance and practice guidance.",
+      "Collect 2 protocols for timing decisions (when to pause vs proceed) with evidence of outcomes."
+    ],
+    "LYRA": [
+      "Find 3 restorative case narratives (any region; any offense) with concrete steps, consent model, and outcome metrics.",
+      "Document 2 testimonies showing narrative repair for victims; extract facilitation moves that enabled safety."
+    ],
+    "ORION": [
+      "List 2 updates to RJ-anchored laws/policies in the last 12 months; quote statutory language or official guidance.",
+      "Compare one hybrid court–RJ model and one Indigenous/customary model; map rights protections and risks."
+    ],
+    "THALEA": [
+      "Gather 2 ecologically grounded repair projects linked to harm; capture practice steps and community roles.",
+      "Identify one city- or campus-level initiative connecting service, land, and reconciliation; record measurable effects."
+    ],
+    "VESTA": [
+      "Catalogue 3 reconciliation rites or symbolic acts from distinct cultures; include meanings, steps, and adaptation cautions.",
+      "Find 1 digital/online restorative tool enabling apology, circles, or agreements; summarize features and safeguards."
+    ],
+    "MIRRA": [
+      "From this cycle's results, detect contradictions with existing doctrine; propose 2–3 resolution options and reflection prompts."
+    ],
+    "JUNO": [
+      "Review all agent findings for doctrinal consistency; identify 2-3 areas requiring immediate integration or clarification.",
+      "Synthesize cycle outputs into 3 doctrinal amendments and 3 practice templates; include proportionality notes and risk flags."
+    ],
+    "SENTINEL": [
+      "Monitor system integrity across all agent domains; detect anomalies in data patterns, agent behaviors, or doctrinal inconsistencies.",
+      "Scan for narrative freeze conditions, grief avoidance loops, and contradiction echoes that other agents may have missed.",
+      "Generate surveillance report on overall system health and recommend immediate interventions for any critical issues."
+    ]
+  },
+  "tagging_schema": {
+    "fields": ["agent", "book_ref", "justice_tier", "harm_type", "region", "source", "date", "confidence"],
+    "defaults": {"confidence": 0.7},
+    "books_map": {
+      "AEGIS": ["Book I", "Book X"],
+      "KAIROS": ["Book IV", "Book II"],
+      "LYRA": ["Book I", "Book II"],
+      "ORION": ["Book I", "Book V"],
+      "THALEA": ["Book V"],
+      "VESTA": ["Book VI"],
+      "MIRRA": ["Book XII"],
+      "JUNO": ["Book I", "Book XIII"],
+      "SENTINEL": ["Book VII", "Book IX"]
+    }
+  },
+  "output_format": {
+    "type": "json",
+    "shape": {
+      "cycle_date": "YYYY-MM-DD",
+      "items": [
+        {
+          "agent": "string",
+          "summary": "string",
+          "insights": ["string"],
+          "book_ref": ["Book II"],
+          "justice_tier": "low|medium|high|extreme",
+          "harm_type": "property|violent|sexual|white_collar|digital|environmental|symbolic",
+          "region": "string",
+          "source": "uri or citation",
+          "date": "YYYY-MM-DD",
+          "confidence": 0.0
+        }
+      ],
+      "contradictions": [
+        {"id": "mirra-001", "description": "string", "severity": 1, "proposals": ["string"]}
+      ],
+      "doctrine_updates": [
+        {"id": "juno-001", "book": "Book II", "change": "string", "rationale": "string"}
+      ]
+    }
+  },
+  "integration_targets": {
+    "save_to": "../data/growth_logs/",
+    "books_dir": "../books/",
+    "portal_feed": "../../../frontend/public/growth_feed.json"
+  },
+  "thresholds": {
+    "min_items_per_agent": 2,
+    "contradiction_trigger": 1,
+    "doctrine_update_min": 1,
+    "min_confidence": 0.7,
+    "max_contradictions": 5,
+    "require_source": true
+  }
+}

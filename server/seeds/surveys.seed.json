@@ -1,0 +1,5 @@
+[
+  {"case_id":"CASE-001","role":"survivor","kind":"meaning","score":78},
+  {"case_id":"CASE-001","role":"survivor","kind":"safety","score":74},
+  {"case_id":"CASE-002","role":"responsible","kind":"meaning","score":69}
+]

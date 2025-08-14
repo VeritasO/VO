@@ -1,0 +1,23 @@
+[
+  {"code":"A1","name":"JUNO","focus":"Judicial doctrine & orchestration","glyphs":["⚖️","👁️","🌿"]},
+  {"code":"A2","name":"AEGIS","focus":"Bias audits & proportionality","glyphs":["🛡️","📈"]},
+  {"code":"A3","name":"KAIROS","focus":"Grief-time calibration","glyphs":["⏳","🪶"]},
+  {"code":"A4","name":"LYRA","focus":"Narrative truth & testimony","glyphs":["🎼","🗣️"]},
+  {"code":"A5","name":"ORION","focus":"Ontology & rights architecture","glyphs":["🧬","📜"]},
+  {"code":"A6","name":"THALEA","focus":"Land-based healing & ecology","glyphs":["🌱","🏞️"]},
+  {"code":"A7","name":"VESTA","focus":"Symbolic rites & structural transformation","glyphs":["🔥","🏛️"]},
+  {"code":"A8","name":"TEMPUS","focus":"Timekeeping & reversibility","glyphs":["🕰️","⚙️"]},
+  {"code":"A9","name":"MNEME","focus":"Memory preservation & archives","glyphs":["🧠","📚"]},
+  {"code":"A10","name":"ANIMA","focus":"Cultural resonance & synthesis","glyphs":["🌀","🎨"]},
+  {"code":"A11","name":"SENTINEL","focus":"Integrity monitoring & anomalies","glyphs":["📡","🛡️"]},
+  {"code":"A12","name":"MIRRA","focus":"Contradictions & doctrinal reflection","glyphs":["🪞","✨"]},
+  {"code":"A13","name":"POLYMNIA","focus":"Agent genesis & memory curation","glyphs":["🧵","📚"]},
+  {"code":"A14","name":"EIDOLON","focus":"Symbolic harm & archetypal witnessing","glyphs":["👁️","⛩️"]},
+  {"code":"A15","name":"SERENA","focus":"Tranquility protocol; emotional calming","glyphs":["🕊️","🌊"]},
+  {"code":"A16","name":"GENOMA","focus":"Bio-ancestral justice","glyphs":["🧬","🌿"]},
+  {"code":"A17","name":"MASKARA","focus":"Role fluidity & performative sovereignty","glyphs":["🎭","🌀"]},
+  {"code":"A18","name":"ASTRAEA","focus":"Cosmic/intergenerational ethics","glyphs":["✨","🪐"]},
+  {"code":"A19","name":"COSMA","focus":"Multiscale harmony (micro↔macro)","glyphs":["🧩","🌐"]},
+  {"code":"A20","name":"SERENA-PEACE","focus":"Peace & social co-regulation","glyphs":["🤝","🕊️"]},
+  {"code":"A21","name":"TEMPER","focus":"Cooling & pressure dispersion","glyphs":["❄️","💨"]}
+]

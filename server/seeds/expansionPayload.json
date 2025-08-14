@@ -1,0 +1,23 @@
+{
+  "cvt_timestamp": "2025-08-14T00:00:00-04:00",
+  "doctrine_refs": ["Book I","Book II","Book V","Book VII","Book VIII"],
+  "standards": {
+    "algorithmic_bias": {
+      "name": "IEEE 7003-2024",
+      "status": "Active",
+      "integration": [
+        "Bias Profile per model/agent decision",
+        "Lifecycle checkpoints aligned to CVT",
+        "Audit fields: data sources, harms, impacted groups, mitigation"
+      ]
+    }
+  },
+  "agents": {
+    "AEGIS": { "focus": "Bias & proportionality" },
+    "LYRA":  { "focus": "Narrative outcomes" },
+    "ORION": { "focus": "Rights & reintegration" },
+    "TEMPUS":{ "focus": "Temporal integrity" },
+    "THALEA":{ "focus": "Community restoration" },
+    "VESTA": { "focus": "Symbolic rites" }
+  }
+}

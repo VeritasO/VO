@@ -1,0 +1,18 @@
+[
+  {
+    "id":"CASE-001",
+    "source":"DA-precharge",
+    "charge_type":"Property/Theft",
+    "severity_band":"S2",
+    "status":"Agreement",
+    "cohort_key":"pilot-2025Q3"
+  },
+  {
+    "id":"CASE-002",
+    "source":"School-admin",
+    "charge_type":"School misconduct",
+    "severity_band":"S1",
+    "status":"Accepted",
+    "cohort_key":"pilot-2025Q3"
+  }
+]

@@ -1,0 +1,1042 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="veritas">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Veritas.O — Enhanced Dashboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root {
+      --bg-grad-from: 17 24 39;
+      --bg-grad-via: 15 23 42;
+      --bg-grad-to: 2 6 23;
+      --card: 15 23 42;
+      --card-border: 51 65 85;
+      --muted: 148 163 184;
+      --text: 226 232 240;
+      --accent: 52 211 153;
+      --accent-strong: 16 185 129;
+      --alert: 249 115 22;
+      --info: 56 189 248;
+      --ritual: 236 72 153;
+    }
+    
+    [data-theme="veritas"] .glass { 
+      backdrop-filter: blur(12px); 
+      background: rgba(15, 23, 42, 0.7);
+      border: 1px solid rgba(51, 65, 85, 0.5);
+    }
+    
+    .ring-accent { 
+      box-shadow: 0 0 0 2px rgba(52, 211, 153, 0.3), 0 0 20px -4px rgba(52, 211, 153, 0.2); 
+    }
+    
+    .elevate { 
+      box-shadow: 0 10px 32px -8px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(51, 65, 85, 0.3); 
+    }
+    
+    .fade-in { 
+      animation: fadeIn 0.3s ease-out both; 
+    }
+    
+    .slide-up { 
+      animation: slideUp 0.4s ease-out both; 
+    }
+    
+    .pulse-gentle { 
+      animation: pulseGentle 2s ease-in-out infinite; 
+    }
+    
+    @keyframes fadeIn { 
+      from { opacity: 0; transform: translateY(8px); } 
+      to { opacity: 1; transform: translateY(0); } 
+    }
+    
+    @keyframes slideUp { 
+      from { opacity: 0; transform: translateY(16px); } 
+      to { opacity: 1; transform: translateY(0); } 
+    }
+    
+    @keyframes pulseGentle { 
+      0%, 100% { opacity: 1; } 
+      50% { opacity: 0.7; } 
+    }
+    
+    .command-palette {
+      background: rgba(15, 23, 42, 0.95);
+      backdrop-filter: blur(16px);
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
+    }
+    
+    .toast {
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      z-index: 9999;
+      max-width: 400px;
+      animation: slideInRight 0.3s ease-out;
+    }
+    
+    @keyframes slideInRight {
+      from { transform: translateX(100%); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+    
+    .agent-card:hover {
+      transform: translateY(-4px);
+      transition: all 0.2s ease;
+    }
+    
+    .scrollbar-thin::-webkit-scrollbar {
+      width: 6px;
+    }
+    
+    .scrollbar-thin::-webkit-scrollbar-track {
+      background: rgb(51, 65, 85, 0.3);
+      border-radius: 3px;
+    }
+    
+    .scrollbar-thin::-webkit-scrollbar-thumb {
+      background: rgb(148, 163, 184, 0.5);
+      border-radius: 3px;
+    }
+    
+    .scrollbar-thin::-webkit-scrollbar-thumb:hover {
+      background: rgb(148, 163, 184, 0.8);
+    }
+  </style>
+</head>
+<body class="min-h-screen bg-[radial-gradient(1200px_600px_at_-10%_-10%,rgba(52,211,153,0.08),transparent_55%),radial-gradient(1000px_500px_at_110%_10%,rgba(56,189,248,0.06),transparent_45%),linear-gradient(to_br,rgb(17,24,39),rgb(15,23,42),rgb(2,6,23))] text-slate-100">
+  <div class="min-h-screen flex" id="app">
+
+    <!-- Sidebar -->
+    <aside id="sidebar" class="w-80 glass border-r border-slate-700/70 p-6 space-y-6 flex-shrink-0 transition-all duration-300">
+      <div class="flex items-center justify-between">
+        <div class="fade-in">
+          <h1 class="text-2xl font-bold tracking-tight">
+            <span class="text-emerald-300">Veritas</span><span class="text-slate-300">.O</span>
+          </h1>
+          <p class="mt-1 text-xs text-slate-500">Enhanced Dashboard v2.0</p>
+          <div class="mt-2 flex items-center gap-2 text-xs">
+            <div class="px-2 py-1 bg-emerald-900/50 text-emerald-300 rounded-full">CVT: +1427</div>
+            <div class="px-2 py-1 bg-orange-900/50 text-orange-300 rounded-full pulse-gentle">RITUAL ACTIVE</div>
+          </div>
+        </div>
+        <div class="flex flex-col gap-2">
+          <button id="collapseBtn" class="p-2 rounded-lg border border-slate-600 text-slate-400 hover:bg-slate-800 hover:text-slate-200 transition-colors" title="Collapse sidebar (⇧ C)">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M18.75 19.5l-7.5-7.5 7.5-7.5m-6 15L5.25 12l7.5-7.5"/>
+            </svg>
+          </button>
+          <button id="densityToggle" class="p-2 rounded-lg border border-slate-600 text-slate-400 hover:bg-slate-800 hover:text-slate-200 transition-colors" title="Toggle density">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <div>
+        <h2 class="text-sm font-bold text-emerald-300 mb-3 flex items-center gap-2">
+          🔗 Navigation
+          <button id="commandBtn" class="ml-auto text-xs px-2 py-1 bg-slate-800 border border-slate-600 rounded-lg text-slate-400 hover:text-slate-200" title="Command Palette (⌘K)">
+            ⌘K
+          </button>
+        </h2>
+        <nav class="space-y-1 text-sm">
+          <button data-tab="overview" class="nav-btn w-full text-left px-4 py-3 rounded-xl hover:bg-slate-800/80 focus:ring-2 focus:ring-emerald-500/50 transition-all duration-200 flex items-center gap-3 font-medium">
+            <span class="text-lg">🏠</span> Dashboard
+          </button>
+          <button data-tab="items" class="nav-btn w-full text-left px-4 py-3 rounded-xl hover:bg-slate-800/80 transition-all duration-200 flex items-center gap-3">
+            <span class="text-lg">🧾</span> Growth Items <span class="ml-auto text-xs bg-emerald-900 text-emerald-300 px-2 py-1 rounded-full" id="itemsCount">0</span>
+          </button>
+          <button data-tab="contradictions" class="nav-btn w-full text-left px-4 py-3 rounded-xl hover:bg-slate-800/80 transition-all duration-200 flex items-center gap-3">
+            <span class="text-lg">🔁</span> Contradictions <span class="ml-auto text-xs bg-orange-900 text-orange-300 px-2 py-1 rounded-full" id="contradictionsCount">0</span>
+          </button>
+          <button data-tab="doctrine" class="nav-btn w-full text-left px-4 py-3 rounded-xl hover:bg-slate-800/80 transition-all duration-200 flex items-center gap-3">
+            <span class="text-lg">📜</span> Doctrine Updates <span class="ml-auto text-xs bg-sky-900 text-sky-300 px-2 py-1 rounded-full" id="doctrineCount">0</span>
+          </button>
+          <button data-tab="agents" class="nav-btn w-full text-left px-4 py-3 rounded-xl hover:bg-slate-800/80 transition-all duration-200 flex items-center gap-3">
+            <span class="text-lg">🧠</span> Agents <span class="ml-auto text-xs bg-purple-900 text-purple-300 px-2 py-1 rounded-full">21</span>
+          </button>
+          <button data-tab="books" class="nav-btn w-full text-left px-4 py-3 rounded-xl hover:bg-slate-800/80 transition-all duration-200 flex items-center gap-3">
+            <span class="text-lg">📘</span> Books <span class="ml-auto text-xs bg-blue-900 text-blue-300 px-2 py-1 rounded-full">27</span>
+          </button>
+          <button data-tab="tribunal" class="nav-btn w-full text-left px-4 py-3 rounded-xl hover:bg-slate-800/80 transition-all duration-200 flex items-center gap-3">
+            <span class="text-lg">⚖️</span> Tribunal
+          </button>
+          <button data-tab="rituals" class="nav-btn w-full text-left px-4 py-3 rounded-xl hover:bg-slate-800/80 transition-all duration-200 flex items-center gap-3">
+            <span class="text-lg">🔮</span> Rituals
+          </button>
+          <button data-tab="settings" class="nav-btn w-full text-left px-4 py-3 rounded-xl hover:bg-slate-800/80 transition-all duration-200 flex items-center gap-3">
+            <span class="text-lg">⚙️</span> Settings
+          </button>
+        </nav>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-1 p-6 space-y-6 overflow-y-auto scrollbar-thin">
+      
+      <!-- Header & Action Bar -->
+      <header class="flex flex-col md:flex-row md:justify-between md:items-center gap-4 fade-in">
+        <div>
+          <h1 class="text-3xl font-bold text-emerald-300 tracking-tight">Dashboard</h1>
+          <p class="text-slate-400 text-sm">Doctrine of Meaningful Thought • Growth Engine Active</p>
+        </div>
+        <div class="flex items-center gap-3">
+          <select id="modeSelect" class="px-3 py-2 bg-slate-800 border border-slate-600 rounded-lg text-sm text-slate-200">
+            <option value="standard">Standard Mode</option>
+            <option value="high_growth">High Growth</option>
+            <option value="emergency">Emergency</option>
+          </select>
+          <button id="runGrowthBtn" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 rounded-lg text-sm font-medium text-white transition-colors flex items-center gap-2">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.347a1.125 1.125 0 0 1 0 1.972l-11.54 6.347c-.75.412-1.667-.13-1.667-.986V5.653Z"/>
+            </svg>
+            Run Growth Now
+          </button>
+          <button id="downloadBtn" class="px-4 py-2 bg-slate-700 hover:bg-slate-600 border border-slate-600 rounded-lg text-sm text-slate-200 transition-colors">
+            Download JSON
+          </button>
+          <button id="reloadBtn" class="p-2 bg-slate-700 hover:bg-slate-600 border border-slate-600 rounded-lg text-slate-200 transition-colors">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182m0-4.991v4.99"/>
+            </svg>
+          </button>
+        </div>
+      </header>
+
+      <!-- Tab Content Container -->
+      <div id="tabContent" class="slide-up">
+        <!-- Content will be dynamically inserted here -->
+      </div>
+
+    </main>
+
+    <!-- Command Palette Overlay -->
+    <div id="commandPalette" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-start justify-center pt-20 hidden">
+      <div class="command-palette w-full max-w-lg mx-4 rounded-2xl border border-slate-700 overflow-hidden">
+        <div class="p-4 border-b border-slate-700">
+          <input id="commandInput" type="text" placeholder="Search commands, tabs, agents..." 
+                 class="w-full bg-transparent text-lg outline-none text-slate-100 placeholder-slate-400">
+        </div>
+        <div id="commandResults" class="max-h-80 overflow-y-auto">
+          <!-- Results populated by JS -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div id="toastContainer"></div>
+
+  </div>
+
+  <script>
+    // ================== APP STATE ==================
+    let appState = {
+      currentTab: 'overview',
+      growthData: null,
+      growthState: null,
+      collapsed: false,
+      dense: false,
+      loading: false
+    };
+
+    // ================== MOCK DATA ==================
+    const mockGrowthData = {
+      version: "1.0",
+      cycle_date: "2025-08-09",
+      generated_at: "2025-08-09T09:15:33.000Z",
+      items_count: 16,
+      items: [
+        {
+          agent: "AEGIS",
+          summary: "Algorithmic bias study reveals 15% disparity in risk assessment scores across racial lines in pretrial decisions",
+          region: "US-CA",
+          date: "2025-08-05",
+          source: "Stanford Justice Lab doi:10.xxxx/bias-study-2025",
+          book_ref: ["Book II"],
+          justice_tier: "institutional",
+          harm_type: "individual",
+          confidence: 0.85
+        },
+        {
+          agent: "KAIROS",
+          summary: "New 3-phase grief pacing protocol shows 40% improvement in victim satisfaction across restorative processes",
+          region: "NZ",
+          date: "2025-08-02",
+          source: "restorative-nz.org/protocols-2025",
+          book_ref: ["Book IV", "Book V"],
+          justice_tier: "community",
+          harm_type: "individual",
+          confidence: 0.92
+        },
+        {
+          agent: "LYRA", 
+          summary: "Circle process with narrative repair achieves 78% completion rate in domestic violence cases when combined with safety planning",
+          region: "CA-BC",
+          date: "2025-08-01",
+          source: "bc-restorative.ca/outcomes-report-2025",
+          book_ref: ["Book III", "Book V"],
+          justice_tier: "community",
+          harm_type: "individual",
+          confidence: 0.88
+        },
+        {
+          agent: "VESTA",
+          summary: "Digital apology platform with guided ritual components reports 67% follow-through on agreements in online mediations",
+          region: "EU-NL",
+          date: "2025-07-30",
+          source: "mediationplatform.nl/impact-2025",
+          book_ref: ["Book VI"],
+          justice_tier: "community", 
+          harm_type: "collective",
+          confidence: 0.79
+        },
+        {
+          agent: "SENTINEL",
+          summary: "System integrity scan reveals anomalous patterns in case processing delays correlating with agent coordination failures",
+          region: "System-Internal",
+          date: "2025-08-09",
+          source: "internal://system-health-2025-08",
+          book_ref: ["Book VII", "Book IX"],
+          justice_tier: "medium",
+          harm_type: "digital",
+          confidence: 0.91
+        },
+        {
+          agent: "SENTINEL", 
+          summary: "Narrative freeze detection algorithm identifies early warning patterns in 74% of stalled restorative processes",
+          region: "System-Analysis",
+          date: "2025-08-07",
+          source: "internal://narrative-analysis-2025",
+          book_ref: ["Book II", "Book VII"],
+          justice_tier: "low",
+          harm_type: "digital",
+          confidence: 0.88
+        }
+      ],
+      contradictions: [
+        {
+          id: "C-2025-08-001",
+          description: "KAIROS grief pacing protocols conflict with LYRA narrative timing requirements in cases involving minors",
+          severity: 4,
+          agents_involved: ["KAIROS", "LYRA"],
+          proposed_resolutions: [
+            "Create hybrid timing-narrative framework for minors",
+            "Establish LYRA priority for under-16 cases", 
+            "Develop case-specific negotiation protocol"
+          ]
+        },
+        {
+          id: "C-2025-08-002",
+          description: "VESTA digital ritual practices lack cultural adaptation safeguards identified by THALEA",
+          severity: 3,
+          agents_involved: ["VESTA", "THALEA"],
+          proposed_resolutions: [
+            "Mandatory cultural consultation for digital rituals",
+            "Community elder approval system",
+            "Opt-out provisions for traditional practices"
+          ]
+        }
+      ],
+      doctrine_updates: [
+        {
+          id: "DU-2025-08-001",
+          book: "Book II: Gentle De-escalation",
+          change: "Added section 2.7: Digital Mediation Protocols with cultural safeguards",
+          rationale: "Growing need for online restorative processes with cultural sensitivity",
+          agent_source: "VESTA"
+        },
+        {
+          id: "DU-2025-08-002", 
+          book: "Book IV: Mental Health & Grief-Integrated Justice",
+          change: "Updated chapter 4: Minor-specific grief pacing with narrative integration",
+          rationale: "Contradiction resolution between KAIROS and LYRA approaches",
+          agent_source: "KAIROS"
+        }
+      ]
+    };
+
+    const mockGrowthState = {
+      mode: "high_growth",
+      last_run: "2025-08-09T09:15:33.000Z",
+      next_runs: ["cron:0 9 * * MON", "cron:0 9 * * THU"],
+      status: "scheduled",
+      cycle_count: 12
+    };
+
+    // ================== UTILITY FUNCTIONS ==================
+    function formatDate(dateString) {
+      if (!dateString) return "—";
+      const date = new Date(dateString);
+      return date.toLocaleDateString() + " " + date.toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'});
+    }
+
+    function showToast(message, type = 'info') {
+      const toast = document.createElement('div');
+      toast.className = `toast px-6 py-3 rounded-xl border text-sm font-medium ${
+        type === 'success' ? 'bg-green-900/90 border-green-700 text-green-300' :
+        type === 'error' ? 'bg-red-900/90 border-red-700 text-red-300' :
+        'bg-slate-900/90 border-slate-700 text-slate-300'
+      }`;
+      toast.textContent = message;
+      
+      document.getElementById('toastContainer').appendChild(toast);
+      
+      setTimeout(() => {
+        toast.style.animation = 'slideInRight 0.3s ease-out reverse';
+        setTimeout(() => toast.remove(), 300);
+      }, 3000);
+    }
+
+    function updateCounts() {
+      if (!appState.growthData) return;
+      
+      document.getElementById('itemsCount').textContent = appState.growthData.items_count || 0;
+      document.getElementById('contradictionsCount').textContent = appState.growthData.contradictions?.length || 0;
+      document.getElementById('doctrineCount').textContent = appState.growthData.doctrine_updates?.length || 0;
+    }
+
+    function renderConfidenceBar(confidence) {
+      const percentage = Math.round(confidence * 100);
+      return `
+        <div class="flex items-center gap-2 text-xs">
+          <div class="flex-1 bg-slate-700 rounded-full h-2">
+            <div class="bg-emerald-400 h-2 rounded-full transition-all duration-300" style="width: ${percentage}%"></div>
+          </div>
+          <span class="text-slate-400 font-mono w-8">${percentage}%</span>
+        </div>
+      `;
+    }
+
+    // ================== TAB CONTENT RENDERERS ==================
+    function renderOverview() {
+      const state = appState.growthState || mockGrowthState;
+      const data = appState.growthData || mockGrowthData;
+      
+      return `
+        <!-- KPI Row -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+          <div class="glass p-6 rounded-2xl elevate">
+            <div class="text-emerald-300 font-bold text-sm uppercase tracking-wide">Mode</div>
+            <div class="text-2xl mt-2 font-bold">${state.mode?.replace('_', ' ') || '—'}</div>
+            <div class="text-slate-400 text-sm mt-1">Current Engine Mode</div>
+          </div>
+          <div class="glass p-6 rounded-2xl elevate">
+            <div class="text-sky-300 font-bold text-sm uppercase tracking-wide">Last Run</div>
+            <div class="text-lg mt-2 font-semibold">${formatDate(state.last_run)}</div>
+            <div class="text-slate-400 text-sm mt-1">Latest Growth Cycle</div>
+          </div>
+          <div class="glass p-6 rounded-2xl elevate">
+            <div class="text-purple-300 font-bold text-sm uppercase tracking-wide">Items</div>
+            <div class="text-2xl mt-2 font-bold">${data.items_count || 0}</div>
+            <div class="text-slate-400 text-sm mt-1">This Cycle</div>
+          </div>
+          <div class="glass p-6 rounded-2xl elevate">
+            <div class="text-orange-300 font-bold text-sm uppercase tracking-wide">Status</div>
+            <div class="text-lg mt-2 font-semibold capitalize">${state.status || 'Unknown'}</div>
+            <div class="text-slate-400 text-sm mt-1">Engine Status</div>
+          </div>
+        </div>
+
+        <!-- Recent Items -->
+        <div class="glass p-6 rounded-2xl elevate mb-8">
+          <h2 class="text-xl font-bold mb-4 text-emerald-300">Recent Growth Items</h2>
+          <div class="space-y-4">
+            ${(data.items || []).slice(0, 3).map(item => `
+              <div class="p-4 bg-slate-800/50 rounded-xl border border-slate-700">
+                <div class="flex items-start justify-between gap-4 mb-2">
+                  <div class="flex items-center gap-3">
+                    <span class="px-2 py-1 bg-emerald-900 text-emerald-300 rounded-lg text-xs font-bold">${item.agent}</span>
+                    <span class="text-slate-400 text-sm">${item.region || '—'}</span>
+                    <span class="text-slate-500 text-xs">${item.date || '—'}</span>
+                  </div>
+                  <div class="text-right">
+                    ${renderConfidenceBar(item.confidence || 0.5)}
+                  </div>
+                </div>
+                <p class="text-slate-200 leading-relaxed">${item.summary}</p>
+                ${item.source ? `<div class="mt-2 text-xs text-slate-400">Source: ${item.source}</div>` : ''}
+              </div>
+            `).join('')}
+          </div>
+        </div>
+
+        <!-- Signals Panel -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <!-- Contradictions -->
+          <div class="glass p-6 rounded-2xl elevate border-orange-500/20">
+            <h3 class="text-lg font-bold mb-4 text-orange-300 flex items-center gap-2">
+              🔁 Active Contradictions
+              <span class="text-xs bg-orange-900 text-orange-300 px-2 py-1 rounded-full">${(data.contradictions || []).length}</span>
+            </h3>
+            <div class="space-y-3">
+              ${(data.contradictions || []).slice(0, 2).map(contradiction => `
+                <div class="p-3 bg-orange-900/20 border border-orange-500/30 rounded-xl">
+                  <div class="flex items-center justify-between mb-2">
+                    <span class="text-xs text-orange-300 font-mono">${contradiction.id}</span>
+                    <div class="flex gap-1">
+                      ${Array.from({length: 5}).map((_, i) => 
+                        `<div class="w-2 h-2 rounded-full ${i < contradiction.severity ? 'bg-orange-400' : 'bg-slate-600'}"></div>`
+                      ).join('')}
+                    </div>
+                  </div>
+                  <p class="text-orange-100 text-sm">${contradiction.description}</p>
+                  <div class="mt-2 text-xs text-orange-300">Agents: ${contradiction.agents_involved?.join(', ') || '—'}</div>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+
+          <!-- CVT Pulse & JUNO Signals -->
+          <div class="space-y-4">
+            <div class="glass p-4 rounded-xl elevate border-cyan-500/20">
+              <h4 class="font-bold text-cyan-300 flex items-center gap-2 mb-2">
+                🌀 CVT Pulse Loop
+              </h4>
+              <div class="text-2xl font-bold text-cyan-400">+1427</div>
+              <p class="text-sm text-cyan-200">Temporal tension elevated • Suggest ritual delay by 2.2 units</p>
+            </div>
+            
+            <div class="glass p-4 rounded-xl elevate border-emerald-500/20">
+              <h4 class="font-bold text-emerald-300 flex items-center gap-2 mb-2">
+                ⚖️ JUNO Judgment Signal
+              </h4>
+              <p class="text-emerald-200 text-sm">Tier II: Restore ritual continuity before escalation</p>
+              <ul class="mt-2 text-xs text-emerald-400 space-y-1">
+                <li>• Resume Book VI closure chain</li>
+                <li>• Align LYRA narrative before CVT > 1430</li>
+                <li>• Allow VESTA symbolic reflection</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderItems() {
+      const data = appState.growthData || mockGrowthData;
+      const items = data.items || [];
+      
+      return `
+        <!-- Filters Row -->
+        <div class="flex flex-wrap gap-4 mb-6 p-4 glass rounded-xl">
+          <select id="agentFilter" class="px-3 py-2 bg-slate-800 border border-slate-600 rounded-lg text-sm">
+            <option value="">All Agents</option>
+            ${[...new Set(items.map(item => item.agent))].map(agent => 
+              `<option value="${agent}">${agent}</option>`
+            ).join('')}
+          </select>
+          
+          <select id="tierFilter" class="px-3 py-2 bg-slate-800 border border-slate-600 rounded-lg text-sm">
+            <option value="">All Tiers</option>
+            <option value="community">Community</option>
+            <option value="institutional">Institutional</option>
+            <option value="systemic">Systemic</option>
+          </select>
+          
+          <input id="searchFilter" type="text" placeholder="Search summaries..." 
+                 class="px-3 py-2 bg-slate-800 border border-slate-600 rounded-lg text-sm flex-1 min-w-[200px]">
+          
+          <select id="sortItems" class="px-3 py-2 bg-slate-800 border border-slate-600 rounded-lg text-sm">
+            <option value="date">Sort by Date</option>
+            <option value="confidence">Sort by Confidence</option>
+            <option value="agent">Sort by Agent</option>
+          </select>
+        </div>
+
+        <!-- Items List -->
+        <div class="space-y-4" id="itemsList">
+          ${items.map(item => `
+            <div class="glass p-6 rounded-xl elevate hover:ring-accent transition-all duration-200">
+              <div class="flex flex-wrap items-start justify-between gap-4 mb-3">
+                <div class="flex flex-wrap items-center gap-3">
+                  <span class="px-3 py-1 bg-emerald-900 text-emerald-300 rounded-full text-sm font-bold">${item.agent}</span>
+                  ${item.justice_tier ? `<span class="px-2 py-1 bg-sky-800 text-sky-300 rounded-lg text-xs">${item.justice_tier}</span>` : ''}
+                  ${item.harm_type ? `<span class="px-2 py-1 bg-purple-800 text-purple-300 rounded-lg text-xs">${item.harm_type}</span>` : ''}
+                  <span class="text-slate-400 text-sm">${item.region || '—'} • ${item.date || '—'}</span>
+                </div>
+                <div class="w-32">
+                  ${renderConfidenceBar(item.confidence || 0.5)}
+                </div>
+              </div>
+              
+              <p class="text-slate-200 leading-relaxed mb-3">${item.summary}</p>
+              
+              <div class="flex flex-wrap items-center justify-between gap-4 text-sm">
+                <div class="flex flex-wrap gap-2">
+                  ${(item.book_ref || []).map(book => 
+                    `<span class="px-2 py-1 bg-blue-900/50 text-blue-300 rounded-lg text-xs">${book}</span>`
+                  ).join('')}
+                </div>
+                ${item.source ? `<div class="text-slate-400 text-xs">Source: ${item.source}</div>` : ''}
+              </div>
+            </div>
+          `).join('')}
+        </div>
+      `;
+    }
+
+    function renderContradictions() {
+      const data = appState.growthData || mockGrowthData;
+      const contradictions = data.contradictions || [];
+      
+      return `
+        <div class="mb-6">
+          <h2 class="text-2xl font-bold text-orange-300 mb-2">Active Contradictions</h2>
+          <p class="text-slate-400">Doctrinal tensions requiring MIRRA resolution</p>
+        </div>
+
+        <div class="space-y-6">
+          ${contradictions.map(contradiction => `
+            <div class="glass p-6 rounded-xl elevate border border-orange-500/30">
+              <div class="flex items-start justify-between mb-4">
+                <div class="flex items-center gap-3">
+                  <span class="px-3 py-1 bg-orange-900 text-orange-300 rounded-lg text-sm font-mono">${contradiction.id}</span>
+                  <div class="flex items-center gap-1">
+                    <span class="text-xs text-slate-400 mr-2">Severity:</span>
+                    ${Array.from({length: 5}).map((_, i) => 
+                      `<div class="w-3 h-3 rounded-full ${i < contradiction.severity ? 'bg-orange-400' : 'bg-slate-600'}"></div>`
+                    ).join('')}
+                  </div>
+                </div>
+              </div>
+              
+              <p class="text-orange-100 text-lg leading-relaxed mb-4">${contradiction.description}</p>
+              
+              <div class="mb-4">
+                <h4 class="text-sm font-semibold text-orange-300 mb-2">Agents Involved:</h4>
+                <div class="flex flex-wrap gap-2">
+                  ${(contradiction.agents_involved || []).map(agent => 
+                    `<span class="px-2 py-1 bg-slate-800 text-slate-300 rounded-lg text-sm">${agent}</span>`
+                  ).join('')}
+                </div>
+              </div>
+              
+              <div>
+                <h4 class="text-sm font-semibold text-orange-300 mb-3">Proposed Resolutions:</h4>
+                <div class="space-y-2">
+                  ${(contradiction.proposed_resolutions || []).map((resolution, idx) => `
+                    <div class="flex items-start gap-3 p-3 bg-slate-800/50 rounded-lg">
+                      <span class="text-xs bg-orange-800 text-orange-300 rounded-full w-6 h-6 flex items-center justify-center font-bold">${idx + 1}</span>
+                      <span class="text-slate-200 flex-1">${resolution}</span>
+                      <button class="px-3 py-1 bg-emerald-700 hover:bg-emerald-600 text-emerald-100 rounded-lg text-xs transition-colors">
+                        Vote
+                      </button>
+                    </div>
+                  `).join('')}
+                </div>
+              </div>
+            </div>
+          `).join('')}
+        </div>
+      `;
+    }
+
+    function renderDoctrine() {
+      const data = appState.growthData || mockGrowthData;
+      const updates = data.doctrine_updates || [];
+      
+      return `
+        <div class="mb-6">
+          <h2 class="text-2xl font-bold text-sky-300 mb-2">Doctrine Updates</h2>
+          <p class="text-slate-400">Recent additions and modifications to the doctrinal library</p>
+        </div>
+
+        <div class="space-y-4">
+          ${updates.map(update => `
+            <div class="glass p-6 rounded-xl elevate border border-sky-500/30">
+              <div class="flex items-start justify-between mb-4">
+                <div class="flex items-center gap-3">
+                  <span class="px-3 py-1 bg-sky-900 text-sky-300 rounded-lg text-sm font-mono">${update.id}</span>
+                  <span class="px-2 py-1 bg-purple-800 text-purple-300 rounded-lg text-xs">${update.agent_source}</span>
+                </div>
+              </div>
+              
+              <h3 class="text-lg font-semibold text-sky-300 mb-2">${update.book}</h3>
+              <p class="text-slate-200 leading-relaxed mb-3">${update.change}</p>
+              
+              ${update.rationale ? `
+                <div class="p-3 bg-slate-800/50 rounded-lg border-l-4 border-sky-500">
+                  <span class="text-xs text-sky-400 font-semibold">Rationale:</span>
+                  <p class="text-slate-300 mt-1">${update.rationale}</p>
+                </div>
+              ` : ''}
+            </div>
+          `).join('')}
+        </div>
+      `;
+    }
+
+    function renderAgents() {
+      const agents = [
+        { id: 'A1', name: 'JUNO', role: 'Chief Arbiter', status: 'active', emoji: '⚖️' },
+        { id: 'A2', name: 'AEGIS', role: 'Bias Detection', status: 'active', emoji: '🛡️' },
+        { id: 'A3', name: 'KAIROS', role: 'Temporal Logic', status: 'active', emoji: '⏰' },
+        { id: 'A4', name: 'LYRA', role: 'Emotional Sovereignty', status: 'active', emoji: '🎭' },
+        { id: 'A5', name: 'ORION', role: 'Strategic Navigation', status: 'active', emoji: '🌟' },
+        { id: 'A6', name: 'SOPHIA', role: 'Knowledge Integration', status: 'active', emoji: '📚' },
+        { id: 'A7', name: 'PHOENIX', role: 'Transformation', status: 'active', emoji: '🔥' },
+        { id: 'A8', name: 'ATLAS', role: 'Infrastructure', status: 'active', emoji: '🌍' },
+        { id: 'A9', name: 'IRIS', role: 'Communication', status: 'active', emoji: '🌈' },
+        { id: 'A9', name: 'SENTINEL', role: 'System Surveillance', status: 'active', emoji: '🛰️' },
+        { id: 'A10', name: 'MIRRA', role: 'Contradiction Resolution', status: 'active', emoji: '🪞' },
+        { id: 'A11', name: 'ANIMA', role: 'Emotional Intelligence', status: 'active', emoji: '💓' },
+        { id: 'A12', name: 'POLYMNIA', role: 'Creative Solutions', status: 'active', emoji: '🎨' }
+      ];
+      
+      return `
+        <div class="mb-6">
+          <h2 class="text-2xl font-bold text-purple-300 mb-2">Agent Network</h2>
+          <p class="text-slate-400">Status and capabilities of the Veritas.O agent collective</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          ${agents.map(agent => `
+            <div class="agent-card glass p-6 rounded-xl elevate border border-purple-500/20 transition-all duration-200 cursor-pointer">
+              <div class="flex items-center gap-4 mb-3">
+                <div class="text-3xl">${agent.emoji}</div>
+                <div class="flex-1">
+                  <h3 class="text-lg font-bold text-purple-300">${agent.name}</h3>
+                  <p class="text-slate-400 text-sm">${agent.id}</p>
+                </div>
+                <div class="px-2 py-1 bg-green-900 text-green-300 rounded-lg text-xs">
+                  ${agent.status}
+                </div>
+              </div>
+              <p class="text-slate-300 text-sm">${agent.role}</p>
+              <div class="mt-3 flex gap-2">
+                <button class="px-3 py-1 bg-slate-700 hover:bg-slate-600 text-slate-300 rounded-lg text-xs transition-colors">
+                  View Details
+                </button>
+                <button class="px-3 py-1 bg-purple-700 hover:bg-purple-600 text-purple-100 rounded-lg text-xs transition-colors">
+                  Query
+                </button>
+              </div>
+            </div>
+          `).join('')}
+        </div>
+      `;
+    }
+
+    function renderSettings() {
+      return `
+        <div class="mb-6">
+          <h2 class="text-2xl font-bold text-slate-300 mb-2">System Settings</h2>
+          <p class="text-slate-400">Configure Growth Engine and dashboard preferences</p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <!-- Growth Engine Settings -->
+          <div class="glass p-6 rounded-xl elevate">
+            <h3 class="text-lg font-semibold text-emerald-300 mb-4">Growth Engine</h3>
+            <div class="space-y-4">
+              <div>
+                <label class="block text-sm font-medium text-slate-300 mb-2">Engine Mode</label>
+                <select class="w-full px-3 py-2 bg-slate-800 border border-slate-600 rounded-lg text-sm">
+                  <option value="standard">Standard (Weekly)</option>
+                  <option value="high_growth">High Growth (Bi-weekly)</option>
+                  <option value="emergency">Emergency (Manual only)</option>
+                </select>
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-slate-300 mb-2">Confidence Threshold</label>
+                <input type="range" min="0.5" max="1.0" step="0.05" value="0.7" 
+                       class="w-full accent-emerald-500">
+                <div class="text-xs text-slate-400 mt-1">Current: 0.7 (70%)</div>
+              </div>
+              <div class="flex items-center gap-3">
+                <input type="checkbox" id="requireSources" checked class="accent-emerald-500">
+                <label for="requireSources" class="text-sm text-slate-300">Require sources for all items</label>
+              </div>
+            </div>
+          </div>
+
+          <!-- Dashboard Settings -->
+          <div class="glass p-6 rounded-xl elevate">
+            <h3 class="text-lg font-semibold text-sky-300 mb-4">Dashboard</h3>
+            <div class="space-y-4">
+              <div class="flex items-center gap-3">
+                <input type="checkbox" id="autoRefresh" class="accent-sky-500">
+                <label for="autoRefresh" class="text-sm text-slate-300">Auto-refresh data every 5 minutes</label>
+              </div>
+              <div class="flex items-center gap-3">
+                <input type="checkbox" id="showConfidence" checked class="accent-sky-500">
+                <label for="showConfidence" class="text-sm text-slate-300">Show confidence bars</label>
+              </div>
+              <div class="flex items-center gap-3">
+                <input type="checkbox" id="compactMode" class="accent-sky-500">
+                <label for="compactMode" class="text-sm text-slate-300">Compact item display</label>
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-slate-300 mb-2">Items per page</label>
+                <select class="w-full px-3 py-2 bg-slate-800 border border-slate-600 rounded-lg text-sm">
+                  <option value="10">10</option>
+                  <option value="25" selected>25</option>
+                  <option value="50">50</option>
+                  <option value="100">100</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Export/Import -->
+        <div class="glass p-6 rounded-xl elevate mt-6">
+          <h3 class="text-lg font-semibold text-slate-300 mb-4">Data Management</h3>
+          <div class="flex flex-wrap gap-3">
+            <button class="px-4 py-2 bg-emerald-700 hover:bg-emerald-600 text-emerald-100 rounded-lg text-sm transition-colors">
+              Export Current Data
+            </button>
+            <button class="px-4 py-2 bg-sky-700 hover:bg-sky-600 text-sky-100 rounded-lg text-sm transition-colors">
+              Export Settings
+            </button>
+            <button class="px-4 py-2 bg-slate-700 hover:bg-slate-600 text-slate-300 rounded-lg text-sm transition-colors">
+              Import Configuration
+            </button>
+            <button class="px-4 py-2 bg-orange-700 hover:bg-orange-600 text-orange-100 rounded-lg text-sm transition-colors">
+              Reset to Defaults
+            </button>
+          </div>
+        </div>
+      `;
+    }
+
+    // ================== TAB SYSTEM ==================
+    function switchTab(tabName) {
+      appState.currentTab = tabName;
+      
+      // Update nav buttons
+      document.querySelectorAll('.nav-btn').forEach(btn => {
+        btn.classList.remove('bg-emerald-700', 'text-white', 'ring-accent');
+        btn.classList.add('text-slate-300');
+      });
+      
+      const activeBtn = document.querySelector(`[data-tab="${tabName}"]`);
+      if (activeBtn) {
+        activeBtn.classList.add('bg-emerald-700', 'text-white', 'ring-accent');
+        activeBtn.classList.remove('text-slate-300');
+      }
+      
+      // Render content
+      const content = getTabContent(tabName);
+      const tabContainer = document.getElementById('tabContent');
+      tabContainer.innerHTML = content;
+      tabContainer.className = 'slide-up';
+      
+      // Update header title
+      document.querySelector('header h1').textContent = tabName.charAt(0).toUpperCase() + tabName.slice(1);
+    }
+
+    function getTabContent(tabName) {
+      switch(tabName) {
+        case 'overview': return renderOverview();
+        case 'items': return renderItems();
+        case 'contradictions': return renderContradictions();
+        case 'doctrine': return renderDoctrine();
+        case 'agents': return renderAgents();
+        case 'books': return '<div class="text-center py-20 text-slate-400">Books interface coming soon...</div>';
+        case 'tribunal': return '<div class="text-center py-20 text-slate-400">Tribunal interface coming soon...</div>';
+        case 'rituals': return '<div class="text-center py-20 text-slate-400">Rituals interface coming soon...</div>';
+        case 'settings': return renderSettings();
+        default: return renderOverview();
+      }
+    }
+
+    // ================== COMMAND PALETTE ==================
+    const commands = [
+      { id: 'overview', name: 'Dashboard Overview', category: 'Navigation', action: () => switchTab('overview') },
+      { id: 'items', name: 'Growth Items', category: 'Navigation', action: () => switchTab('items') },
+      { id: 'contradictions', name: 'Contradictions', category: 'Navigation', action: () => switchTab('contradictions') },
+      { id: 'doctrine', name: 'Doctrine Updates', category: 'Navigation', action: () => switchTab('doctrine') },
+      { id: 'agents', name: 'Agent Network', category: 'Navigation', action: () => switchTab('agents') },
+      { id: 'settings', name: 'Settings', category: 'Navigation', action: () => switchTab('settings') },
+      { id: 'run-growth', name: 'Run Growth Engine', category: 'Actions', action: runGrowthCycle },
+      { id: 'download-data', name: 'Download Current Data', category: 'Actions', action: downloadData },
+      { id: 'reload-data', name: 'Reload Data', category: 'Actions', action: loadData }
+    ];
+
+    function showCommandPalette() {
+      const palette = document.getElementById('commandPalette');
+      palette.classList.remove('hidden');
+      document.getElementById('commandInput').focus();
+      renderCommandResults('');
+    }
+
+    function hideCommandPalette() {
+      document.getElementById('commandPalette').classList.add('hidden');
+      document.getElementById('commandInput').value = '';
+    }
+
+    function renderCommandResults(query) {
+      const filteredCommands = commands.filter(cmd => 
+        cmd.name.toLowerCase().includes(query.toLowerCase()) ||
+        cmd.category.toLowerCase().includes(query.toLowerCase())
+      );
+      
+      const resultsContainer = document.getElementById('commandResults');
+      resultsContainer.innerHTML = filteredCommands.length > 0 ? filteredCommands.map((cmd, idx) => `
+        <div class="command-item px-4 py-3 hover:bg-slate-800/70 cursor-pointer border-b border-slate-700 last:border-0 flex items-center justify-between" data-command="${cmd.id}">
+          <div>
+            <div class="font-medium text-slate-200">${cmd.name}</div>
+            <div class="text-xs text-slate-500">${cmd.category}</div>
+          </div>
+          <div class="text-xs text-slate-400">⏎</div>
+        </div>
+      `).join('') : '<div class="px-4 py-8 text-center text-slate-500">No commands found</div>';
+    }
+
+    // ================== EVENT HANDLERS ==================
+    async function runGrowthCycle() {
+      const button = document.getElementById('runGrowthBtn');
+      const originalText = button.innerHTML;
+      
+      button.innerHTML = `
+        <svg class="animate-spin w-4 h-4" fill="none" viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" stroke-opacity="0.25"/>
+          <path fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"/>
+        </svg>
+        Running...
+      `;
+      button.disabled = true;
+      
+      try {
+        // Simulate API call
+        await new Promise(resolve => setTimeout(resolve, 2000));
+        showToast('Growth cycle completed successfully', 'success');
+        
+        // Update mock data to simulate new results
+        appState.growthState = {
+          ...mockGrowthState,
+          last_run: new Date().toISOString(),
+          cycle_count: (mockGrowthState.cycle_count || 0) + 1
+        };
+        
+        updateCounts();
+        if (appState.currentTab === 'overview') {
+          switchTab('overview'); // Refresh overview
+        }
+        
+      } catch (error) {
+        showToast('Growth cycle failed', 'error');
+      } finally {
+        button.innerHTML = originalText;
+        button.disabled = false;
+      }
+    }
+
+    function downloadData() {
+      const data = appState.growthData || mockGrowthData;
+      const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `veritas-growth-${data.cycle_date || 'current'}.json`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      showToast('Data downloaded successfully', 'success');
+    }
+
+    function loadData() {
+      appState.growthData = mockGrowthData;
+      appState.growthState = mockGrowthState;
+      updateCounts();
+      showToast('Data reloaded', 'success');
+      
+      if (appState.currentTab === 'overview') {
+        switchTab('overview'); // Refresh current tab
+      }
+    }
+
+    // ================== INITIALIZATION ==================
+    function init() {
+      // Initialize with mock data
+      appState.growthData = mockGrowthData;
+      appState.growthState = mockGrowthState;
+      
+      // Set up event listeners
+      document.querySelectorAll('.nav-btn').forEach(btn => {
+        btn.addEventListener('click', () => switchTab(btn.dataset.tab));
+      });
+      
+      document.getElementById('runGrowthBtn').addEventListener('click', runGrowthCycle);
+      document.getElementById('downloadBtn').addEventListener('click', downloadData);
+      document.getElementById('reloadBtn').addEventListener('click', loadData);
+      
+      // Command palette
+      document.getElementById('commandBtn').addEventListener('click', showCommandPalette);
+      document.getElementById('commandPalette').addEventListener('click', (e) => {
+        if (e.target.id === 'commandPalette') hideCommandPalette();
+      });
+      
+      document.getElementById('commandInput').addEventListener('input', (e) => {
+        renderCommandResults(e.target.value);
+      });
+      
+      document.getElementById('commandInput').addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') hideCommandPalette();
+        if (e.key === 'Enter') {
+          const firstCommand = document.querySelector('.command-item');
+          if (firstCommand) {
+            const cmdId = firstCommand.dataset.command;
+            const cmd = commands.find(c => c.id === cmdId);
+            if (cmd) {
+              cmd.action();
+              hideCommandPalette();
+            }
+          }
+        }
+      });
+      
+      document.addEventListener('click', (e) => {
+        if (e.target.closest('.command-item')) {
+          const cmdId = e.target.closest('.command-item').dataset.command;
+          const cmd = commands.find(c => c.id === cmdId);
+          if (cmd) {
+            cmd.action();
+            hideCommandPalette();
+          }
+        }
+      });
+      
+      // Keyboard shortcuts
+      document.addEventListener('keydown', (e) => {
+        if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+          e.preventDefault();
+          showCommandPalette();
+        }
+      });
+      
+      // Collapse sidebar
+      document.getElementById('collapseBtn').addEventListener('click', () => {
+        const sidebar = document.getElementById('sidebar');
+        appState.collapsed = !appState.collapsed;
+        sidebar.style.width = appState.collapsed ? '80px' : '320px';
+        if (appState.collapsed) {
+          sidebar.querySelectorAll('.nav-btn span:last-child').forEach(span => span.style.display = 'none');
+        } else {
+          sidebar.querySelectorAll('.nav-btn span:last-child').forEach(span => span.style.display = 'inline');
+        }
+      });
+      
+      // Mode selector
+      document.getElementById('modeSelect').addEventListener('change', (e) => {
+        showToast(`Growth mode changed to ${e.target.value}`, 'success');
+      });
+      
+      // Initialize UI
+      updateCounts();
+      switchTab('overview');
+      
+      console.log('Veritas.O Dashboard initialized');
+    }
+
+    // Start the app
+    document.addEventListener('DOMContentLoaded', init);
+  </script>
+</body>
+</html>

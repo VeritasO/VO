@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Veritas.O – Harmonized Justice UI</title>
+  <!-- Pre-paint dark mode (prevents flash) -->
+  <script>
+    (() => {
+      try {
+        const stored = localStorage.getItem('veritas.theme');
+        const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        if (stored === 'dark' || (!stored && prefersDark)) document.documentElement.classList.add('dark');
+      } catch (_) {}
+    })();
+  </script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <meta name="theme-color" content="#059669" />
+</head>
+<body class="min-h-screen bg-gradient-to-br from-gray-50 to-emerald-100 dark:from-gray-900 dark:to-emerald-950 transition-colors duration-500 font-sans">
+  <!-- Toasts -->
+  <div id="toast-root" class="fixed top-4 left-1/2 -translate-x-1/2 z-[999] space-y-2" aria-live="polite" aria-atomic="true"></div>
+
+  <!-- Dark Mode Toggle -->
+  <button id="darkToggle" aria-label="Toggle dark mode"
+    class="fixed top-4 right-4 z-50 bg-gray-200 dark:bg-gray-800 text-gray-800 dark:text-gray-100 rounded px-3 py-1 text-sm shadow focus:outline-none focus:ring-2 focus:ring-emerald-400">🌗 Dark</button>
+
+  <!-- HEADER -->
+  <header class="bg-white/90 dark:bg-gray-900/90 backdrop-blur shadow-sm px-6 py-4 flex items-center justify-between sticky top-0 z-40">
+    <div class="flex items-center gap-3">
+      <span class="text-3xl font-bold text-emerald-700 dark:text-emerald-300">Veritas.O</span>
+      <span class="px-2 py-1 bg-emerald-200 dark:bg-emerald-900 text-emerald-900 dark:text-emerald-100 text-xs rounded-xl font-semibold tracking-wide ml-2">v6.0.0</span>
+    </div>
+    <nav class="flex gap-6 items-center" role="navigation" aria-label="Primary">
+      <a href="#dashboard" class="nav-link font-medium text-emerald-700 dark:text-emerald-200" data-section="dashboard">Dashboard</a>
+      <a href="#agents" class="nav-link text-gray-700 dark:text-gray-200 hover:text-emerald-700 dark:hover:text-emerald-300" data-section="agents">Agents</a>
+      <a href="#books" class="nav-link text-gray-700 dark:text-gray-200 hover:text-emerald-700 dark:hover:text-emerald-300" data-section="books">Doctrine Books</a>
+      <a href="#cases" class="nav-link text-gray-700 dark:text-gray-200 hover:text-emerald-700 dark:hover:text-emerald-300" data-section="cases">Cases</a>
+      <a href="#metrics" class="nav-link text-gray-700 dark:text-gray-200 hover:text-emerald-700 dark:hover:text-emerald-300" data-section="metrics">Metrics</a>
+    </nav>
+    <div class="flex items-center gap-2" aria-label="System Status">
+      <span id="systemDot" class="w-2 h-2 bg-green-500 rounded-full"></span>
+      <span class="text-xs text-gray-500 dark:text-gray-400">System Active</span>
+    </div>
+  </header>
+
+  <main id="main" class="flex-1 px-6 py-6">
+    <!-- DASHBOARD -->
+    <section id="dashboard" class="main-section opacity-100 transition-opacity duration-300" data-section role="region" aria-labelledby="dashboard-title">
+      <h1 id="dashboard-title" class="sr-only">Dashboard</h1>
+      <div class="flex flex-col xl:flex-row gap-6">
+        <!-- Left rail -->
+        <section class="flex-1 xl:max-w-sm bg-white dark:bg-gray-900 rounded-2xl shadow p-6 flex flex-col gap-8">
+          <!-- Agents Card -->
+          <div>
+            <h2 class="text-lg font-bold text-emerald-700 dark:text-emerald-300 mb-2 flex items-center gap-2">
+              <svg class="w-5 h-5 text-emerald-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" /></svg>
+              Inner Council Agents
+            </h2>
+            <div id="agentPills" class="flex flex-wrap gap-3"></div>
+          </div>
+          <!-- Case Intake -->
+          <div>
+            <h3 class="text-md font-semibold text-gray-800 dark:text-gray-100 mb-1">Submit a New Case</h3>
+            <form id="caseForm" class="flex flex-col gap-2" novalidate>
+              <input name="title" aria-label="Case title" required type="text" class="border rounded-lg px-3 py-2 text-sm dark:bg-gray-800 dark:text-gray-100" placeholder="Case Title or Brief Description" />
+              <textarea name="desc" aria-label="Case description" required class="border rounded-lg px-3 py-2 text-sm dark:bg-gray-800 dark:text-gray-100" rows="3" placeholder="Describe the grievance or event..."></textarea>
+              <select name="tier" aria-label="Justice tier" required class="border rounded-lg px-3 py-2 text-sm dark:bg-gray-800 dark:text-gray-100">
+                <option value="">Choose Justice Tier</option>
+                <option>Restoration</option>
+                <option>Reconciliation</option>
+                <option>Transformation</option>
+              </select>
+              <button type="submit" class="mt-2 bg-emerald-600 hover:bg-emerald-700 text-white py-2 rounded-lg font-semibold transition">Submit Case</button>
+            </form>
+          </div>
+        </section>
+
+        <!-- Middle rail -->
+        <section class="flex-[2] flex flex-col gap-8">
+          <!-- Living Doctrine Card -->
+          <div class="bg-white dark:bg-gray-900 rounded-2xl shadow p-6">
+            <h2 class="text-lg font-bold text-emerald-700 dark:text-emerald-300 mb-1 flex items-center gap-2">
+              <svg class="w-5 h-5 text-emerald-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><rect width="20" height="12" x="2" y="6" rx="2" /></svg>
+              Living Doctrine Books
+            </h2>
+            <ul id="bookQuickList" class="list-disc pl-5 text-gray-700 dark:text-gray-200 text-sm mt-2 grid grid-cols-2 md:grid-cols-3 gap-y-1"></ul>
+            <div class="mt-3">
+              <button class="text-emerald-700 hover:underline text-xs dark:text-emerald-300" data-open-section="books">View All Books</button>
+            </div>
+          </div>
+          <!-- Active Cases Searchable List -->
+          <div class="bg-white dark:bg-gray-900 rounded-2xl shadow p-6">
+            <div class="flex items-center gap-3 mb-2">
+              <input id="caseSearch" type="text" placeholder="Search cases..." class="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-emerald-300 text-sm dark:bg-gray-800 dark:text-gray-100" aria-label="Search cases" />
+              <button id="caseSearchClear" class="text-xs text-gray-400 hover:text-emerald-700 dark:hover:text-emerald-300">Clear</button>
+            </div>
+            <table class="w-full text-sm" id="casesTable" role="table" aria-label="Active cases table">
+              <thead>
+                <tr>
+                  <th class="text-left py-2">Case ID</th>
+                  <th class="text-left py-2">Title</th>
+                  <th class="text-left py-2">Tier</th>
+                  <th class="text-left py-2">Status</th>
+                  <th class="text-left py-2">Actions</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- Right rail -->
+        <section class="flex-1 xl:max-w-xs flex flex-col gap-8">
+          <!-- Metrics Card -->
+          <div class="bg-white dark:bg-gray-900 rounded-2xl shadow p-6">
+            <h2 class="text-lg font-bold text-emerald-700 dark:text-emerald-300 mb-2 flex items-center gap-2">
+              <svg class="w-5 h-5 text-emerald-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2" /><path d="M12 12v4" /><path d="M8 8v8" /><path d="M16 8v8" /></svg>
+              Metrics & System Health
+            </h2>
+            <div class="space-y-1 text-sm">
+              <div class="flex justify-between"><span>Cases Resolved</span><span id="metricResolved" class="font-semibold text-emerald-700 dark:text-emerald-300">0</span></div>
+              <div class="flex justify-between"><span>Avg Resolution Time</span><span id="metricAvgTime" class="font-semibold text-emerald-700 dark:text-emerald-300">—</span></div>
+              <div class="flex justify-between"><span>Current Reflection Cycle</span><span id="metricCycle" class="font-semibold text-emerald-700 dark:text-emerald-300">#0</span></div>
+              <div class="flex justify-between"><span>System Integrity</span><span id="metricIntegrity" class="text-green-500 font-bold">✓</span></div>
+            </div>
+          </div>
+          <!-- Agent Network Diagram -->
+          <div class="bg-white dark:bg-gray-900 rounded-2xl shadow p-6">
+            <h3 class="text-lg font-bold text-emerald-700 dark:text-emerald-300 mb-2">Agent Network</h3>
+            <div class="flex justify-center">
+              <svg id="agentGraph" viewBox="0 0 400 240" class="w-full max-w-xs h-48" role="img" aria-label="Agent network diagram"></svg>
+            </div>
+          </div>
+          <!-- Case Workflow Simulation -->
+          <div class="bg-white dark:bg-gray-900 rounded-2xl shadow p-6">
+            <h3 class="text-lg font-bold text-emerald-700 dark:text-emerald-300 mb-2">Case Workflow</h3>
+            <div class="flex items-center gap-1 justify-between mb-4" aria-label="Workflow steps">
+              <div class="flex flex-col items-center flex-1"><div id="step-0" class="w-8 h-8 rounded-full flex items-center justify-center font-bold bg-emerald-500 text-white transition-all duration-300">1</div><span class="text-xs mt-2 text-center">Intake</span></div>
+              <div class="h-1 w-8 bg-emerald-200 dark:bg-emerald-800"></div>
+              <div class="flex flex-col items-center flex-1"><div id="step-1" class="w-8 h-8 rounded-full flex items-center justify-center font-bold bg-gray-200 dark:bg-gray-800 text-gray-500">2</div><span class="text-xs mt-2 text-center">Validation</span></div>
+              <div class="h-1 w-8 bg-emerald-200 dark:bg-emerald-800"></div>
+              <div class="flex flex-col items-center flex-1"><div id="step-2" class="w-8 h-8 rounded-full flex items-center justify-center font-bold bg-gray-200 dark:bg-gray-800 text-gray-500">3</div><span class="text-xs mt-2 text-center">Deliberation</span></div>
+              <div class="h-1 w-8 bg-emerald-200 dark:bg-emerald-800"></div>
+              <div class="flex flex-col items-center flex-1"><div id="step-3" class="w-8 h-8 rounded-full flex items-center justify-center font-bold bg-gray-200 dark:bg-gray-800 text-gray-500">4</div><span class="text-xs mt-2 text-center">Remedy</span></div>
+              <div class="h-1 w-8 bg-emerald-200 dark:bg-emerald-800"></div>
+              <div class="flex flex-col items-center flex-1"><div id="step-4" class="w-8 h-8 rounded-full flex items-center justify-center font-bold bg-gray-200 dark:bg-gray-800 text-gray-500">5</div><span class="text-xs mt-2 text-center">Audit</span></div>
+            </div>
+            <div class="rounded bg-emerald-50 dark:bg-emerald-950 p-3 mb-2 text-sm" id="stepInfo"></div>
+            <div class="flex gap-2">
+              <button id="prevBtn" class="text-xs bg-gray-100 dark:bg-gray-700 rounded px-3 py-1">Prev</button>
+              <button id="nextBtn" class="text-xs bg-gray-100 dark:bg-gray-700 rounded px-3 py-1">Next</button>
+            </div>
+          </div>
+          <!-- Role Demo -->
+          <div class="bg-white dark:bg-gray-900 rounded-2xl shadow p-6">
+            <div class="mb-2 text-sm text-gray-500 dark:text-gray-200">Role-based UI (demo):</div>
+            <button id="settingsBtn" class="hidden bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-100 px-4 py-2 rounded-lg">System Settings</button>
+          </div>
+        </section>
+      </div>
+    </section>
+
+    <!-- AGENTS -->
+    <section id="agents" class="main-section hidden opacity-0 transition-opacity duration-300" data-section role="region" aria-labelledby="agents-title">
+      <h1 id="agents-title" class="text-xl font-bold text-emerald-700 dark:text-emerald-300 mb-4">Agents</h1>
+      <div id="agentsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+    </section>
+
+    <!-- BOOKS -->
+    <section id="books" class="main-section hidden opacity-0 transition-opacity duration-300" data-section role="region" aria-labelledby="books-title">
+      <h1 id="books-title" class="text-xl font-bold text-emerald-700 dark:text-emerald-300 mb-4">Doctrine Books</h1>
+      <div id="booksGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+    </section>
+
+    <!-- CASES -->
+    <section id="cases" class="main-section hidden opacity-0 transition-opacity duration-300" data-section role="region" aria-labelledby="cases-title">
+      <h1 id="cases-title" class="text-xl font-bold text-emerald-700 dark:text-emerald-300 mb-4">Cases</h1>
+      <div class="flex items-center gap-3 mb-3">
+        <input id="allCaseSearch" type="text" placeholder="Search all cases..." class="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-emerald-300 text-sm dark:bg-gray-800 dark:text-gray-100" aria-label="Search all cases" />
+        <button id="allCaseSearchClear" class="text-xs text-gray-400 hover:text-emerald-700 dark:hover:text-emerald-300">Clear</button>
+      </div>
+      <div id="casesList" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4"></div>
+    </section>
+
+    <!-- METRICS -->
+    <section id="metrics" class="main-section hidden opacity-0 transition-opacity duration-300" data-section role="region" aria-labelledby="metrics-title">
+      <h1 id="metrics-title" class="text-xl font-bold text-emerald-700 dark:text-emerald-300 mb-4">Metrics</h1>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div class="bg-white dark:bg-gray-900 rounded-2xl shadow p-6"><h2 class="font-semibold mb-2">Throughput</h2><p class="text-sm text-gray-600 dark:text-gray-300">Mock: 1245 resolved, 7.2 days avg.</p></div>
+        <div class="bg-white dark:bg-gray-900 rounded-2xl shadow p-6"><h2 class="font-semibold mb-2">Fairness Index</h2><p class="text-sm text-gray-600 dark:text-gray-300">AEGIS audit pass: 98.3%</p></div>
+        <div class="bg-white dark:bg-gray-900 rounded-2xl shadow p-6"><h2 class="font-semibold mb-2">Reflection Cycles</h2><p class="text-sm text-gray-600 dark:text-gray-300">Current cycle: #38</p></div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Multi-Agent Chat Modal (per case) -->
+  <div id="caseModal" class="fixed inset-0 bg-black/40 z-50 hidden opacity-0 transition-opacity duration-200" role="dialog" aria-modal="true" aria-labelledby="caseModalTitle">
+    <div class="bg-white dark:bg-gray-900 p-6 rounded-2xl shadow-lg max-w-lg w-[92%] mx-auto mt-20 focus:outline-none" tabindex="-1">
+      <h3 id="caseModalTitle" class="text-xl font-bold text-emerald-700 dark:text-emerald-300 mb-2">Case</h3>
+      <div class="bg-gray-50 dark:bg-gray-800 rounded-xl p-4 mb-4 max-h-56 overflow-y-auto" id="chatLog" aria-live="polite"></div>
+      <div class="flex mt-2 gap-2">
+        <input id="chatInput" type="text" class="flex-1 px-3 py-2 border rounded-lg text-sm dark:bg-gray-800 dark:text-gray-100" placeholder="Type a message..."/>
+        <button id="chatSend" class="bg-emerald-600 text-white rounded-lg px-4 py-2">Send</button>
+      </div>
+      <div class="mt-4 flex justify-end">
+        <button data-close-modal class="bg-emerald-600 text-white px-4 py-2 rounded-lg font-semibold">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Book Reader Modal -->
+  <div id="bookReaderModal" class="fixed inset-0 bg-black/40 z-50 hidden opacity-0 transition-opacity duration-200" role="dialog" aria-modal="true" aria-labelledby="bookReaderTitle">
+    <div class="bg-white dark:bg-gray-900 p-8 rounded-2xl shadow-lg max-w-3xl w-[94%] mx-auto mt-16 focus:outline-none" tabindex="-1">
+      <div class="flex justify-between items-center mb-4">
+        <h2 id="bookReaderTitle" class="text-xl font-bold text-emerald-700 dark:text-emerald-300"></h2>
+        <button data-close-modal class="text-gray-400 hover:text-emerald-700 dark:hover:text-emerald-300" aria-label="Close">&times;</button>
+      </div>
+      <div class="flex gap-6">
+        <aside class="w-1/3 border-r pr-4">
+          <ul id="bookChapterList" class="text-sm"></ul>
+        </aside>
+        <main class="flex-1 pl-4">
+          <article id="bookChapterContent" class="text-gray-700 dark:text-gray-100 text-base"></article>
+          <div class="flex gap-3 mt-4">
+            <button id="bookPrev" class="text-xs bg-gray-100 dark:bg-gray-700 rounded px-3 py-1">Prev</button>
+            <button id="bookNext" class="text-xs bg-gray-100 dark:bg-gray-700 rounded px-3 py-1">Next</button>
+          </div>
+        </main>
+      </div>
+    </div>
+  </div>
+
+  <footer class="bg-white dark:bg-gray-900/90 backdrop-blur shadow-inner py-4 px-6 text-center text-xs text-gray-400 dark:text-gray-600">
+    Veritas.O © 2025 – Earth-Based Justice, Restoration, and Meaningful Thought.
+  </footer>
+
+  <!-- JS SCRIPTS -->
+  <script>
+    // --- Simple State Store ---
+    const state = {
+      theme: document.documentElement.classList.contains('dark') ? 'dark' : 'light',
+      userRole: 'admin', // change to "case_creator", "agent", etc.
+      workflowStep: 0,
+      currentBook: null,
+      currentChapter: 0,
+      activeCaseId: null,
+    };
+
+    // --- Data (mock) ---
+    const agents = [
+      { id:'JUNO', color:'#059669', role:'Judicial Core', status:'online' },
+      { id:'AEGIS', color:'#3b82f6', role:'Fairness Audit', status:'online' },
+      { id:'LYRA', color:'#ec4899', role:'Narrative Truth', status:'idle' },
+      { id:'TEMPUS', color:'#eab308', role:'Timekeeper', status:'online' },
+      { id:'VESTA', color:'#a21caf', role:'Rites & Repair', status:'idle' },
+      { id:'THALEA', color:'#06b6d4', role:'Care Protocols', status:'offline' },
+    ];
+
+    const books = {
+      'Book I': { title:'Book I: The Book of Meaningful Thought', chapters:[
+        { name:'Foundations', content:'Foundational logic and justice philosophy.' },
+        { name:'Memory & Truth', content:'Justice as memory, collective and personal.' },
+        { name:'Neuroethics', content:'Cognitive science in justice design.' },
+      ]},
+      'Book II': { title:'Book II: Gentle De-escalation', chapters:[
+        { name:'Trauma Cooling', content:'Methods for de-escalating conflict gently.' },
+        { name:'Nonviolent Boundaries', content:'Boundary-setting without force.' },
+      ]},
+      'Book III': { title:'Book III: Gentle Escalation', chapters:[
+        { name:'Urgency in Justice', content:'Escalating peacefully when needed.' },
+      ]},
+      'Book IV': { title:'Book IV: Mental Health & Grief', chapters:[
+        { name:'Grief Vectors', content:'Mapping grief to care pathways.' },
+        { name:'Stability Windows', content:'Designing safe decision thresholds.' },
+      ]},
+      'Book V': { title:'Book V: Transformative Restoration', chapters:[
+        { name:'Symbolic Repair', content:'Rituals and material restitution working together.' },
+      ]},
+      'Book XV': { title:'Book XV: Cosmopolitical Justice', chapters:[
+        { name:'Beyond Borders', content:'Fairness across contexts and species.' },
+      ]},
+    };
+
+    const cases = [
+      { id:1023, title:'School Mediation Circle', tier:'Restoration', status:'In Progress' },
+      { id:1022, title:'Land Repair Ritual', tier:'Transformation', status:'Review' },
+      { id:1019, title:'Community Noise Dispute', tier:'Reconciliation', status:'Scheduled' },
+      { id:1011, title:'Local Park Cleanup', tier:'Restoration', status:'Complete' },
+    ];
+
+    const metrics = { resolved: 1245, avgDays: 7.2, cycle: 38, integrity: true };
+
+    // --- Utilities ---
+    const $ = (sel, root=document) => root.querySelector(sel);
+    const $$ = (sel, root=document) => Array.from(root.querySelectorAll(sel));
+
+    function toast(msg) {
+      const el = document.createElement('div');
+      el.className = 'px-3 py-2 rounded-lg shadow bg-gray-900 text-white text-sm/5';
+      el.textContent = msg;
+      $('#toast-root').appendChild(el);
+      setTimeout(() => { el.classList.add('opacity-0'); el.style.transition = 'opacity .6s'; }, 1600);
+      setTimeout(() => el.remove(), 2300);
+    }
+
+    // --- Theme Toggle (persist) ---
+    $('#darkToggle').addEventListener('click', () => {
+      const dark = document.documentElement.classList.toggle('dark');
+      localStorage.setItem('veritas.theme', dark ? 'dark' : 'light');
+      toast(dark ? 'Dark mode on' : 'Dark mode off');
+    });
+
+    // --- Navigation & Section Loader ---
+    const sections = $$('.main-section');
+    function showSection(id) {
+      sections.forEach(sec => {
+        const isTarget = sec.id === id;
+        sec.classList.toggle('hidden', !isTarget);
+        sec.classList.toggle('opacity-0', !isTarget);
+        sec.classList.toggle('opacity-100', isTarget);
+      });
+      $$('.nav-link').forEach(a => a.classList.toggle('font-medium', a.dataset.section === id));
+      if (id === 'agents') renderAgents();
+      if (id === 'books') renderBooks();
+      if (id === 'cases') renderCasesCards();
+      if (id === 'dashboard') renderDashboardTables();
+    }
+
+    // Delegated clicks: nav + section jumpers
+    document.addEventListener('click', (e) => {
+      const a = e.target.closest('.nav-link');
+      if (a) { e.preventDefault(); showSection(a.dataset.section); return; }
+      const openSection = e.target.closest('[data-open-section]');
+      if (openSection) { showSection(openSection.dataset.openSection); }
+    });
+
+    // --- Modal System (focus trap + ESC close) ---
+    let lastFocused = null;
+    function toggleModal(modal, open) {
+      const el = typeof modal === 'string' ? $(modal) : modal;
+      if (!el) return;
+      if (open) {
+        lastFocused = document.activeElement;
+        el.classList.remove('hidden');
+        requestAnimationFrame(() => el.classList.add('opacity-100'));
+        const focusable = el.querySelector('[tabindex="-1"], button, [href], input, select, textarea');
+        focusable && focusable.focus();
+        document.addEventListener('keydown', escClose);
+        el.addEventListener('keydown', trapFocus);
+      } else {
+        el.classList.remove('opacity-100');
+        setTimeout(() => el.classList.add('hidden'), 200);
+        document.removeEventListener('keydown', escClose);
+        el.removeEventListener('keydown', trapFocus);
+        lastFocused && lastFocused.focus();
+      }
+    }
+    function escClose(ev){ if (ev.key === 'Escape') toggleModal('#caseModal', false), toggleModal('#bookReaderModal', false); }
+    function trapFocus(ev){
+      const dlg = ev.currentTarget;
+      const focusables = $$('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])', dlg).filter(x=>!x.hasAttribute('disabled'));
+      if (ev.key === 'Tab' && focusables.length) {
+        const first = focusables[0], last = focusables[focusables.length-1];
+        if (ev.shiftKey && document.activeElement === first) { last.focus(); ev.preventDefault(); }
+        else if (!ev.shiftKey && document.activeElement === last) { first.focus(); ev.preventDefault(); }
+      }
+    }
+    document.addEventListener('click', (e)=>{
+      if (e.target.matches('[data-close-modal]')) {
+        const dlg = e.target.closest('[role="dialog"]');
+        toggleModal(dlg, false);
+      }
+    });
+
+    // --- Agents UI ---
+    function renderAgentPills(){
+      const host = $('#agentPills'); host.innerHTML='';
+      agents.forEach(a=>{
+        const span = document.createElement('span');
+        span.className = 'px-3 py-1 rounded-xl text-xs font-medium flex items-center gap-2';
+        span.style.backgroundColor = 'rgba(16,185,129,0.08)';
+        span.innerHTML = `<span class="inline-block w-2 h-2 rounded-full" style="background:${statusColor(a.status)}"></span><span class="text-gray-800 dark:text-gray-100">${a.id}</span>`;
+        host.appendChild(span);
+      })
+    }
+    function statusColor(s){ return s==='online'?'#22c55e':(s==='idle'?'#eab308':'#ef4444'); }
+
+    function renderAgentGraph(){
+      const g = $('#agentGraph');
+      g.innerHTML = '';
+      // Center JUNO
+      circle(200,120,30, '#059669', 'JUNO', 16);
+      // Radial layout for others
+      const others = agents.filter(a=>a.id!=='JUNO');
+      const R = 70;
+      others.forEach((a,i)=>{
+        const angle = (i/others.length)*Math.PI*2;
+        const x = 200 + Math.cos(angle)*R*1.6;
+        const y = 120 + Math.sin(angle)*R*1.0;
+        circle(x,y,14, a.color, a.id, 10);
+        line(200,120,x,y,'#a7f3d0');
+      });
+      function circle(cx,cy,r,fill,label,fontSize){
+        const c = document.createElementNS('http://www.w3.org/2000/svg','circle');
+        c.setAttribute('cx',cx); c.setAttribute('cy',cy); c.setAttribute('r',r); c.setAttribute('fill',fill);
+        g.appendChild(c);
+        const t = document.createElementNS('http://www.w3.org/2000/svg','text');
+        t.setAttribute('x',cx); t.setAttribute('y',cy+4);
+        t.setAttribute('text-anchor','middle'); t.setAttribute('fill','white'); t.setAttribute('font-size',fontSize);
+        t.setAttribute('font-weight','bold'); t.textContent = label;
+        g.appendChild(t);
+      }
+      function line(x1,y1,x2,y2,stroke){
+        const l = document.createElementNS('http://www.w3.org/2000/svg','line');
+        l.setAttribute('x1',x1); l.setAttribute('y1',y1); l.setAttribute('x2',x2); l.setAttribute('y2',y2);
+        l.setAttribute('stroke',stroke); l.setAttribute('stroke-width',2); g.appendChild(l);
+      }
+    }
+
+    function renderAgents(){
+      const grid = $('#agentsGrid'); grid.innerHTML='';
+      agents.forEach(a=>{
+        const card = document.createElement('div');
+        card.className = 'rounded-2xl shadow p-4 bg-white dark:bg-gray-900 flex items-start gap-3';
+        card.innerHTML = `
+          <div class="w-10 h-10 rounded-full shrink-0" style="background:${a.color}"></div>
+          <div class="flex-1">
+            <div class="flex items-center gap-2">
+              <h3 class="font-semibold">${a.id}</h3>
+              <span class="inline-flex items-center gap-1 text-xs"><span class="w-2 h-2 rounded-full" style="background:${statusColor(a.status)}"></span>${a.status}</span>
+            </div>
+            <p class="text-xs text-gray-500 dark:text-gray-400">${a.role}</p>
+          </div>`;
+        grid.appendChild(card);
+      })
+    }
+
+    // --- Books UI ---
+    function renderBookQuickList(){
+      const host = $('#bookQuickList'); host.innerHTML='';
+      Object.keys(books).slice(0,6).forEach(key=>{
+        const li = document.createElement('li');
+        li.innerHTML = `<button class="hover:underline" data-book-open="${key}">${books[key].title.split(':')[0]}: ${books[key].title.split(':')[1]||''}</button>`;
+        host.appendChild(li);
+      });
+    }
+    function renderBooks(){
+      const grid = $('#booksGrid'); grid.innerHTML='';
+      Object.entries(books).forEach(([key, val])=>{
+        const card = document.createElement('div');
+        card.className = 'rounded-2xl shadow p-4 bg-white dark:bg-gray-900 flex flex-col gap-2';
+        card.innerHTML = `
+          <h3 class="font-semibold">${val.title}</h3>
+          <p class="text-xs text-gray-500 dark:text-gray-400">Chapters: ${val.chapters.length}</p>
+          <div><button class="text-sm text-emerald-700 dark:text-emerald-300 hover:underline" data-book-open="${key}">Open</button></div>`;
+        grid.appendChild(card);
+      });
+    }
+
+    // Delegated open book
+    document.addEventListener('click', (e)=>{
+      const btn = e.target.closest('[data-book-open]');
+      if (!btn) return;
+      const key = btn.getAttribute('data-book-open');
+      state.currentBook = books[key]; state.currentChapter = 0;
+      $('#bookReaderTitle').textContent = state.currentBook.title;
+      const list = $('#bookChapterList'); list.innerHTML='';
+      state.currentBook.chapters.forEach((ch,i)=>{
+        const li = document.createElement('li');
+        li.className = 'mb-2';
+        li.innerHTML = `<a href="#" class="hover:underline" data-chapter-index="${i}">${ch.name}</a>`;
+        list.appendChild(li);
+      });
+      showChapter();
+      toggleModal('#bookReaderModal', true);
+    });
+
+    document.addEventListener('click', (e)=>{
+      const jump = e.target.closest('[data-chapter-index]');
+      if (!jump) return; e.preventDefault();
+      state.currentChapter = parseInt(jump.getAttribute('data-chapter-index'),10) || 0; showChapter();
+    });
+
+    $('#bookPrev').addEventListener('click', ()=>{ if (state.currentChapter>0){ state.currentChapter--; showChapter(); }});
+    $('#bookNext').addEventListener('click', ()=>{ const max=state.currentBook?.chapters.length-1||0; if (state.currentChapter<max){ state.currentChapter++; showChapter(); }});
+
+    function showChapter(){
+      const ch = state.currentBook.chapters[state.currentChapter];
+      const host = $('#bookChapterContent'); host.textContent = ch.content;
+      $('#bookPrev').disabled = state.currentChapter === 0;
+      $('#bookNext').disabled = state.currentChapter === state.currentBook.chapters.length - 1;
+      toast(`Chapter: ${ch.name}`);
+    }
+
+    // --- Cases UI (table + cards) ---
+    function renderDashboardTables(){
+      renderAgentPills();
+      renderAgentGraph();
+      // table
+      const tbody = $('#casesTable tbody'); tbody.innerHTML='';
+      cases.forEach(c=>{
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td class="py-2">#${c.id}</td>
+          <td>${c.title}</td>
+          <td><span class="rounded px-2 py-1 ${tierClass(c.tier)}">${c.tier}</span></td>
+          <td>${c.status}</td>
+          <td><button class="text-xs text-emerald-700 dark:text-emerald-300 hover:underline" data-case-open="${c.id}">Details</button></td>`;
+        tbody.appendChild(tr);
+      })
+      // metrics
+      $('#metricResolved').textContent = metrics.resolved.toLocaleString();
+      $('#metricAvgTime').textContent = metrics.avgDays + ' days';
+      $('#metricCycle').textContent = '#' + metrics.cycle;
+      $('#metricIntegrity').textContent = metrics.integrity ? '✓' : '⚠';
+      // workflow
+      updateWorkflow();
+    }
+
+    function tierClass(t){
+      return t==='Restoration' ? 'bg-emerald-100 text-emerald-700 dark:bg-emerald-900 dark:text-emerald-200' :
+             t==='Reconciliation' ? 'bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-200' :
+             'bg-yellow-100 text-yellow-700 dark:bg-yellow-900 dark:text-yellow-200';
+    }
+
+    function renderCasesCards(){
+      const host = $('#casesList'); host.innerHTML='';
+      cases.forEach(c=>{
+        const card = document.createElement('div');
+        card.className = 'rounded-2xl shadow p-4 bg-white dark:bg-gray-900 flex flex-col gap-2';
+        card.innerHTML = `
+          <div class="flex items-center justify-between">
+            <h3 class="font-semibold">#${c.id} — ${c.title}</h3>
+            <span class="text-xs ${tierClass(c.tier)} rounded px-2 py-1">${c.tier}</span>
+          </div>
+          <div class="text-xs text-gray-500 dark:text-gray-400">Status: ${c.status}</div>
+          <div class="mt-2"><button class="text-emerald-700 dark:text-emerald-300 hover:underline text-sm" data-case-open="${c.id}">Open Chat</button></div>`;
+        host.appendChild(card);
+      })
+    }
+
+    // Delegated case open
+    document.addEventListener('click', (e)=>{
+      const btn = e.target.closest('[data-case-open]'); if (!btn) return;
+      const id = parseInt(btn.getAttribute('data-case-open'),10); state.activeCaseId = id;
+      $('#caseModalTitle').textContent = `Case #${id}`;
+      const log = $('#chatLog'); log.innerHTML='';
+      // seed
+      addChat('J', 'JUNO: Please provide more context about the event.', 'left');
+      addChat('A', 'AEGIS: Reviewing for fairness now.', 'right');
+      toggleModal('#caseModal', true);
+    });
+
+    // Chat send (sanitize)
+    $('#chatSend').addEventListener('click', sendChatMsg);
+    $('#chatInput').addEventListener('keydown', (e)=>{ if (e.key==='Enter'){ e.preventDefault(); sendChatMsg(); }});
+    function addChat(initial, text, side){
+      const wrap = document.createElement('div');
+      wrap.className = 'flex gap-2 items-start ' + (side==='right'?'flex-row-reverse':'');
+      const avatar = document.createElement('span');
+      avatar.className = 'w-8 h-8 bg-gray-600 text-white rounded-full flex items-center justify-center font-bold';
+      avatar.textContent = initial;
+      const msgWrap = document.createElement('div');
+      const bubble = document.createElement('span');
+      bubble.className = 'block rounded-lg px-4 py-2 text-sm ' + (side==='right'?'bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-100':'bg-emerald-100 dark:bg-emerald-900 text-emerald-800 dark:text-emerald-100');
+      bubble.textContent = text; // safe text only
+      const meta = document.createElement('span'); meta.className='text-xs text-gray-400 ml-2'; meta.textContent = 'Now';
+      msgWrap.appendChild(bubble); msgWrap.appendChild(meta);
+      wrap.appendChild(avatar); wrap.appendChild(msgWrap);
+      $('#chatLog').appendChild(wrap); $('#chatLog').scrollTop=1e9;
+    }
+    function sendChatMsg(){
+      const inp = $('#chatInput'); const val = inp.value.trim(); if (!val) return;
+      addChat('U', val, 'right'); inp.value=''; toast('Message sent');
+    }
+
+    // --- Workflow ---
+    const stepTexts = [
+      'Intake: The case is submitted and logged by JUNO. Awaiting validation.',
+      'Validation: AEGIS checks for bias and fairness; context and facts are verified.',
+      'Deliberation: Agents collaborate, review memories and narratives, propose solutions.',
+      'Remedy: Restoration, reconciliation, or transformation actions are agreed and initiated.',
+      'Audit: Outcome is reviewed; doctrinal updates or audits are triggered if needed.'
+    ];
+    function updateWorkflow(){
+      for (let i=0;i<5;i++){
+        const el = $('#step-'+i);
+        el.className = 'w-8 h-8 rounded-full flex items-center justify-center font-bold transition-all duration-300 ' + (i===state.workflowStep ? 'bg-emerald-500 text-white' : 'bg-gray-200 dark:bg-gray-800 text-gray-500');
+      }
+      $('#prevBtn').disabled = state.workflowStep===0;
+      $('#nextBtn').disabled = state.workflowStep===stepTexts.length-1;
+      $('#stepInfo').textContent = stepTexts[state.workflowStep];
+    }
+    $('#prevBtn').addEventListener('click', ()=>{ if (state.workflowStep>0){ state.workflowStep--; updateWorkflow(); }});
+    $('#nextBtn').addEventListener('click', ()=>{ if (state.workflowStep<stepTexts.length-1){ state.workflowStep++; updateWorkflow(); }});
+
+    // --- Search (dashboard table) ---
+    $('#caseSearch').addEventListener('input', function(){ filterTable(this.value); });
+    $('#caseSearchClear').addEventListener('click', ()=>{ $('#caseSearch').value=''; filterTable(''); });
+    function filterTable(q){
+      const rows = $$('#casesTable tbody tr');
+      const f = q.toLowerCase();
+      rows.forEach(r=>{ r.style.display = r.innerText.toLowerCase().includes(f) ? '' : 'none'; });
+    }
+
+    // --- Search (all cases) ---
+    $('#allCaseSearch').addEventListener('input', function(){ filterCards(this.value); });
+    $('#allCaseSearchClear').addEventListener('click', ()=>{ $('#allCaseSearch').value=''; filterCards(''); });
+    function filterCards(q){
+      const f = q.toLowerCase();
+      $$('#casesList > div').forEach(card=>{ card.style.display = card.innerText.toLowerCase().includes(f) ? '' : 'none'; });
+    }
+
+    // --- Case Form Validation ---
+    $('#caseForm').addEventListener('submit', (e)=>{
+      e.preventDefault();
+      const fd = new FormData(e.currentTarget);
+      const title = (fd.get('title')||'').toString().trim();
+      const desc = (fd.get('desc')||'').toString().trim();
+      const tier = (fd.get('tier')||'').toString().trim();
+      if (!title || !desc || !tier){ toast('Please fill out all fields.'); return; }
+      // mock create
+      const newId = Math.max(...cases.map(c=>c.id))+1;
+      cases.unshift({ id:newId, title, tier, status:'Intake' });
+      renderDashboardTables(); renderCasesCards(); toast('Case submitted');
+      e.currentTarget.reset();
+    });
+
+    // --- Role-based UI ---
+    if (state.userRole === 'admin') { $('#settingsBtn').classList.remove('hidden'); }
+
+    // --- Init ---
+    function init(){ renderBookQuickList(); renderDashboardTables(); showSection('dashboard'); }
+    init();
+  </script>
+</body>
+</html>

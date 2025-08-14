@@ -1,0 +1,7 @@
+[
+  {"title":"Adopt IEEE-7003 bias profiles across decisions","assignedTo":"AEGIS","taskType":"audit","source":"system-expansion","metadata":{"standard":"IEEE 7003-2024"}},
+  {"title":"Integrate RCT/meta-analyses into precedent vault","assignedTo":"LYRA","taskType":"knowledge","source":"system-expansion","metadata":{"topics":["youth felonies","RJ recidivism"]}},
+  {"title":"CoSA pilot scoping memo","assignedTo":"ORION","taskType":"design","source":"system-expansion","metadata":{"phases":["community_screening","circle_training","metrics"]}},
+  {"title":"CVT bias-checkpoint cron","assignedTo":"TEMPUS","taskType":"ops","source":"system-expansion","metadata":{"interval_days":7}},
+  {"title":"Public Commitments Ceremony template","assignedTo":"VESTA","taskType":"ritual","source":"system-expansion","metadata":{"milestones":["committee_formed","policies_published","quarterly_report"]}}
+]

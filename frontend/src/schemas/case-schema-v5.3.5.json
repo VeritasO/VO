@@ -1,0 +1,643 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://veritas.system/schemas/case-v5_3_5.json",
+  "title": "Veritas Case (v5.3.5)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "version",
+    "case_id",
+    "case_tier",
+    "initiation_cvt",
+    "parties",
+    "consent",
+    "review_interval",
+    "reversibility_level",
+    "intake",
+    "evidence",
+    "harm_need_map",
+    "fairness_audit",
+    "ruling_hypotheses",
+    "reconciliation_menu",
+    "selection_consent",
+    "activation",
+    "review_adaptation",
+    "closure",
+    "system_audit_hooks"
+  ],
+  "properties": {
+    "version": { "const": "v5.3.5" },
+    "case_id": { "type": "string", "pattern": "^[a-z0-9\\-]{8,64}$" },
+    "case_tier": { "type": "integer", "minimum": 0, "maximum": 4 },
+    "initiation_cvt": { "$ref": "#/$defs/Timestamp" },
+    "labels": {
+      "type": "array",
+      "items": { "type": "string", "maxLength": 64 },
+      "default": []
+    },
+    "parties": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/Party" }
+    },
+    "consent": { "$ref": "#/$defs/ConsentMatrix" },
+    "review_interval": { "$ref": "#/$defs/DurationISO8601" },
+    "reversibility_level": {
+      "type": "string",
+      "enum": ["Full", "Layered", "Escrowed", "Conditional"]
+    },
+    "intake": { "$ref": "#/$defs/IntakePhase" },
+    "evidence": { "$ref": "#/$defs/EvidencePhase" },
+    "harm_need_map": { "$ref": "#/$defs/HarmNeedMap" },
+    "fairness_audit": { "$ref": "#/$defs/FairnessAudit" },
+    "ruling_hypotheses": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/RulingHypothesis" }
+    },
+    "reconciliation_menu": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/ReconciliationOption" }
+    },
+    "selection_consent": { "$ref": "#/$defs/SelectionConsent" },
+    "activation": { "$ref": "#/$defs/ActivationPhase" },
+    "review_adaptation": { "$ref": "#/$defs/ReviewAdaptation" },
+    "closure": { "$ref": "#/$defs/ClosurePhase" },
+    "system_audit_hooks": { "$ref": "#/$defs/SystemAuditHooks" },
+    "explainability": { "$ref": "#/$defs/ProofOfReasonPack" }
+  },
+  "$defs": {
+    "Timestamp": {
+      "type": "string",
+      "description": "ISO‑8601 with timezone, e.g., 2025-08-09T12:00:00-04:00",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(?:\\.\\d+)?(?:Z|[+-]\\d{2}:\\d{2})$"
+    },
+    "DurationISO8601": {
+      "type": "string",
+      "description": "ISO‑8601 duration, e.g., P30D, PT1H",
+      "pattern": "^P(?!$)(\\d+Y)?(\\d+M)?(\\d+D)?(T(\\d+H)?(\\d+M)?(\\d+S)?)?$"
+    },
+    "Score0to100": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 100
+    },
+    "UUID": {
+      "type": "string",
+      "pattern": "^[0-9a-fA-F\\-]{36}$"
+    },
+    "Money": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["amount", "currency"],
+      "properties": {
+        "amount": { "type": "number", "minimum": 0 },
+        "currency": { "type": "string", "pattern": "^[A-Z]{3}$" }
+      }
+    },
+    "AgentRef": {
+      "type": "string",
+      "enum": ["JUNO", "AEGIS", "KAIROS", "LYRA", "ORION", "THALEA", "VESTA"]
+    },
+    "Party": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["party_id", "role", "display_name"],
+      "properties": {
+        "party_id": { "$ref": "#/$defs/UUID" },
+        "role": {
+          "type": "string",
+          "enum": ["harmed", "responsible", "witness", "community", "observer", "facilitator"]
+        },
+        "display_name": { "type": "string", "minLength": 1, "maxLength": 140 },
+        "contact": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "email": { "type": "string", "format": "email" },
+            "phone": { "type": "string", "maxLength": 32 }
+          }
+        },
+        "language_prefs": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 2, "maxLength": 32 },
+          "default": []
+        },
+        "access_needs": { "type": "array", "items": { "type": "string" }, "default": [] },
+        "representation": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "advocate_id": { "$ref": "#/$defs/UUID" },
+            "notes": { "type": "string", "maxLength": 2000 }
+          }
+        }
+      }
+    },
+    "ConsentMatrix": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["visibility", "pacing", "topics", "privacy_flags", "revocation_policy"],
+      "properties": {
+        "visibility": {
+          "type": "string",
+          "enum": ["sealed", "parties-only", "panel", "public-summary"]
+        },
+        "pacing": {
+          "type": "string",
+          "enum": ["asynchronous", "scheduled", "participant-paced"]
+        },
+        "topics": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "allowed": { "type": "array", "items": { "type": "string" }, "default": [] },
+            "restricted": { "type": "array", "items": { "type": "string" }, "default": [] }
+          }
+        },
+        "privacy_flags": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": ["no-biometric", "no-location", "no-financial", "no-redistribution", "anonymize-public"]
+          },
+          "default": []
+        },
+        "revocation_policy": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["can_revoke", "notice_period"],
+          "properties": {
+            "can_revoke": { "type": "boolean" },
+            "notice_period": { "$ref": "#/$defs/DurationISO8601" }
+          }
+        }
+      }
+    },
+    "NarrativeCapture": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["modes", "summary"],
+      "properties": {
+        "modes": {
+          "type": "array",
+          "items": { "type": "string", "enum": ["text", "audio", "video", "symbolic"] }
+        },
+        "summary": { "type": "string", "maxLength": 10000 },
+        "attachments": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/EvidenceItem" },
+          "default": []
+        }
+      }
+    },
+    "IntakePhase": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["narrative", "harm_statement", "needs_statement", "narrative_dignity_score"],
+      "properties": {
+        "narrative": { "$ref": "#/$defs/NarrativeCapture" },
+        "harm_statement": { "type": "string", "maxLength": 8000 },
+        "needs_statement": { "type": "string", "maxLength": 8000 },
+        "narrative_dignity_score": { "$ref": "#/$defs/Score0to100" },
+        "intake_agent": { "$ref": "#/$defs/AgentRef" },
+        "timestamp": { "$ref": "#/$defs/Timestamp" }
+      }
+    },
+    "EvidenceItem": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["evidence_id", "kind", "provenance", "reliability"],
+      "properties": {
+        "evidence_id": { "$ref": "#/$defs/UUID" },
+        "kind": { "type": "string", "enum": ["document", "media", "sensor", "testimony", "expert-opinion", "other"] },
+        "uri": { "type": "string", "format": "uri" },
+        "hash": { "type": "string", "pattern": "^[A-Fa-f0-9]{64}$" },
+        "provenance": { "type": "string", "maxLength": 4000 },
+        "reliability": { "$ref": "#/$defs/Score0to100" },
+        "notes": { "type": "string", "maxLength": 4000 }
+      }
+    },
+    "EvidencePhase": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["items", "contradictions", "context_notes"],
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/EvidenceItem" }
+        },
+        "contradictions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["statement_a", "statement_b", "detected_by"],
+            "properties": {
+              "statement_a": { "type": "string", "maxLength": 4000 },
+              "statement_b": { "type": "string", "maxLength": 4000 },
+              "detected_by": { "type": "string", "enum": ["engine", "party", "agent"] },
+              "severity": { "$ref": "#/$defs/Score0to100" }
+            }
+          },
+          "default": []
+        },
+        "context_notes": { "type": "string", "maxLength": 8000 }
+      }
+    },
+    "HarmNeedMap": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["human_harm", "community_harm", "ecological_harm", "temporal", "systemic_links"],
+      "properties": {
+        "human_harm": { "$ref": "#/$defs/HarmScorepack" },
+        "community_harm": { "$ref": "#/$defs/HarmScorepack" },
+        "ecological_harm": { "$ref": "#/$defs/HarmScorepack" },
+        "temporal": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["grief_clock", "urgency_score"],
+          "properties": {
+            "grief_clock": { "$ref": "#/$defs/DurationISO8601" },
+            "delay_cost": { "$ref": "#/$defs/Score0to100" },
+            "urgency_score": { "$ref": "#/$defs/Score0to100" }
+          }
+        },
+        "systemic_links": {
+          "type": "array",
+          "items": { "type": "string", "maxLength": 2000 },
+          "default": []
+        }
+      }
+    },
+    "HarmScorepack": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["emotional", "physical", "economic"],
+      "properties": {
+        "emotional": { "$ref": "#/$defs/Score0to100" },
+        "physical": { "$ref": "#/$defs/Score0to100" },
+        "economic": { "$ref": "#/$defs/Score0to100" },
+        "notes": { "type": "string", "maxLength": 4000 }
+      }
+    },
+    "FairnessAudit": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["bias_scan", "uncertainty", "mitigation_plan", "expected_outcome_parity"],
+      "properties": {
+        "bias_scan": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["methods", "flags"],
+          "properties": {
+            "methods": {
+              "type": "array",
+              "items": { "type": "string", "enum": ["counterfactual", "subgroup", "calibration", "abstention"] }
+            },
+            "flags": {
+              "type": "array",
+              "items": { "type": "string", "maxLength": 200 },
+              "default": []
+            }
+          }
+        },
+        "uncertainty": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["confidence_pct", "uncertainty_budget"],
+          "properties": {
+            "confidence_pct": { "$ref": "#/$defs/Score0to100" },
+            "uncertainty_budget": { "$ref": "#/$defs/Score0to100" }
+          }
+        },
+        "mitigation_plan": {
+          "type": "array",
+          "items": { "type": "string", "maxLength": 2000 },
+          "default": []
+        },
+        "expected_outcome_parity": { "$ref": "#/$defs/Score0to100" }
+      }
+    },
+    "Obligation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["obligation_id", "kind", "parameters", "timeline", "reversibility"],
+      "properties": {
+        "obligation_id": { "$ref": "#/$defs/UUID" },
+        "kind": {
+          "type": "string",
+          "enum": ["restitution", "service", "access", "education", "mediation", "stewardship", "symbolic_rite", "policy_change", "other"]
+        },
+        "parameters": { "type": "object" },
+        "timeline": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["start", "target_completion"],
+          "properties": {
+            "start": { "$ref": "#/$defs/Timestamp" },
+            "target_completion": { "$ref": "#/$defs/Timestamp" },
+            "pacing": { "$ref": "#/$defs/DurationISO8601" }
+          }
+        },
+        "reversibility": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["level", "checkpoints"],
+          "properties": {
+            "level": { "type": "string", "enum": ["Full", "Layered", "Escrowed", "Conditional"] },
+            "checkpoints": {
+              "type": "array",
+              "minItems": 1,
+              "items": { "$ref": "#/$defs/Checkpoint" }
+            }
+          }
+        },
+        "escrow": { "$ref": "#/$defs/Escrow" },
+        "measurement": { "$ref": "#/$defs/MeasurementPlan" }
+      }
+    },
+    "Checkpoint": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "gate", "actions_on_fail"],
+      "properties": {
+        "name": { "type": "string", "maxLength": 140 },
+        "gate": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["condition", "verified_by"],
+          "properties": {
+            "condition": { "type": "string", "maxLength": 2000 },
+            "verified_by": { "type": "string", "enum": ["JUNO", "AEGIS", "KAIROS", "LYRA", "ORION", "THALEA", "VESTA", "panel"] }
+          }
+        },
+        "actions_on_fail": {
+          "type": "array",
+          "items": { "type": "string", "maxLength": 1000 },
+          "default": []
+        }
+      }
+    },
+    "Escrow": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["enabled"],
+      "properties": {
+        "enabled": { "type": "boolean" },
+        "funds": { "$ref": "#/$defs/Money" },
+        "release_policy": { "type": "string", "maxLength": 4000 },
+        "rollback_policy": { "type": "string", "maxLength": 4000 }
+      }
+    },
+    "MeasurementPlan": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["repair_targets", "metrics"],
+      "properties": {
+        "repair_targets": { "type": "array", "items": { "type": "string", "maxLength": 500 } },
+        "metrics": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["name", "target", "method"],
+            "properties": {
+              "name": { "type": "string", "maxLength": 140 },
+              "target": { "$ref": "#/$defs/Score0to100" },
+              "method": { "type": "string", "maxLength": 1000 }
+            }
+          }
+        }
+      }
+    },
+    "RulingHypothesis": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["hypothesis_id", "obligations", "repair_forecast", "fairness_score", "reversibility_plan", "risk_map", "narrative_impact"],
+      "properties": {
+        "hypothesis_id": { "$ref": "#/$defs/UUID" },
+        "label": { "type": "string", "maxLength": 140 },
+        "obligations": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/Obligation" }
+        },
+        "repair_forecast": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["expected_repair_score", "time_to_repair"],
+          "properties": {
+            "expected_repair_score": { "$ref": "#/$defs/Score0to100" },
+            "time_to_repair": { "$ref": "#/$defs/DurationISO8601" }
+          }
+        },
+        "fairness_score": { "$ref": "#/$defs/Score0to100" },
+        "reversibility_plan": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["summary", "global_checkpoints"],
+          "properties": {
+            "summary": { "type": "string", "maxLength": 4000 },
+            "global_checkpoints": {
+              "type": "array",
+              "items": { "$ref": "#/$defs/Checkpoint" }
+            }
+          }
+        },
+        "risk_map": {
+          "type": "array",
+          "items": { "type": "string", "maxLength": 2000 },
+          "default": []
+        },
+        "narrative_impact": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["dignity_score", "notes"],
+          "properties": {
+            "dignity_score": { "$ref": "#/$defs/Score0to100" },
+            "notes": { "type": "string", "maxLength": 2000 }
+          }
+        }
+      }
+    },
+    "ReconciliationOption": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["option_id", "kind", "bundle", "scores"],
+      "properties": {
+        "option_id": { "$ref": "#/$defs/UUID" },
+        "kind": {
+          "type": "string",
+          "enum": ["narrative_mediation", "restitution_access", "learning_for_repair", "community_stewardship", "symbolic_structural_rite", "custom"]
+        },
+        "bundle": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/Obligation" }
+        },
+        "scores": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["repair_curve", "fairness_index", "emotional_compatibility", "reversibility_ease"],
+          "properties": {
+            "repair_curve": { "$ref": "#/$defs/Score0to100" },
+            "fairness_index": { "$ref": "#/$defs/Score0to100" },
+            "emotional_compatibility": { "$ref": "#/$defs/Score0to100" },
+            "reversibility_ease": { "$ref": "#/$defs/Score0to100" }
+          }
+        }
+      }
+    },
+    "SelectionConsent": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["selection_mode", "votes", "modifications", "consent_lock"],
+      "properties": {
+        "selection_mode": { "type": "string", "enum": ["consensus", "majority", "hybrid"] },
+        "votes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["party_id", "option_id", "timestamp"],
+            "properties": {
+              "party_id": { "$ref": "#/$defs/UUID" },
+              "option_id": { "$ref": "#/$defs/UUID" },
+              "timestamp": { "$ref": "#/$defs/Timestamp" }
+            }
+          }
+        },
+        "modifications": { "type": "string", "maxLength": 4000 },
+        "consent_lock": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["locked", "conditions"],
+          "properties": {
+            "locked": { "type": "boolean" },
+            "conditions": { "type": "string", "maxLength": 2000 }
+          }
+        }
+      }
+    },
+    "ActivationPhase": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["smart_obligations", "observers", "live_repair_tracking"],
+      "properties": {
+        "smart_obligations": { "type": "array", "items": { "$ref": "#/$defs/Obligation" } },
+        "observers": {
+          "type": "array",
+          "items": { "type": "string", "maxLength": 140 },
+          "default": []
+        },
+        "live_repair_tracking": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["enabled", "dashboard_uri"],
+          "properties": {
+            "enabled": { "type": "boolean" },
+            "dashboard_uri": { "type": "string", "format": "uri" }
+          }
+        }
+      }
+    },
+    "ReviewAdaptation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["triggers", "appeals", "rollback"],
+      "properties": {
+        "triggers": {
+          "type": "array",
+          "items": { "type": "string", "enum": ["new_evidence", "harm_drift", "bias_drop", "distress_signal", "time_gate"] }
+        },
+        "appeals": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["type", "submitted_by", "timestamp", "grounds"],
+            "properties": {
+              "type": { "type": "string", "enum": ["evidence", "fairness", "dignity", "timing"] },
+              "submitted_by": { "$ref": "#/$defs/UUID" },
+              "timestamp": { "$ref": "#/$defs/Timestamp" },
+              "grounds": { "type": "string", "maxLength": 4000 }
+            }
+          },
+          "default": []
+        },
+        "rollback": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["policy", "can_execute", "executed_at"],
+          "properties": {
+            "policy": { "type": "string", "maxLength": 4000 },
+            "can_execute": { "type": "boolean" },
+            "executed_at": { "anyOf": [{ "type": "null" }, { "$ref": "#/$defs/Timestamp" }] }
+          }
+        }
+      }
+    },
+    "ClosurePhase": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["final_repair_score", "attestations", "archive"],
+      "properties": {
+        "final_repair_score": { "$ref": "#/$defs/Score0to100" },
+        "attestations": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["proof_of_reason_uri", "rights_compliance", "narrative_closure"],
+          "properties": {
+            "proof_of_reason_uri": { "type": "string", "format": "uri" },
+            "rights_compliance": { "type": "string", "maxLength": 4000 },
+            "narrative_closure": { "type": "string", "maxLength": 4000 }
+          }
+        },
+        "archive": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["immutable_log_uri", "reseal_rights"],
+          "properties": {
+            "immutable_log_uri": { "type": "string", "format": "uri" },
+            "reseal_rights": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["can_reseal", "conditions"],
+              "properties": {
+                "can_reseal": { "type": "boolean" },
+                "conditions": { "type": "string", "maxLength": 2000 }
+              }
+            }
+          }
+        }
+      }
+    },
+    "SystemAuditHooks": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["case_counter", "scheduled_audit_after_n_cases", "hooks"],
+      "properties": {
+        "case_counter": { "type": "integer", "minimum": 0 },
+        "scheduled_audit_after_n_cases": { "type": "integer", "minimum": 1, "default": 5 },
+        "hooks": {
+          "type": "array",
+          "items": { "type": "string", "enum": ["AEGIS_bias_drift", "ORION_doctrine_consistency", "VESTA_rite_evolution", "KAIROS_grief_pacing", "JUNO_contradiction_review"] }
+        }
+      }
+    },
+    "ProofOfReasonPack": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["inputs", "weights", "fairness_diagnostics", "counterfactuals", "plain_summary"],
+      "properties": {
+        "inputs": { "type": "array", "items": { "type": "string", "maxLength": 1000 } },
+        "weights": { "type": "array", "items": { "type": "number" } },
+        "fairness_diagnostics": { "type": "string", "maxLength": 8000 },
+        "counterfactuals": { "type": "string", "maxLength": 8000 },
+        "plain_summary": { "type": "string", "maxLength": 4000 }
+      }
+    }
+  }
+}

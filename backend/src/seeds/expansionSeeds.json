@@ -1,0 +1,13 @@
+{
+  "tasks": [
+    { "title": "Adopt IEEE 7003 bias profiles across decisions", "agent": "AEGIS", "type": "audit", "metadata": { "standard": "IEEE 7003-2024" } },
+    { "title": "Integrate RCT/meta-analyses into precedent vault", "agent": "LYRA", "type": "knowledge", "metadata": { "topics": ["youth felonies", "RJ recidivism"] } },
+    { "title": "CoSA pilot scoping memo", "agent": "ORION", "type": "design", "metadata": { "phases": ["community_screening","circle_training","metrics"] } },
+    { "title": "CVT bias-checkpoint cron", "agent": "TEMPUS", "type": "ops", "metadata": { "interval_days": 7 } },
+    { "title": "Community RJ patterns import", "agent": "THALEA", "type": "knowledge", "metadata": { "source": "ISLG Yearbook 2024-2025" } },
+    { "title": "Public Commitments Ceremony template", "agent": "VESTA", "type": "ritual", "metadata": { "milestones": ["committee_formed","policies_published","quarterly_report"] } }
+  ],
+  "rituals": [
+    { "name": "Rite of Public Commitments", "tier": "structural", "elements": ["Oath reading","Milestone ledger signing","Quarterly truth circle"] }
+  ]
+}

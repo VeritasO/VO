@@ -1,0 +1,4 @@
+[
+  {"case_id":"CASE-001","category":"community_service","qty":12,"unit":"hours","verified_by":"CBO-1"},
+  {"case_id":"CASE-002","category":"ecological","qty":20,"unit":"plants","verified_by":"Parks-Dept"}
+]
