@@ -1,0 +1,124 @@
+{
+  // ─────────────────────────────────────────────────────────────────────────────
+  // VERITAS.O SYSTEM WORKSPACE — BOOT PRIMER (A1–A21)
+  // Place this file at repo root and open it with VS Code:
+  //   code veritas.code-workspace
+  //
+  // To make VS Code "the system" on boot, use the OS boot snippets at the end of
+  // this file (macOS LaunchAgent, Linux systemd --user, Windows Task Scheduler).
+  // ─────────────────────────────────────────────────────────────────────────────
+
+  "folders": [
+    { "path": "." }
+  ],
+
+  "settings": {
+    // ——— Make VS Code the "front‑door" UI ———
+    "workbench.startupEditor": "readme",
+    "workbench.welcomePage.enabled": false,
+    "window.restoreWindows": "one",
+    "window.openWithoutArgumentsInNewWindow": "off",
+    "window.title": "Veritas.O — System Console",
+    "workbench.editor.enablePreview": false,
+    "workbench.statusBar.visible": true,
+    "workbench.activityBar.location": "bottom",
+    "zenMode.fullScreen": true,
+    "zenMode.centerLayout": true,
+    "window.newWindowDimensions": "maximized",
+
+    // ——— Surface our system manual as the "Readme" target ———
+    // VS Code shows README.md or any 'readme'‑like file on startup when
+    // startupEditor=readme. We map our canonical manual filename here.
+    // Create the file at project root: README_VERITAS.SYSTEM.md (template below).
+    "veritas.system.readme": "README_VERITAS.SYSTEM.md",
+
+    // ——— Editor defaults (stable, auditable) ———
+    "files.autoSave": "afterDelay",
+    "files.autoSaveDelay": 1000,
+    "files.trimTrailingWhitespace": true,
+    "editor.formatOnSave": true,
+    "editor.wordWrap": "on",
+    "editor.renderWhitespace": "selection",
+    "editor.minimap.enabled": false,
+
+    // ——— Security & trust ———
+    "security.workspace.trust.enabled": true,
+    "security.workspace.trust.startupPrompt": "never",
+
+    // ——— Extensions we rely on ———
+    "extensions.ignoreRecommendations": false,
+    "extensions.recommendations": [
+      "ms-vscode.vscode-typescript-next",
+      "esbenp.prettier-vscode",
+      "streetsidesoftware.code-spell-checker",
+      "Gruntfuggly.todo-tree",
+      "bierner.markdown-mermaid"
+    ],
+
+    // ——— Tasks: one‑key ops aligned with Doctrine ———
+    "task.allowAutomaticTasks": "on",
+    "code-runner.clearPreviousOutput": true
+  },
+
+  "tasks": {
+    "version": "2.0.0",
+    "tasks": [
+      {
+        "label": "JUNO: System Health",
+        "type": "shell",
+        "command": "echo 'JUNO Health • TEMPUS lock • AEGIS drift • MIRRA queue' && exit 0",
+        "group": "build",
+        "problemMatcher": []
+      },
+      {
+        "label": "AEGIS: Weekly Bias Checkpoint",
+        "type": "shell",
+        "command": "node server/scripts/runBiasCheckpoint.js",
+        "problemMatcher": []
+      },
+      {
+        "label": "LYRA: Reflection → Task",
+        "type": "shell",
+        "command": "curl -s -X POST http://localhost:3000/api/reflections -H 'Content-Type: application/json' -d '{\"text\":\"System reflection bootstrap\",\"emotionTag\":\"hope\",\"affectedAgentCode\":\"LYRA\"}'",
+        "problemMatcher": []
+      },
+      {
+        "label": "TEMPUS: Snapshotter Now",
+        "type": "shell",
+        "command": "curl -s -X POST http://localhost:3000/api/snapshots/run -H 'Content-Type: application/json' -d '{\"kind\":\"manual\",\"notes\":\"Operator snapshot from VS Code\"}'",
+        "problemMatcher": []
+      }
+    ]
+  },
+
+  "launch": {
+    "configurations": [
+      {
+        "name": "Backend (Node) — Veritas.O",
+        "type": "node",
+        "request": "launch",
+        "program": "${workspaceFolder}/server/app.ts",
+        "runtimeExecutable": "node",
+        "cwd": "${workspaceFolder}",
+        "env": { "NODE_ENV": "development" },
+        "console": "integratedTerminal"
+      },
+      {
+        "name": "Frontend (Next/Vite) — Veritas.O",
+        "type": "pwa-node",
+        "request": "launch",
+        "program": "${workspaceFolder}/client/dev.js",
+        "cwd": "${workspaceFolder}",
+        "console": "integratedTerminal"
+      }
+    ]
+  },
+
+  "keybindings": [
+    // Quick open the Veritas manual
+    { "key": "ctrl+alt+m", "command": "workbench.action.files.openFile",
+      "when": "!editorReadonly", "args": { "path": "README_VERITAS.SYSTEM.md" } },
+    // Run snapshotter
+    { "key": "ctrl+alt+s", "command": "workbench.action.tasks.runTask", "args": "TEMPUS: Snapshotter Now" }
+  ]
+}

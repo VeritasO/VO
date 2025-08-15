@@ -1,0 +1,13 @@
+[Unit]
+Description=Veritas.O development stack (backend + frontend)
+After=network.target
+
+[Service]
+Type=simple
+WorkingDirectory=/home/ladonyabell/VO
+ExecStart=/home/ladonyabell/VO/scripts/start-all.sh
+Restart=on-failure
+User=ladonyabell
+
+[Install]
+WantedBy=multi-user.target
