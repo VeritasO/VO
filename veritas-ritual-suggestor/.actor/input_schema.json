@@ -1,0 +1,10 @@
+{
+  "title": "VESTA — Ritual Suggestor",
+  "type": "object",
+  "schemaVersion": 1,
+  "properties": {
+    "caseNarrative": { "title": "Case narrative", "type": "string", "editor": "textarea", "required": true },
+    "tier": { "title": "JSS tier hint", "type": "string", "enum": ["S1","S2","S3"], "default": "S2" }
+  },
+  "required": ["caseNarrative"]
+}

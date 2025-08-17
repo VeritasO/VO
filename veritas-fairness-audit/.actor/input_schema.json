@@ -1,0 +1,10 @@
+{
+  "title": "AEGIS — Fairness Audit",
+  "type": "object",
+  "schemaVersion": 1,
+  "properties": {
+    "caseNarrative": { "title": "Case narrative", "type": "string", "editor": "textarea", "required": true },
+    "maxSources": { "title": "Max citations", "type": "integer", "default": 5 }
+  },
+  "required": ["caseNarrative"]
+}

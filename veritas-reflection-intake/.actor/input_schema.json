@@ -1,0 +1,9 @@
+{
+  "title": "LYRA — Reflection Intake",
+  "type": "object",
+  "schemaVersion": 1,
+  "properties": {
+    "caseNarrative": { "title": "Case narrative", "type": "string", "editor": "textarea", "required": true }
+  },
+  "required": ["caseNarrative"]
+}

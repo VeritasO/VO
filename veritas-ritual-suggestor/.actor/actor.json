@@ -1,0 +1,14 @@
+{
+  "actorSpecification": 1,
+  "name": "veritas-ritual-suggestor",
+  "title": "Veritas.O — VESTA Ritual Suggestor",
+  "description": "VESTA: suggests ritual and ecological/community repair steps based on case tier and narrative.",
+  "version": "0.1",
+  "buildTag": "latest",
+  "dockerfile": "./Dockerfile",
+  "environmentVariables": [
+    { "name": "OPENAI_API_KEY", "value": "@OPENAI_API_KEY" }
+  ],
+  "defaultRunOptions": { "build": "latest" },
+  "input": { "$ref": "./input_schema.json" }
+}

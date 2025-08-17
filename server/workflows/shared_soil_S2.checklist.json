@@ -1,0 +1,20 @@
+{
+  "title": "Shared Soil — Mediator Checklist",
+  "purpose": "Ensure mediation aligns with doctrine, safety, and fairness.",
+  "pre_mediation": [
+    "Review case facts and severity classification.",
+    "Confirm parties’ voluntary consent to mediate.",
+    "Check bias drift log — ensure ≤1.5% threshold.",
+    "Conduct separate safety screenings for each party."
+  ],
+  "during_mediation": [
+    "Follow Shared Soil script — focus on restoration, not punishment.",
+    "Keep discussions grounded in Restoration First Logic.",
+    "Monitor emotional escalation — pause if needed for safety."
+  ],
+  "post_mediation": [
+    "Document agreed reparations and timelines.",
+    "Confirm both parties’ understanding of the agreement.",
+    "Schedule reflection check-ins (minimum 2 within 30 days)."
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "$schema": "https://veritas.o/schema/workflow-1.json",
+  "id": "workflow:shared_soil:S2",
+  "title": "Shared Soil — S2 mediation workflow",
+  "version": "1.0.0",
+  "description": "Machine-readable mediation workflow for S2 (Shared Soil) cases. Includes mediator checklist, safety agreement template, and monitoring schedule.",
+  "trigger": {
+    "on": "case_assigned",
+    "conditions": { "tier": "S2" }
+  },
+  "agents_sequence": [
+    { "agent": "LYRA", "action": "intake", "params": { "fields": ["narrative","parties","context"] } },
+    { "agent": "AEGIS", "action": "bias_check", "params": { "threshold": 1.5 } },
+    { "agent": "JUNO", "action": "authorize_mediation", "params": {} },
+    { "agent": "VESTA", "action": "suggest_ritual", "params": { "ritual": "Shared Soil" } },
+    { "agent": "A7", "action": "facilitate_mediation", "params": { "checklist": "server/workflows/shared_soil_S2.checklist.json" } },
+    { "agent": "TEMPUS", "action": "schedule_snapshots", "params": { "days": [0,7,14,21,30] } },
+    { "agent": "MNEME", "action": "archive_record", "params": {} }
+  ],
+  "outputs": {
+    "agreement_doc": "server/workflows/shared_soil_S2.safety_agreement.json",
+    "monitoring_plan": "server/workflows/shared_soil_S2.monitoring.json"
+  },
+  "example_input": {
+    "caseId": "CASE-123",
+    "narrative": "Two students fought; one sprained wrist; both wish to avoid suspension; family requests mediated repair.",
+    "parties": { "harmed": "Student A", "responsible": "Student B" },
+    "jurisdiction": "NY, USA",
+    "requestedBy": "school-counselor@example.edu"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "title": "Shared Soil — Monitoring Schedule",
+  "caseId": "",
+  "duration_days": 30,
+  "checkpoints": [
+    { "day": 0, "check": "Mediation Session", "agent": "VESTA / A7", "purpose": "Establish agreement" },
+    { "day": 7, "check": "Reflection Call", "agent": "SERENA", "purpose": "Assess progress & emotional state" },
+    { "day": 14, "check": "Progress Report", "agent": "VESTA / A7", "purpose": "Verify repairs completed or in progress" },
+    { "day": 21, "check": "Bias Drift Scan", "agent": "AEGIS", "purpose": "Ensure fairness remains intact" },
+    { "day": 30, "check": "Final Review", "agent": "JUNO + VESTA", "purpose": "Close case or extend monitoring" }
+  ]
+}

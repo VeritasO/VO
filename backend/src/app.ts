@@ -5,6 +5,7 @@ import growth from "./routes/growth";
 import biasProfilesRouter from "./routes/biasProfiles";
 import thaleaRouter from "./routes/thalea";
 import metricsRouter from "./routes/metrics";
+import workflowsRouter from "./routes/workflows";
 import { startCvtCron } from "./cvtCron";
 
 const app = express();
@@ -20,6 +21,7 @@ app.use("/api/growth", growth);
 app.use("/api/bias-profiles", biasProfilesRouter);
 app.use("/api/thalea", thaleaRouter);
 app.use("/api/metrics", metricsRouter);
+app.use("/api/workflows", workflowsRouter);
 
 // Health check
 app.get("/api/health", (_req, res) => {
