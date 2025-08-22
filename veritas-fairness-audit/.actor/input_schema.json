@@ -3,8 +3,18 @@
   "type": "object",
   "schemaVersion": 1,
   "properties": {
-    "caseNarrative": { "title": "Case narrative", "type": "string", "editor": "textarea", "required": true },
-    "maxSources": { "title": "Max citations", "type": "integer", "default": 5 }
+    "caseNarrative": { 
+      "title": "Case narrative", 
+      "type": "string", 
+      "editor": "textarea",
+      "description": "The case narrative to analyze for fairness"
+    },
+    "maxSources": { 
+      "title": "Max citations", 
+      "type": "integer", 
+      "default": 5,
+      "description": "Maximum number of citations to include in the analysis"
+    }
   },
   "required": ["caseNarrative"]
 }

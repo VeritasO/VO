@@ -6,7 +6,7 @@
   "scripts": {
     "build:backend": "tsc -p tsconfig.backend.json",
     "start": "node dist/system/main.js",
-  "dev:backend": "cd backend && npm run dev",
+    "dev:backend": "cd backend && npm run dev",
     "dev": "concurrently \"npm run dev:backend\" \"cd frontend && npm run dev\"",
     "watch": "tsc --watch",
     "test": "jest",
@@ -15,9 +15,17 @@
     "typecheck": "npm run typecheck:frontend && npm run typecheck:backend",
     "watch:backend": "tsc -p tsconfig.backend.json --watch",
     "seed:expansion": "tsx backend/src/scripts/seedExpansion.ts",
-    "seed:load": "tsx server/scripts/loadSeeds.ts"
+    "seed:load": "tsx server/scripts/loadSeeds.ts",
+    "actor:tribunal:run": "cd veritas-tribunal && OPENAI_API_KEY=$OPENAI_API_KEY apify run --input '{\"caseNarrative\":\"Two students fought...\"}'",
+    "actor:tribunal:push": "cd veritas-tribunal && apify push",
+    "boot": "node veritas_boot.js",
+    "mock-peers:start": "./scripts/mock_peers_ctl.sh start",
+    "mock-peers:stop": "./scripts/mock_peers_ctl.sh stop",
+    "mock-peers:status": "./scripts/mock_peers_ctl.sh status",
+    "audit": "npm run mock-peers:start && npm run boot"
   },
   "dependencies": {
+    "apify": "^3.4.4",
     "autoprefixer": "^10.4.21",
     "cors": "^2.8.5",
     "dayjs": "^1.11.13",

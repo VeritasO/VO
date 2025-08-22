@@ -1,0 +1,7 @@
+{
+  "case_id": "CASE-DEMO-001",
+  "description": "Demo case to test seed loading",
+  "participants": ["Alice", "Bob"],
+  "issue": "Symbolic harm over sharing resources",
+  "status": "pending"
+}

@@ -1,0 +1,9 @@
+version: "1.1"
+output_contract:
+  contract:
+    summary: ""                 # ≤120 words
+    findings: []                # bullet list
+    metrics_or_scores: []       # if applicable
+    uncertainty: "0..1"
+    citations: []               # document placeholders only
+    next_routes: []

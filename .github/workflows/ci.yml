@@ -35,3 +35,26 @@ jobs:
       - name: Run tests
         run: npm run test
         working-directory: backend
+
+  juno-actor-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check veritas-tribunal actor
+        working-directory: veritas-tribunal
+        run: |
+          python3 -m venv .venv
+          . .venv/bin/activate
+          pip install -r requirements.txt
+          python3 check_actor.py || true
+
+      - name: Check sub-actors
+        run: |
+          for d in veritas-reflection-intake veritas-fairness-audit veritas-ritual-suggestor; do
+            echo "--- $d ---"
+            (cd $d && python3 -m venv .venv && . .venv/bin/activate && pip install -r requirements.txt && python3 check_actor.py) || true
+          done
+
+      - name: Build container (dry run)
+        working-directory: veritas-tribunal
+        run: docker build -t veritas-tribunal:ci .

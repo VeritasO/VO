@@ -1,22 +1,29 @@
 import OpenAI from "openai";
+import { requireEnv } from "../infra/secrets";
 
 // OpenAI Integration for Veritas.O Growth Engine
 // Uncomment and configure this when ready to use real OpenAI API
 
-export async function askGPTReal(system: string, user: string): Promise<string> {
+export async function askGPTReal(system: string, user: string, type: keyof typeof openAIConfig.models = 'synthesis'): Promise<string> {
   const client = new OpenAI({ 
-    apiKey: process.env.OPENAI_API_KEY 
+    apiKey: requireEnv("OPENAI_API_KEY"),
+    organization: process.env.OPENAI_PROJECT // Optional project/org ID
   });
+
+  const model = process.env.OPENAI_MODEL || openAIConfig.models[type];
+  if (!model) {
+    throw new Error(`Invalid model type: ${type}`);
+  }
 
   try {
     const response = await client.chat.completions.create({
-      model: process.env.OPENAI_MODEL || "gpt-4o-mini",
-      temperature: 0.2, // Low temperature for reproducible results
+      model: model,
+      temperature: openAIConfig.temperatures.balanced, // Default to balanced temperature
       messages: [
         { role: "system", content: system },
         { role: "user", content: user }
       ],
-      max_tokens: 4000 // Adjust based on needs
+      max_tokens: openAIConfig.tokenLimits.comprehensive // Max tokens for detailed responses
     });
 
     return response.choices?.[0]?.message?.content || "";
@@ -64,7 +71,23 @@ export async function askGPTWithRetry(
     try {
       return await askGPTReal(system, user);
     } catch (error) {
-      console.warn(`[OpenAI] Attempt ${attempt} failed:`, error);
+      const rateLimitError = error instanceof Error && 
+        error.message.includes('exceeded your current quota');
+
+      // Log with appropriate level
+      if (rateLimitError) {
+        console.error(`[OpenAI] Rate limit exceeded - Please check your API key and quota`);
+      } else {
+        console.warn(`[OpenAI] Attempt ${attempt} failed:`, error);
+      }
+      
+      // Don't retry on rate limits
+      if (rateLimitError) {
+        throw new Error(
+          `OpenAI API rate limit exceeded. Please ensure you have sufficient quota ` +
+          `and a valid API key in your .env file.`
+        );
+      }
       
       if (attempt === maxRetries) {
         throw error;

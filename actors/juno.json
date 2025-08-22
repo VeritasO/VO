@@ -1,0 +1,34 @@
+{
+  "schemas": {
+    "CaseInput": {
+      "required": ["case_id", "parties", "allegations", "context", "case_narrative", "jurisdiction", "model"],
+      "properties": {
+        "case_narrative": {
+          "type": "string",
+          "minLength": 1,
+          "title": "Case Narrative",
+          "description": "Chronological summary of events and impacts; first-person or neutral."
+        },
+        "jurisdiction": {
+          "type": "string",
+          "title": "Jurisdiction",
+          "enum": ["personal", "community", "organizational", "inter-organizational", "digital", "environmental", "cross-border"],
+          "default": "community",
+          "description": "Primary forum responsible for reconciliation."
+        },
+        "jurisdiction_details": {
+          "type": "string",
+          "title": "Jurisdiction Details",
+          "description": "Optional specifics (e.g., community name, org unit)."
+        },
+        "model": {
+          "type": "string",
+          "title": "Model",
+          "enum": ["gpt-5-thinking", "gpt-5", "o4-mini", "gpt-4o-mini"],
+          "default": "gpt-5-thinking",
+          "description": "LLM profile used for analysis and drafting."
+        }
+      }
+    }
+  }
+}

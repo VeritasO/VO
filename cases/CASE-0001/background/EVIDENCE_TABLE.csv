@@ -1,0 +1,7 @@
+type,id,source,description,key_points,citation_placeholder
+telematics,TLM-A-001,Vehicle A ECU,"Speed 33–37 km/h pre-intersection; no ABS event; throttle steady",consistent_speed;no_abs,"{{DOCUMENT2}}"
+dashcam,DSH-B-001,Vehicle B dashcam,"Still frame shows stop sign at ~18m; wipers on; van parked near corner",occlusion_possible;stop_required,"{{IMAGE1}}"
+cctv,CCTV-INT-017,City camera,"Two frames show Vehicle B entering intersection line; Vehicle A already within conflict zone",late_entry_by_B;A_in_right_of_way,"{{IMAGE2}}"
+scene_markers,SCN-005,Police scene,"Skid marks present eastbound ~3m past stop line",late_brake_B,"{{DOCUMENT1}}"
+policy,POL-3P-2025,Insurer policy,"Third-party liability; comparative fault allowed; repair via certified network",comparative_fault,"{{DOCUMENT3}}"
+weather,WTH-0810,Met office,"Light rain 17:00–18:00; visibility 1.5–2 km",reduced_visibility,"{{DOCUMENT1}}"

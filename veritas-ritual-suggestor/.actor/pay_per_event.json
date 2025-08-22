@@ -1,0 +1,6 @@
+{
+  "version": 1,
+  "events": [
+    { "name": "ritual_suggested", "title": "Ritual suggested", "priceUsd": 0.04 }
+  ]
+}

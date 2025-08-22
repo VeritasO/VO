@@ -11,5 +11,27 @@
 			],
 			"isBackground": false
 		}
+		,
+		{
+			"label": "JUNO Actor: Run (local)",
+			"type": "shell",
+			"command": "cd veritas-tribunal && OPENAI_API_KEY=$OPENAI_API_KEY apify run --input '{\"caseNarrative\":\"Test narrative from VS Code\",\"jurisdiction\":\"NY, USA\",\"modelName\":\"gpt-4.1-mini\"}'",
+			"problemMatcher": []
+		},
+		{
+			"label": "JUNO Actor: Push (deploy)",
+			"type": "shell",
+			"command": "cd veritas-tribunal && apify push",
+			"problemMatcher": []
+		}
+		,
+		{
+			"label": "Run Veritas Boot Sequence",
+			"type": "shell",
+			"command": "node",
+			"args": ["veritas_boot.js"],
+			"options": { "cwd": "${workspaceFolder}" },
+			"problemMatcher": []
+		}
 	]
 }

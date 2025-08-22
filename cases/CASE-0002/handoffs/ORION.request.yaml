@@ -1,0 +1,29 @@
+interop_header:
+  agent_id: "A05-ORION"
+  mission: "Maintain rights/obligations ontology"
+  case_id: "CASE-0002-SE-RURAL-ANIMAL"
+  provenance:
+    inputs: ["{{DOCUMENT1}}"]
+    citations_required: true
+
+1_role_task: "Enumerate entities, rights, duties, conflicts for wildlife-hazard collision."
+2_tone: "Formal, exact, rights-first."
+3_background: "Comparative fault allowed; lane discipline duty; speed moderation."
+4_rules:
+  - "Output Rights Grid (entity × right × duty × status)."
+  - "Flag conflicts/precedence; cite."
+  - "Suggest minimal-change harmonizations."
+7_immediate_task: "Provide authoritative rights grid."
+9_output_format:
+  rights_grid:
+    - {entity: "Driver A", right: "Property restoration", duty: "Maintain lane/adjust speed", status: "clear"}
+    - {entity: "Driver C", right: "Property restoration", duty: "Maintain safe speed/visibility", status: "clear"}
+  conflicts:
+    - {type: "apportionment", parties: ["Driver A","Driver C"], note: "Comparative fault % TBD"}
+contract:
+  summary: ""
+  findings: []
+  metrics_or_scores: []
+  uncertainty: 0.0
+  citations: []
+  next_routes: ["A01-JUNO"]

@@ -1,0 +1,21 @@
+{
+  "case_id": "C-2025-08-19-001",
+  "parties": {
+    "harmer": "agent:X",
+    "harmed": "agent:Y",
+    "community": "Circle-7"
+  },
+  "allegations": ["symbolic harm via public statement"],
+  "harm_type": "symbolic",
+  "evidence": ["link:post/12345", "witness:W1"],
+  "grief_notes": "Harmed reports ongoing distress.",
+  "context": {
+    "venue": "community forum",
+    "date": "2025-08-18"
+  },
+  "urgency": "medium",
+  "case_narrative": "On Aug 18, at a community forum, X stated..., resulting in Y feeling...",
+  "jurisdiction": "community",
+  "jurisdiction_details": "Circle-7 Restorative Forum",
+  "model": "gpt-5-thinking"
+}

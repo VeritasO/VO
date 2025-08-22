@@ -15,5 +15,6 @@ export interface CaseContext {
     status: CaseStatus;
     contradictions: Contradiction[];
     timeline: string[];
+    data?: Record<string, any>;
 }
 //# sourceMappingURL=Case.d.ts.map

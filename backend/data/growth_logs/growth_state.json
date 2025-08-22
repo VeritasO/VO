@@ -1,0 +1,19 @@
+{
+  "cycles": [],
+  "last_run": null,
+  "stats": {
+    "total_cycles": 0,
+    "total_insights": 0,
+    "total_contradictions": 0,
+    "doctrine_updates": 0
+  },
+  "current_cycle": {
+    "id": null,
+    "start_time": null,
+    "status": "idle",
+    "agents_processed": [],
+    "insights_generated": 0,
+    "contradictions_found": 0,
+    "doctrine_changes": 0
+  }
+}

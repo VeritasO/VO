@@ -1,0 +1,18 @@
+version: "1.1"
+interop_header:
+  agent_id: "{{AGENT_ID}}"               # e.g., A01-JUNO
+  mission: "{{AGENT_MISSION}}"           # one-line reminder
+  case_id: "{{CASE_ID}}"                 # stable identifier
+  route:
+    to: []                                 # next agents
+    cc: []                                 # transparency copies
+  provenance:
+    inputs: []                             # e.g., [{{DOCUMENT1}}, {{IMAGE1}}, {{HISTORY1}}]
+    citations_required: true
+  constraints:
+    doctrine: "Meaningful Thought"
+    non_carceral: true
+    time_reversible: true
+  audit_hooks:
+    count_toward_5_case_cycle: true
+    fairness_review: "AEGIS"

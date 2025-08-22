@@ -1,0 +1,7 @@
+type,id,source,description,key_points,citation_placeholder
+telematics,TLM-A-022,Vehicle A ECU,"Speed 71→66 km/h pre-curve; high-beam → dipped; ABS light touch",speed_moderating;partial_abs,"{{DOCUMENT2}}"
+telematics,TLM-C-014,Vehicle C ECU,"Speed ~74 km/h steady; no evasive maneuvers flagged",steady_speed;no_evasive,"{{DOCUMENT3}}"
+dashcam,DSH-A-017,Vehicle A dashcam,"Still shows elk shoulder/partial lane incursion at t-1.4s",animal_in_lane;urgent_avoidance,"{{IMAGE1}}"
+lotcam,LTC-02,Roadside lot cam,"Single frame at t-0.8s; A near centerline; C within lane",a_crossing_center;C_in_lane,"{{IMAGE2}}"
+scene,SCN-011,Report,"Light drizzle; reflectivity glare; no roadway defects noted",reduced_visibility,"{{DOCUMENT1}}"
+policy,POL-3P-2025,Insurer policy,"Comparative fault; wildlife hazard guidance; repair options",comparative_fault,"{{DOCUMENT1}}"

@@ -1,7 +1,6 @@
 import { Router } from "express";
 import { db } from "../db";
 import { biasProfiles } from "../schema/models/biasProfiles";
-import { eq } from "drizzle-orm";
 
 const router = Router();
 
@@ -21,7 +20,8 @@ router.get("/", async (req, res) => {
     const { decisionId, agent } = req.query as { decisionId?: string; agent?: string };
     let rows;
     if (decisionId) {
-      rows = await db.select().from(biasProfiles).where(eq(biasProfiles.decisionId, decisionId));
+      // Use object-style where to avoid relying on driver-specific helpers
+      rows = await db.select().from(biasProfiles).where({ decisionId: decisionId as any });
     } else {
       rows = await db.select().from(biasProfiles);
     }

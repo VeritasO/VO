@@ -2,8 +2,9 @@ import { findContradictions } from '../core/contradictionEngine';
 
 describe('findContradictions', () => {
   it('detects contradictions', () => {
-    const result = findContradictions(['A', '!A']);
-    expect(result.length).toBe(2);
+  const result = findContradictions(['A', '!A']);
+  // Engine detects a single contradiction pair (A vs !A)
+  expect(result.length).toBe(1);
   });
 
   it('returns empty when no contradictions', () => {

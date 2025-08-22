@@ -1,0 +1,10 @@
+
+==== Veritas.O Boot Sequence (JUNO) ====
+[JUNO] Initializing...
+[JUNO] Loaded 10 seed file(s).
+[JUNO] Running system audit...
+[JUNO] Audit passed: All core directories present.
+[JUNO] Attempting to connect to 2 peer(s)...
+[JUNO] Connected to peer at http://localhost:9001/api/health: status 200
+[JUNO] Connected to peer at http://localhost:9002/api/health: status 200
+[JUNO] Boot sequence complete. System ready for activation.

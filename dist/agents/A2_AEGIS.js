@@ -2,6 +2,8 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AEGIS = void 0;
 const contradictionUtils_1 = require("../cases/contradictionUtils");
+const evidently_1 = require("evidently");
+const langchain_tools_1 = require("langchain-tools");
 exports.AEGIS = {
     id: "A2",
     name: "AEGIS",
@@ -31,6 +33,15 @@ exports.AEGIS = {
             systemicRiskLevel: systemicPatterns.riskLevel,
             auditTimestamp: timestamp
         })}`);
+        // Initialize Evidently and Scikit-learn metrics
+        const evidently = new evidently_1.Evidently();
+        const metrics = new langchain_tools_1.ScikitLearnMetrics();
+        // Use Evidently for ML fairness audits
+        const mlFairnessReport = evidently.audit(caseContext.data);
+        // Use Scikit-learn metrics for advanced bias analysis
+        const advancedMetrics = metrics.calculate(caseContext.data);
+        memory.write(`${this.id}: ml_fairness - ${JSON.stringify(mlFairnessReport)}`);
+        memory.write(`${this.id}: advanced_metrics - ${JSON.stringify(advancedMetrics)}`);
         const actions = [];
         const flaggedIssues = [];
         // Handle detected bias

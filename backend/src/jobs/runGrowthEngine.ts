@@ -43,11 +43,12 @@ function ensureDir(p: string) {
   if (!fs.existsSync(p)) fs.mkdirSync(p, { recursive: true }); 
 }
 
-// Enhanced GPT integration - replace with actual OpenAI when ready
+import { askGPTWithRetry } from './openaiClient';
+
 async function askGPT(system: string, user: string): Promise<string> {
   console.log(`[Growth Engine] Processing GPT query for: ${user.split('\n')[0]}`);
   
-  // Simulate OpenAI API call - replace this block with actual OpenAI integration
+  return await askGPTWithRetry(system, user);
   const agentMatch = user.match(/AGENT: (\w+)/);
   const agent = agentMatch?.[1] || "UNKNOWN";
   

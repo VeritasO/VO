@@ -1,0 +1,58 @@
+{
+  "generatedAt": "2025-08-22T16:01:50.392Z",
+  "count": 13,
+  "files": [
+    {
+      "title": "Preamble",
+      "file": "knowledge/books/book_preamble.md"
+    },
+    {
+      "title": "10. Emergent Patterns & Doctrinal Reflections",
+      "file": "knowledge/books/book_10_emergent_patterns_doctrinal_reflections.md"
+    },
+    {
+      "title": "1. CORE IDENTITY & FOUNDATIONAL MISSION",
+      "file": "knowledge/books/book_1_core_identity_foundational_mission.md"
+    },
+    {
+      "title": "2. SYSTEM ARCHITECTURE & COMPONENTS",
+      "file": "knowledge/books/book_2_system_architecture_components.md"
+    },
+    {
+      "title": "3. AGENTS & ROLES",
+      "file": "knowledge/books/book_3_agents_roles.md"
+    },
+    {
+      "title": "4. LIVING DOCTRINE BOOKS",
+      "file": "knowledge/books/book_4_living_doctrine_books.md"
+    },
+    {
+      "title": "5. OPERATIONAL PROTOCOLS & MECHANICS",
+      "file": "knowledge/books/book_5_operational_protocols_mechanics.md"
+    },
+    {
+      "title": "6. STRATEGIES & EVOLUTION",
+      "file": "knowledge/books/book_6_strategies_evolution.md"
+    },
+    {
+      "title": "7. DEPLOYMENT & EVOLUTION PATHWAYS",
+      "file": "knowledge/books/book_7_deployment_evolution_pathways.md"
+    },
+    {
+      "title": "8. IMPLEMENTATION & TECHNICAL STRUCTURE",
+      "file": "knowledge/books/book_8_implementation_technical_structure.md"
+    },
+    {
+      "title": "9. RECENT UPDATES & MILESTONES",
+      "file": "knowledge/books/book_9_recent_updates_milestones.md"
+    },
+    {
+      "title": "10. EMERGENT PATTERNS & DOCTRINAL REFLECTIONS",
+      "file": "knowledge/books/book_10_emergent_patterns_doctrinal_reflections.md"
+    },
+    {
+      "title": "4. Create a cron or ingestion pipeline (node/python) that re-runs web sweeps and appends truth-weighted updates to OmniMemory with Mirror Clause guardrails.",
+      "file": "knowledge/books/book_4_create_a_cron_or_ingestion_pipeline_node_python_that_re_runs_web_sweeps_and_appends_truth_weighted_updates_to_omnimemo.md"
+    }
+  ]
+}

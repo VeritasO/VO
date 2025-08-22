@@ -1,0 +1,41 @@
+{
+  "title": "JUNO – Case Intake",
+  "description": "Required fields for restoration-first processing.",
+  "type": "object",
+  "schemaVersion": 1,
+  "properties": {
+    "caseNarrative": {
+      "title": "Case Narrative",
+      "type": "string",
+      "minLength": 1,
+      "description": "WHO/WHAT/WHERE/WHEN; harm; needs."
+    },
+    "jurisdiction": {
+      "title": "Jurisdiction",
+      "type": "string",
+      "enum": [
+        "personal",
+        "community",
+        "organizational",
+        "inter-organizational",
+        "digital",
+        "environmental",
+        "cross-border"
+      ],
+      "default": "community"
+    },
+    "model": {
+      "title": "Model",
+      "type": "string",
+      "enum": ["gpt-5-thinking", "gpt-5", "o4-mini", "gpt-4o-mini"],
+      "default": "gpt-5-thinking"
+    },
+    "processingOptions": {
+      "title": "Processing Options (optional)",
+      "type": "object",
+      "additionalProperties": true,
+      "default": {}
+    }
+  },
+  "required": ["caseNarrative", "jurisdiction", "model"]
+}

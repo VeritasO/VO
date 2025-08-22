@@ -1,0 +1,30 @@
+interop_header:
+  agent_id: "A05-ORION"
+  mission: "Maintain rights/obligations ontology"
+  case_id: "CASE-0001-SE-VEH-CLAIM"
+  provenance:
+    inputs: ["{{DOCUMENT3}}","{{DOCUMENT1}}"]
+    citations_required: true
+
+1_role_task: "Enumerate entities, rights, duties, and conflicts for allocation & repair."
+2_tone: "Formal, exact, rights-first."
+3_background: "Comparative fault allowed; third-party property coverage; local stop/yield norms."
+4_rules:
+  - "Output Rights Grid (entity × right × duty × status)."
+  - "Flag conflicts and precedence; cite sources."
+  - "Suggest minimal-change harmonizations."
+7_immediate_task: "Provide authoritative rights grid."
+9_output_format:
+  rights_grid:
+    - {entity: "Driver A", right: "Property restoration", duty: "Cooperate in assessment", status: "clear"}
+    - {entity: "Driver B", right: "Fair apportionment", duty: "Provide telematics/dashcam if available", status: "clear"}
+    - {entity: "Insurer A", right: "Assess via network", duty: "Offer equivalent restoration", status: "clear"}
+  conflicts:
+    - {type: "apportionment", parties: ["Driver A","Driver B"], note: "Comparative fault percentage TBD"}
+contract:
+  summary: ""
+  findings: []
+  metrics_or_scores: []
+  uncertainty: 0.0
+  citations: []
+  next_routes: ["A01-JUNO"]

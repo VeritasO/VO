@@ -1,0 +1,109 @@
+{
+  "version": "1.0",
+  "cycle_date": "2025-08-19",
+  "generated_at": "2025-08-19T15:18:17.301Z",
+  "items_count": 9,
+  "items": [
+    {
+      "agent": "AEGIS",
+      "summary": "Processing error: OpenAI API error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.",
+      "region": "System-Error",
+      "date": "2025-08-19",
+      "source": "internal://error-log",
+      "confidence": 0
+    },
+    {
+      "agent": "KAIROS",
+      "summary": "Processing error: OpenAI API error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.",
+      "region": "System-Error",
+      "date": "2025-08-19",
+      "source": "internal://error-log",
+      "confidence": 0
+    },
+    {
+      "agent": "LYRA",
+      "summary": "Processing error: OpenAI API error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.",
+      "region": "System-Error",
+      "date": "2025-08-19",
+      "source": "internal://error-log",
+      "confidence": 0
+    },
+    {
+      "agent": "ORION",
+      "summary": "Processing error: OpenAI API error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.",
+      "region": "System-Error",
+      "date": "2025-08-19",
+      "source": "internal://error-log",
+      "confidence": 0
+    },
+    {
+      "agent": "THALEA",
+      "summary": "Processing error: OpenAI API error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.",
+      "region": "System-Error",
+      "date": "2025-08-19",
+      "source": "internal://error-log",
+      "confidence": 0
+    },
+    {
+      "agent": "VESTA",
+      "summary": "Processing error: OpenAI API error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.",
+      "region": "System-Error",
+      "date": "2025-08-19",
+      "source": "internal://error-log",
+      "confidence": 0
+    },
+    {
+      "agent": "MIRRA",
+      "summary": "Processing error: OpenAI API error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.",
+      "region": "System-Error",
+      "date": "2025-08-19",
+      "source": "internal://error-log",
+      "confidence": 0
+    },
+    {
+      "agent": "JUNO",
+      "summary": "Processing error: OpenAI API error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.",
+      "region": "System-Error",
+      "date": "2025-08-19",
+      "source": "internal://error-log",
+      "confidence": 0
+    },
+    {
+      "agent": "SENTINEL",
+      "summary": "Processing error: OpenAI API error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.",
+      "region": "System-Error",
+      "date": "2025-08-19",
+      "source": "internal://error-log",
+      "confidence": 0
+    }
+  ],
+  "contradictions": [],
+  "doctrine_updates": [],
+  "metadata": {
+    "agents_processed": [
+      "AEGIS",
+      "KAIROS",
+      "LYRA",
+      "ORION",
+      "THALEA",
+      "VESTA",
+      "MIRRA",
+      "JUNO",
+      "SENTINEL"
+    ],
+    "total_queries": 18,
+    "thresholds_applied": {
+      "min_items_per_agent": 2,
+      "contradiction_trigger": 1,
+      "doctrine_update_min": 1,
+      "min_confidence": 0.7,
+      "max_contradictions": 5,
+      "require_source": true
+    },
+    "processing_summary": {
+      "successful_agents": 0,
+      "total_insights": 0,
+      "quality_score": 0
+    }
+  }
+}

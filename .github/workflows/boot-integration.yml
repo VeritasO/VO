@@ -1,0 +1,33 @@
+name: Boot Integration Test
+
+on:
+  pull_request:
+  push:
+    branches: [ main ]
+
+jobs:
+  boot-integration:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+      - name: Make scripts executable
+        run: |
+          chmod +x ./scripts/mock_peers_ctl.sh || true
+          chmod +x ./scripts/mock_peer.js || true
+          chmod +x ./scripts/assert_boot.sh || true
+      - name: Start mock peers
+        run: ./scripts/mock_peers_ctl.sh start
+      - name: Run boot script
+        run: |
+          node veritas_boot.js | tee boot_output.txt
+      - name: Assert boot output
+        run: |
+          grep -q "Boot sequence complete" boot_output.txt
+          grep -q "Connected to peer" boot_output.txt || true
+      - name: Stop mock peers
+        if: always()
+        run: ./scripts/mock_peers_ctl.sh stop

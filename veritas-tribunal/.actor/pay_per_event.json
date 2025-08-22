@@ -1,0 +1,8 @@
+{
+  "version": 1,
+  "events": [
+    { "name": "case_scored",     "title": "Case scored",       "priceUsd": 0.15 },
+    { "name": "audit_completed", "title": "Fairness audited",  "priceUsd": 0.08 },
+    { "name": "ritual_suggested","title": "Ritual suggested",  "priceUsd": 0.07 }
+  ]
+}

@@ -1,0 +1,6 @@
+{
+  "version": 1,
+  "events": [
+    { "name": "lyra_extracted", "title": "Grief themes extracted", "priceUsd": 0.03 }
+  ]
+}

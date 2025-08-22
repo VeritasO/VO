@@ -1,0 +1,5 @@
+id,type,description,source
+E1,photo,Image showing fence position relative to path,photo_2025-07-02.jpg
+E2,log,Community garden access log (entries/exits),garden_log.csv
+E3,statement,Witness statement from elder resident,witness_anne.md
+E4,report,Community theft report (past 6 months),theft_report.pdf

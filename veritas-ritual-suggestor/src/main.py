@@ -2,7 +2,29 @@ import asyncio
 import json
 from typing import Any, Dict
 
-from apify import Actor
+try:
+    from apify import Actor
+except Exception:  # pragma: no cover - test-time fallback
+    class Actor:
+        @staticmethod
+        async def init():
+            return None
+
+        @staticmethod
+        async def get_input():
+            return {}
+
+        @staticmethod
+        async def push_data(_):
+            return None
+
+        @staticmethod
+        async def set_value(_k, _v):
+            return None
+
+        @staticmethod
+        async def exit():
+            return None
 
 """
 VESTA stub: choose a ritual by tier and provide a concise repair plan.

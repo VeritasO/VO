@@ -1,0 +1,25 @@
+name: Deploy JUNO Actor
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  deploy-actor:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+      - name: Install Apify CLI
+        run: npm install -g apify
+      - name: Deploy veritas-tribunal
+        env:
+          APIFY_TOKEN: ${{ secrets.APIFY_TOKEN }}
+        working-directory: veritas-tribunal
+        run: |
+          apify login --token $APIFY_TOKEN
+          apify push

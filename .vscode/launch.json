@@ -1,0 +1,21 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Launch VeritasO Backend",
+      "program": "${workspaceFolder}/dist/system/main.js",
+      "preLaunchTask": "Build VeritasO"
+    }
+    ,
+    {
+      "name": "JUNO Actor (apify run)",
+      "type": "node",
+      "request": "launch",
+      "program": "apify",
+      "args": ["run"],
+      "cwd": "${workspaceFolder}/veritas-tribunal"
+    }
+  ]
+}

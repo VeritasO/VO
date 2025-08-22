@@ -1,0 +1,15 @@
+date: "2025-08-12"
+local_tz: "Europe/Stockholm"
+sequence:
+  - t: "23:18:12"
+    event: "A approaches curve ~71 km/h; high-beams dip for oncoming C"
+    cites: ["{{DOCUMENT2}}"]
+  - t: "23:18:14"
+    event: "Elk steps near centerline; A initiates swerve left; ABS touches"
+    cites: ["{{IMAGE1}}","{{DOCUMENT2}}"]
+  - t: "23:18:15"
+    event: "A crosses centerline briefly; contact with C front-left"
+    cites: ["{{IMAGE2}}","{{DOCUMENT3}}"]
+post:
+  - "Vehicles stop safely; exchange details; rural incident report filed."
+  - "Insurer contacts initiated; no medical transport."

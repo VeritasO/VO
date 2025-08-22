@@ -74,3 +74,23 @@ router.get("/list", async (_req, res) => {
 });
 
 export default router;
+
+// POST /tribunal/run -> trigger the veritas-tribunal Apify Actor
+import axios from "axios";
+
+router.post("/tribunal/run", async (req, res) => {
+  const { caseNarrative, jurisdiction, options, modelName } = req.body || {};
+  const token = process.env.APIFY_TOKEN;
+  const actorSlug = process.env.APIFY_TRIBUNAL_ACTOR || "veritas-tribunal";
+  if (!token) return res.status(400).json({ error: "Missing APIFY_TOKEN" });
+
+  try {
+    const url = `https://api.apify.com/v2/acts/${actorSlug}/runs?token=${token}`;
+    const input = { caseNarrative, jurisdiction, options, modelName };
+    const r = await axios.post(url, input);
+    return res.json({ runId: r.data?.data?.id, status: r.data?.data?.status });
+  } catch (e: any) {
+    console.error("Failed to start tribunal actor", e?.response?.data || e.message || e);
+    return res.status(500).json({ error: e?.response?.data || e.message || String(e) });
+  }
+});

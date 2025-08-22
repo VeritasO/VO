@@ -1,0 +1,18 @@
+date: "2025-08-10"
+local_tz: "Europe/Stockholm"
+sequence:
+  - t: "17:41:55"
+    event: "Vehicle A approaches intersection (northbound) at ~35 km/h"
+    cites: ["{{DOCUMENT2}}"]
+  - t: "17:42:01"
+    event: "Vehicle B approaches stop sign (eastbound); possible occlusion by van"
+    cites: ["{{IMAGE1}}"]
+  - t: "17:42:03"
+    event: "Vehicle A enters intersection with right-of-way"
+    cites: ["{{IMAGE2}}"]
+  - t: "17:42:04"
+    event: "Vehicle B rolls/enters; brakes late; contact in conflict zone"
+    cites: ["{{DOCUMENT1}}","{{IMAGE2}}"]
+post:
+  - "Exchange of details; police called; no medical transport."
+  - "Insurance contact initiated."

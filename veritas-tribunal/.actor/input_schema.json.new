@@ -1,0 +1,50 @@
+{
+  "title": "Veritas Tribunal Input",
+  "type": "object",
+  "schemaVersion": 1,
+  "properties": {
+    "caseNarrative": {
+      "title": "Case Narrative",
+      "type": "string",
+      "description": "Facts + context (who/what/where/when; harm; needs)",
+      "editor": "textarea"
+    },
+    "jurisdiction": {
+      "title": "Jurisdiction",
+      "type": "string",
+      "description": "Legal jurisdiction where the case takes place (e.g., NY, USA)",
+      "editor": "textfield"
+    },
+    "modelName": {
+      "title": "Model",
+      "type": "string",
+      "description": "OpenAI model to use for case evaluation",
+      "editor": "select",
+      "enum": ["gpt-4.1-mini", "gpt-4", "gpt-3.5-turbo"]
+    },
+    "options": {
+      "title": "Processing Options",
+      "type": "object",
+      "description": "Optional processing flags",
+      "editor": "json",
+      "properties": {
+        "griefScan": {
+          "title": "Run Grief Scan",
+          "type": "boolean",
+          "description": "Enable LYRA grief pattern analysis"
+        },
+        "runFairnessAudit": {
+          "title": "Run Fairness Audit",
+          "type": "boolean",
+          "description": "Enable AEGIS fairness evaluation"
+        },
+        "ritualSuggest": {
+          "title": "Get Ritual Suggestions",
+          "type": "boolean",
+          "description": "Enable VESTA ritual recommendations"
+        }
+      }
+    }
+  },
+  "required": ["caseNarrative", "jurisdiction", "modelName"]
+}

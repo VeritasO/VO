@@ -1,0 +1,6 @@
+{
+  "version": 1,
+  "events": [
+    { "name": "fairness_audit", "title": "Fairness audit", "priceUsd": 0.05 }
+  ]
+}

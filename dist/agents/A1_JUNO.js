@@ -2,6 +2,8 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.JUNO = void 0;
 const contradictionUtils_1 = require("../cases/contradictionUtils");
+const langchain_1 = require("langchain");
+const autogen_1 = require("autogen");
 exports.JUNO = {
     id: "A1",
     name: "JUNO",
@@ -29,6 +31,9 @@ exports.JUNO = {
             councilRequired: councilNeeds.required,
             reviewTimestamp: timestamp
         })}`);
+        // Initialize LangChain router and AutoGen council
+        const router = new langchain_1.LangChainRouter();
+        const council = new autogen_1.AutoGenCouncil();
         const actions = [];
         // Handle contradictions with Mirror Clause activation
         if (contradictions.length > 0) {
@@ -55,6 +60,11 @@ exports.JUNO = {
                 doctrinalStatus: "violated"
             };
         }
+        // Use LangChain router to delegate tasks to sub-agents
+        const routedTasks = router.routeTasks(caseContext.tasks);
+        // Use AutoGen council for multi-agent decision-making
+        const councilDecisions = council.deliberate(routedTasks);
+        memory.write(`${this.id}: council_decisions - ${JSON.stringify(councilDecisions)}`);
         // Coordinate agent activities for case progression
         if (agentCoordination.requiresIntervention) {
             actions.push("Synchronize agent coordination protocols");

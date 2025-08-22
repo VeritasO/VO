@@ -1,0 +1,21 @@
+{
+  "actorSpecification": 1,
+  "views": {
+    "overview": {
+      "title": "Overview",
+      "transformation": {
+        "fields": ["tier","remedy","fairnessScore","ritual","jurisdiction"]
+      },
+      "display": {
+        "component": "table",
+        "properties": {
+          "tier": { "label": "JSS Tier", "format": "text" },
+          "remedy": { "label": "Recommended remedy", "format": "text" },
+          "fairnessScore": { "label": "Fairness (0–1)", "format": "text" },
+          "ritual": { "label": "Ritual", "format": "text" },
+          "jurisdiction": { "label": "Jurisdiction", "format": "text" }
+        }
+      }
+    }
+  }
+}

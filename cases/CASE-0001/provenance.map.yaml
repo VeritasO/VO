@@ -1,0 +1,7 @@
+case_id: CASE-0001
+created_by: system_seed
+artifacts:
+  - CASE_NARRATIVE.md
+  - EVIDENCE_TABLE.csv
+  - WITNESS_SUMMARIES.md
+  - photo_2025-07-02.jpg (not included)
