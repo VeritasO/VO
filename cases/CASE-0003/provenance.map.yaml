@@ -1,0 +1,8 @@
+DOCUMENT1: "background/CASE_NARRATIVE.md#incident-overview"
+DOCUMENT2: "background/EVIDENCE_TABLE.csv#controller-logs"
+DOCUMENT3: "background/EVIDENCE_TABLE.csv#release-notes"
+DOCUMENT4: "background/RIGHTS_CONTEXT.md#sla-excerpts"
+DOCUMENT5: "background/RIGHTS_CONTEXT.md#cold-chain-guidance"
+IMAGE1: "background/EVIDENCE_TABLE.csv#thermal-still"
+HISTORY1: "background/CASE_NARRATIVE.md#prior-incidents"
+JUNO_FINDINGS: "to-be-produced/JUNO.findings.json"

@@ -1,0 +1,20 @@
+date: "2025-08-14"
+local_tz: "Europe/Stockholm"
+sequence:
+  - t: "13:58"
+    event: "Vendor OTA firmware release initiated (batch deploy)"
+    cites: ["{{DOCUMENT3}}"]
+  - t: "14:05"
+    event: "Controllers enter lock-safe; power interruptions begin"
+    cites: ["{{DOCUMENT2}}"]
+  - t: "14:12"
+    event: "Operator begins rollback but access throttled; manual on-site dispatch"
+    cites: ["{{DOCUMENT1}}","{{DOCUMENT2}}"]
+  - t: "16:20"
+    event: "Cooling/medicine risks escalate; residents alerted"
+    cites: ["{{DOCUMENT1}}","{{DOCUMENT5}}"]
+  - t: "20:11"
+    event: "Service restored post-manual rollback; stabilization period starts"
+    cites: ["{{DOCUMENT2}}"]
+post:
+  - "Claims begun for medicine and food replacement; cooling aid requests filed."

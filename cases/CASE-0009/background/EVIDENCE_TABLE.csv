@@ -1,0 +1,8 @@
+type,id,source,description,key_points,citation_placeholder
+bank_recs,BNK-REC-12,Treasurer/Agent,"Monthly bank recs show unexplained timing differences and stale items",unreconciled_items,"{{DOCUMENT2}}"
+ap_ar,APAR-44,Agent,"AP/AR ledger with approvals; missing secondary signoff on 22% of payments",no_dual_sign,"{{DOCUMENT3}}"
+alloc_rule,ALC-RULE-02,Board Policy,"Written fee allocation formula + change log; mid-year tweak without member notice",rule_tweak;notice_gap,"{{DOCUMENT4}}"
+audit,ADT-MIN-07,Committee,"Audit minutes delayed; sample testing flagged vendor mismatch",audit_delay;vendor_mismatch,"{{DOCUMENT5}}"
+arrears,ARR-POL-09,Agent,"Penalty accruals continued during dispute; hardship flags not honored",penalty_during_dispute,"{{DOCUMENT6}}"
+contracts,VND-REG-15,Agent/CPA,"Vendor roster & invoices; two related-party risks noted (disclosed late)",related_party_risk,"{{DOCUMENT7}}"
+image,FIN-DASH-01,Screenshot,"Variance alert from finance dashboard",variance_alert,"{{IMAGE1}}"

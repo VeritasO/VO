@@ -1,0 +1,10 @@
+route: "A02-AEGIS"
+request_type: "parity_scan"
+context:
+  - "Scan for outreach gaps in language/digital access"
+  - "Verify refund/replacement process is loyalty-agnostic"
+  - "Include delivery-only customers in notifications"
+metrics:
+  - "Reach parity across demographics"
+  - "Response time equity"
+  - "Relief barrier index"

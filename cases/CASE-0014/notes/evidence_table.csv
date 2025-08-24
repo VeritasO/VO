@@ -1,0 +1,9 @@
+Document ID,Type,Description,Key Points,Fairness Implications
+DOCUMENT1,Patient Summary,"De-identified incident report re: missed appointments","{language_pref_missing, transport_barrier, repeat_reschedule}","High barrier compound effect"
+DOCUMENT2,Call Logs,"Scheduling tickets and call center interactions","{interpreter_request_timing, slot_constraints}","Slot bias vs language"
+DOCUMENT3,System Config,"EHR/portal language preference settings","{config_gaps, default_bias}","Structural exclusion"
+DOCUMENT4,Service Data,"Interpreter roster coverage and SLAs","{capacity_gaps, fill_rates}","Service parity"
+DOCUMENT5,Communications,"Reminder templates and language coverage","{outreach_gaps, translation_missing}","Information barrier"
+DOCUMENT6,Transport,"Eligibility and booking records","{coordination_failure, timing_mismatch}","Access compound effect"
+IMAGE1,Screenshot,"Portal missing language selector (redacted)","{UI_barrier, preference_capture}","Technical exclusion"
+HISTORY1,Analytics,"Historical interpreter fill rates by language","{parity_gaps, trend_data}","Service inequity"

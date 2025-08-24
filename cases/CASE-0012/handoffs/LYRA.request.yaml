@@ -1,0 +1,16 @@
+route: "A04-LYRA"
+request_type: "narrative_weave"
+context:
+  - "Multi-language notice templates"
+  - "Plain language recall instructions"
+  - "Visual guides and QR codes"
+elements:
+  - "Product identification guide"
+  - "Safe disposal instructions"
+  - "Refund/replacement process"
+  - "Health symptom guidance"
+formats:
+  - "Print/digital notices"
+  - "SMS/voice messages"
+  - "In-store signage"
+  - "App notifications"

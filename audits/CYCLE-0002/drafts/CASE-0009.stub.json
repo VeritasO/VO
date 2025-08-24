@@ -1,0 +1,19 @@
+{
+  "case_id": "CASE-0009-COOP-FINANCE-TRANSPARENCY",
+  "judgment": {
+    "allocation": {
+      "board_treasurer": 0.45,
+      "managing_agent": 0.30,
+      "legacy_system": 0.15,
+      "external_bookkeeper": 0.10
+    },
+    "continuity_risk_level": "Med",
+    "confidence": 0.67
+  },
+  "fairness_score": null,
+  "notes": [
+    "AEGIS: parity_checks across language/seniority/sublet/income proxies",
+    "ORION: duty_precedence for transparency + consistent rule vs board discretion; penalty pause norm",
+    "KAIROS: deadlines for re-calc, credits, and meeting schedule"
+  ]
+}

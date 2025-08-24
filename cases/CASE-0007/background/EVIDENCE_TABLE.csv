@@ -1,0 +1,7 @@
+type,id,source,description,key_points,citation_placeholder
+permit,VAR-2025-08,Regulator,"Temporary variance terms and monitoring clauses",variance_terms;monitoring,"{{DOCUMENT1}}"
+meters,PLANT-MTR-44,Facility,"15-min extraction logs; step-up after variance start",volume_spike,"{{DOCUMENT2}}"
+memos,MUNI-ALLOC-12,Municipality,"Reservoir level notes; contractual prioritization memo",prioritize_industrial,"{{DOCUMENT3}}"
+hydro,HYD-SPR-09,Hydrology,"Spring flow dropped below Qmin; aquifer level down 0.6m",low_flow;aquifer_drop,"{{DOCUMENT4}}"
+quality,WQ-NO3-07,Lab,"Nitrate levels trending upward in community wellfield",nitrate_rise,"{{DOCUMENT5}}"
+image,GAUGE-STILL-3,Photo,"Gauging staff exposed; low stage image",visual_low_flow,"{{IMAGE1}}"

@@ -1,0 +1,20 @@
+{
+  "case_id": "CASE-0012-FOOD-RECALL-ALLERGEN-COLDCHAIN",
+  "judgment": {
+    "allocation": {
+      "processor": 0.45,
+      "distributor": 0.20,
+      "grocer": 0.20,
+      "marketplace_platform": 0.10,
+      "carrier": 0.05
+    },
+    "continuity_risk_level": "High",
+    "confidence": 0.72
+  },
+  "fairness_score": null,
+  "notes": [
+    "AEGIS: ensure refunds/reach are loyalty-agnostic and multilingual; include delivery-only buyers",
+    "ORION: duty_precedence — warn/withdraw before commercial friction",
+    "KAIROS: hard deadlines for block/delist/outreach; symptom-watch window"
+  ]
+}

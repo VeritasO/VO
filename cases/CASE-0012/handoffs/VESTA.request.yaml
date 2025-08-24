@@ -1,0 +1,25 @@
+route: "A07-VESTA"
+request_type: "structural_covenant"
+context:
+  - "Food Safety Covenant"
+  - "Label integrity controls"
+  - "Cold chain monitoring"
+elements:
+  dashboard:
+    - "Public recall status"
+    - "Lot tracking system"
+    - "Temperature compliance"
+  controls:
+    - "Label twin verification"
+    - "ASN lot validation"
+    - "Logger upload gates"
+  commitment:
+    window: "60-90d"
+    metrics:
+      - "Label accuracy rate"
+      - "Temperature compliance"
+      - "Recall response time"
+    anti_backslide:
+      - "Monthly audits"
+      - "Public reporting"
+      - "Certification status"

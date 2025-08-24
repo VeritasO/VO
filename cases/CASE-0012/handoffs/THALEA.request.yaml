@@ -1,0 +1,13 @@
+route: "A06-THALEA"
+request_type: "healing_plan"
+context:
+  - "Low-burden refund process"
+  - "Safe replacement options"
+  - "Medical support if needed"
+elements:
+  - "No-receipt refunds"
+  - "Home pickup service"
+  - "Replacement meal vouchers"
+  - "Transport assistance"
+burden_index_target: 0.2
+support_duration: "30d"

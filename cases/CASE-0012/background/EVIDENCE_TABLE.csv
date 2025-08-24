@@ -1,0 +1,8 @@
+type,id,source,description,key_points,citation_placeholder
+label_variant,LBL-VAR-08,Processor,"Printed variant lacks walnut allergen line; spec includes it",undeclared_allergen,"{{DOCUMENT2}}"
+qa_release,QA-REL-19,Processor QA,"Release checklist signed; label cross-check step missed",qa_gap,"{{DOCUMENT3}}"
+logger,CC-LOG-27,Carrier,"Data logger: 9–10°C for ~2h on lane D",temp_excursion,"{{DOCUMENT4}}"
+stop_ship,DST-STOP-11,Distributor,"Stop-ship sent 12:06; confirmation at 18:14",delay_stop_ship,"{{DOCUMENT5}}"
+pos,POS-BLK-05,Grocer/Platform,"POS block at 19:32; delivery app delisted 21:01",lag_pos_platform,"{{DOCUMENT6}}"
+photo,IMG-TAG-04,Store,"Shelf tag & label photos (redacted)",visual_mismatch,"{{IMAGE1}}"
+policy,FS-POL-01,Retailer,"Recall SOP and multi-language outreach policy",sop_gaps,"{{DOCUMENT6}}"

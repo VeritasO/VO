@@ -1,0 +1,8 @@
+DOCUMENT1: "background/CASE_NARRATIVE.md#resident-and-clinician-summary"
+DOCUMENT2: "background/EVIDENCE_TABLE.csv#moisture-log"
+DOCUMENT3: "background/EVIDENCE_TABLE.csv#tickets"
+DOCUMENT4: "background/EVIDENCE_TABLE.csv#hvac"
+DOCUMENT5: "background/EVIDENCE_TABLE.csv#lab"
+IMAGE1: "background/EVIDENCE_TABLE.csv#photo"
+HISTORY1: "background/CASE_NARRATIVE.md#prior-complaints"
+JUNO_FINDINGS: "to-be-produced/JUNO.findings.json"

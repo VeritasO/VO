@@ -1,0 +1,11 @@
+request:
+  agent: "A02-AEGIS"
+  task: "Parity scan for language/disability/zone disparities in benefits recertification"
+  focus: 
+    - "Analyze churn rates by language, disability status, and geographic zone"
+    - "Examine portal/vendor/mail backlog impact on different populations"
+    - "Propose mitigations: mirrored SLAs, kiosk routes, concierge support"
+  deliverables:
+    - "Disparity analysis with confidence intervals"
+    - "Impact assessment of digital barriers"
+    - "Mitigation recommendations with SLA targets"

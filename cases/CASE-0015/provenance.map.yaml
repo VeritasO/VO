@@ -1,0 +1,8 @@
+DOCUMENT1: "background/CASE_NARRATIVE.md#incident"
+DOCUMENT2: "background/EVIDENCE_TABLE.csv#portal-analytics"
+DOCUMENT3: "background/EVIDENCE_TABLE.csv#vendor-logs"
+DOCUMENT4: "background/EVIDENCE_TABLE.csv#mail-sla"
+DOCUMENT5: "background/EVIDENCE_TABLE.csv#call-center"
+IMAGE1: "background/EVIDENCE_TABLE.csv#screenshots"
+HISTORY1: "background/CASE_NARRATIVE.md#historical-churn"
+JUNO_FINDINGS: "to-be-produced/JUNO.findings.json"

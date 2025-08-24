@@ -1,0 +1,12 @@
+request:
+  agent: "A03-KAIROS"
+  task: "Analyze deadlines and grace periods for benefits recertification"
+  focus:
+    - "Same-day reinstatement requirements"
+    - "24h human review on vendor failures"
+    - "72h mail indexing target"
+    - "Grace window calculations"
+  deliverables:
+    - "Timeline analysis"
+    - "Grace period recommendations"
+    - "Auto-extension trigger criteria"

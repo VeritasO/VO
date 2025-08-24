@@ -1,0 +1,20 @@
+date: "2025-08-22"
+local_tz: "America/New_York"
+sequence:
+  - t: "09:15"
+    event: "Processor issues internal alert; bulletin draft pending"
+    cites: ["{{DOCUMENT3}}"]
+  - t: "12:06"
+    event: "Distributor sends stop-ship; confirmation lags"
+    cites: ["{{DOCUMENT5}}"]
+  - t: "16:10"
+    event: "Consumer hotline reports nut presence; adverse reactions logged"
+    cites: ["{{DOCUMENT1}}"]
+  - t: "19:32"
+    event: "Grocer POS block; shelf sweeps begin"
+    cites: ["{{DOCUMENT6}}"]
+  - t: "21:01"
+    event: "Delivery app delists item"
+    cites: ["{{DOCUMENT6}}"]
+post:
+  - "Refunds begin; multilingual notices roll out."

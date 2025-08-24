@@ -1,0 +1,17 @@
+date: "2025-08-22"
+local_tz: "America/New_York"
+sequence:
+  - t: "T-48h"
+    event: "Maintenance notice sent; limited translations"
+    cites: ["{{DOCUMENT1}}"]
+  - t: "01:00–05:00"
+    event: "Planned window; work ongoing beyond 05:00"
+    cites: ["{{DOCUMENT2}}","{{DOCUMENT4}}"]
+  - t: "08:12"
+    event: "Fiber strike; outage begins; reroute triggers peering congestion"
+    cites: ["{{DOCUMENT2}}","{{DOCUMENT3}}","{{DOCUMENT5}}"]
+  - t: "16:47"
+    event: "Restoration after splice; service resumes"
+    cites: ["{{DOCUMENT2}}","{{IMAGE1}}"]
+post:
+  - "Credits requested; LTE waiver not auto-applied."

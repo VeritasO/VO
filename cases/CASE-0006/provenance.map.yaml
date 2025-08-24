@@ -1,0 +1,8 @@
+DOCUMENT1: "background/CASE_NARRATIVE.md#approved-accommodation"
+DOCUMENT2: "background/EVIDENCE_TABLE.csv#registrar-logs"
+DOCUMENT3: "background/EVIDENCE_TABLE.csv#ds-tickets"
+DOCUMENT4: "background/EVIDENCE_TABLE.csv#dept-notices"
+DOCUMENT5: "background/EVIDENCE_TABLE.csv#lms-logs"
+IMAGE1: "background/EVIDENCE_TABLE.csv#portal-screenshot"
+HISTORY1: "background/CASE_NARRATIVE.md#compliance-aggregate"
+JUNO_FINDINGS: "to-be-produced/JUNO.findings.json"

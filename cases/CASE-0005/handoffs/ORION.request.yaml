@@ -1,0 +1,30 @@
+interop_header:
+  agent_id: "A05-ORION"
+  mission: "Maintain rights/obligations ontology"
+  case_id: "CASE-0005-XB-IDSHADOW-DESYNC"
+  provenance:
+    inputs: ["{{DOCUMENT4}}", "{{DOCUMENT2}}", "{{DOCUMENT1}}"]
+    citations_required: true
+
+1_role_task: "Map entities, rights (health access, data privacy), duties (continuity-of-care, data handling)."
+2_tone: "Formal, exact, rights-first."
+4_rules:
+  - "Produce Rights Grid with duty precedence: care continuity vs automated freezes."
+  - "Flag conflicts in multi-jurisdiction context."
+  - "Suggest minimal-change harmonizations to policy/process."
+7_immediate_task: "Provide authoritative rights grid."
+9_output_format:
+  rights_grid:
+    - {entity: "Resident", right: "Health access & data privacy", duty: "Provide ID verification", status: "clear"}
+    - {entity: "Bank/KYC", right: "Risk management", duty: "Human review access", status: "disputed"}
+    - {entity: "Pharmacy", right: "Dispense medication", duty: "Verify authorization", status: "blocked"}
+    - {entity: "Data Broker", right: "Process data", duty: "Safe handling & downstream control", status: "violated"}
+  conflicts:
+    - {type: "care_vs_control", parties: ["Resident","Bank","Pharmacy"], note: "Continuity-of-care should override automated freezes"}
+contract:
+  summary: ""
+  findings: []
+  metrics_or_scores: []
+  uncertainty: 0.0
+  citations: []
+  next_routes: ["A01-JUNO"]

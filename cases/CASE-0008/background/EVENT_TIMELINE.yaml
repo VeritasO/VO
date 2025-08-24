@@ -1,0 +1,14 @@
+date: "2025-08-22"
+local_tz: "Europe/Stockholm"
+sequence:
+  - t: "Day -21 to -10" 
+    event: "Resident opens tickets; interim patch applied; paint-over before source fix"
+    cites: ["{{DOCUMENT3}}","{{IMAGE1}}"]
+  - t: "Day -7"
+    event: "Moisture readings elevated; HVAC negative pressure observed"
+    cites: ["{{DOCUMENT2}}","{{DOCUMENT4}}"]
+  - t: "Day -2"
+    event: "Lab air/swab show elevation vs outdoor reference"
+    cites: ["{{DOCUMENT5}}"]
+post:
+  - "Make-safe requested; independent clearance pending."

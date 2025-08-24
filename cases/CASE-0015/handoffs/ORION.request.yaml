@@ -1,0 +1,11 @@
+request:
+  agent: "A05-ORION"
+  task: "Rights grid and duty precedence analysis for benefits recertification"
+  focus:
+    - "Analyze 'continuity before paperwork' principle"
+    - "Examine 'attestation before algorithmic mismatch' rule"
+    - "Map rights conflicts between verification and access"
+  deliverables:
+    - "Duty precedence framework"
+    - "Rights conflict resolution guide"
+    - "Policy recommendations for attestation-first approach"

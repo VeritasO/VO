@@ -1,0 +1,12 @@
+route: "A06-THALEA"
+request_type: "healing_plan"
+context:
+  - "Detour assistance"
+  - "Alternative transport"
+  - "Navigation support"
+elements:
+  - "Escort service"
+  - "Taxi vouchers"
+  - "Route planning"
+burden_index_target: 0.2
+support_duration: "duration of works"

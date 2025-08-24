@@ -1,0 +1,25 @@
+route: "A07-VESTA"
+request_type: "structural_covenant"
+context:
+  - "Public Space Accessibility Covenant"
+  - "ROW clearance standards"
+  - "Infrastructure equity"
+elements:
+  dashboard:
+    - "Clearance times"
+    - "APS/LPI coverage"
+    - "Parity metrics"
+  controls:
+    - "Permit requirements"
+    - "TCP standards"
+    - "Device management"
+  commitment:
+    window: "60-90d"
+    metrics:
+      - "Response time"
+      - "Infrastructure equity"
+      - "Clearance rate"
+    anti_backslide:
+      - "Monthly audits"
+      - "Public reporting"
+      - "Corridor badges"

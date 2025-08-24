@@ -1,0 +1,12 @@
+request:
+  agent: "A06-THALEA"
+  task: "Develop healing plan for affected benefits recipients"
+  focus:
+    - "Design grocery stipend program"
+    - "Establish Rx bridge fill protocol"
+    - "Coordinate transport to kiosk/office"
+    - "Calculate burden index target ≤0.2"
+  deliverables:
+    - "Support package design"
+    - "Resource coordination plan"
+    - "Burden reduction strategy"

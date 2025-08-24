@@ -1,0 +1,12 @@
+request:
+  agent: "A04-LYRA"
+  task: "Narrative analysis and multi-language notice design"
+  focus:
+    - "Analyze conflicting accounts from stakeholders"
+    - "Design plain-language notices"
+    - "Create multi-channel communication plan"
+  deliverables:
+    - "Narrative consistency analysis"
+    - "Plain-language notice templates"
+    - "SMS/voice/mail communication strategy"
+    - "Teach-back verification approach"

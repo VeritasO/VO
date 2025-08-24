@@ -1,0 +1,8 @@
+type,id,source,description,key_points,citation_placeholder
+photos,PH-ROW-17,Field,"Images: blocked ramps, fencing without temp ramp, cafe encroachments",blocked_ramps;encroachment,"{{DOCUMENT2}}"
+permits,PERM-TCP-22,City,"Permit set & traffic control plans; several lack ADA detour detail",tcp_gaps,"{{DOCUMENT3}}"
+signals,SIG-APS-09,Signals,"Intersection audit: no APS/LPIs at 38% of studied junctions",signal_gaps,"{{DOCUMENT4}}"
+scooters,SCOOT-GPS-13,Operators,"Heatmap of device clustering; poor rebalancing at transit nodes",cluster_hotspots,"{{DOCUMENT5}}"
+snow,SNOW-SOP-05,Public Works,"SOPs show gap for corners/ramps during storms; trash-day overlaps",corner_gaps,"{{DOCUMENT6}}"
+image,IMG-ROW-04,Field,"Photos of temporary detour lacking tactile cues & ramp modules",temp_gap,"{{IMAGE1}}"
+policy,ACC-POL-ROW,City,"'Access-before-efficiency' draft guideline not enforced in permits",policy_gap,"{{DOCUMENT3}}"

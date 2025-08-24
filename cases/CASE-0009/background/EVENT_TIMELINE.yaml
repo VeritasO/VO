@@ -1,0 +1,14 @@
+date: "2025-08-22"
+local_tz: "Europe/Stockholm"
+sequence:
+  - t: "Q1"
+    event: "Budget approved; allocation rule published"
+    cites: ["{{DOCUMENT4}}"]
+  - t: "Q2"
+    event: "Mid-year rule tweak; no member notice"
+    cites: ["{{DOCUMENT4}}"]
+  - t: "Q2–Q3"
+    event: "Variance alerts; bank recs lag; penalties applied"
+    cites: ["{{DOCUMENT2}}","{{DOCUMENT6}}","{{IMAGE1}}"]
+post:
+  - "Petition filed; request for credits/refunds and audit."

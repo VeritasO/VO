@@ -1,0 +1,16 @@
+route: "A03-KAIROS"
+request_type: "timeline_integrity"
+context:
+  - "Recall windows and deadlines"
+  - "Symptom watch periods"
+  - "Block/delist/outreach timing"
+deadlines:
+  immediate:
+    - "POS block < 2h from alert"
+    - "Platform delist < 1h from alert"
+  short_term:
+    - "Complete shelf sweep < 4h"
+    - "All notifications sent < 8h"
+  monitoring:
+    - "Symptom watch 24-72h"
+    - "Daily reports for 7d"

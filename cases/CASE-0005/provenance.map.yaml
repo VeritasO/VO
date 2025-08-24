@@ -1,0 +1,8 @@
+DOCUMENT1: "background/CASE_NARRATIVE.md#freeze-notice"
+DOCUMENT2: "background/EVIDENCE_TABLE.csv#kyc-collision"
+DOCUMENT3: "background/EVIDENCE_TABLE.csv#broker-breach"
+DOCUMENT4: "background/EVIDENCE_TABLE.csv#processor-logs"
+DOCUMENT5: "background/RIGHTS_CONTEXT.md#pharmacy-continuity"
+IMAGE1: "background/EVIDENCE_TABLE.csv#clock-skew"
+HISTORY1: "background/CASE_NARRATIVE.md#prior-mismatches"
+JUNO_FINDINGS: "to-be-produced/JUNO.findings.json"

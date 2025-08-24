@@ -1,0 +1,10 @@
+route: "A05-ORION"
+request_type: "duty_precedence"
+context:
+  - "Access vs efficiency tradeoffs"
+  - "Temporary access requirements"
+  - "Minimum clear width standards"
+principles:
+  - "Access before efficiency"
+  - "Continuous mobility rights"
+  - "Universal design baseline"

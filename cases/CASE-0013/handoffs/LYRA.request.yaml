@@ -1,0 +1,14 @@
+route: "A04-LYRA"
+request_type: "narrative_weave"
+context:
+  - "Multi-language signage"
+  - "Detour instructions"
+  - "Business guidance"
+elements:
+  - "Detour wayfinding"
+  - "Clear width markers"
+  - "Device parking rules"
+formats:
+  - "On-street signs"
+  - "Business notices"
+  - "Public outreach"

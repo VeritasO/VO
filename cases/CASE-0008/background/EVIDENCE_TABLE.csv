@@ -1,0 +1,7 @@
+type,id,source,description,key_points,citation_placeholder
+moisture,MOI-LOG-22,Building,"Wall moisture 19–23% WME; interior RH 62–68%",elevated_moisture;high_rh,"{{DOCUMENT2}}"
+tickets,TKT-PR-18,Agent/Vendor,"Work orders show 'paint-over' before leak source fix; 11-day gap",premature_paint;delay,"{{DOCUMENT3}}"
+hvac,HV-CTRL-07,Controls,"Return > supply; door draft; stack effect; bath fan weak",negative_pressure;weak_exhaust,"{{DOCUMENT4}}"
+lab,LAB-AIR-03,IH Report,"Air sample elevated vs outside reference; swab from corner shows common indoor molds",elevated_spores;positive_swab,"{{DOCUMENT5}}"
+photo,IMG-COR-01,Resident,"Redacted photo of corner growth; baseboard swelling",visible_growth,"{{IMAGE1}}"
+policy,HAB-GUIDE-01,Co-op/Local,"Habitability guidance; timelines for make-safe & verification",habitability_sla,"{{DOCUMENT3}}"

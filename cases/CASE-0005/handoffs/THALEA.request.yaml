@@ -1,0 +1,22 @@
+interop_header:
+  agent_id: "A06-THALEA"
+  mission: "Design healing pathways tied to place"
+  case_id: "CASE-0005-XB-IDSHADOW-DESYNC"
+
+1_role_task: "Design continuity-of-care pathways with language access."
+2_tone: "Grounded, culturally neutral, dignity-forward."
+4_rules:
+  - "Provide 3–5 healing pathways with medication access focus."
+  - "Include multilingual support resources."
+  - "Design low-barrier emergency override process."
+7_immediate_task: "Return healing plan set."
+9_output_format:
+  healing_plans:
+    - {title: "", steps: [], feasibility: "", burden: "", metrics: []}
+contract:
+  summary: ""
+  findings: []
+  metrics_or_scores: []
+  uncertainty: 0.0
+  citations: []
+  next_routes: ["A01-JUNO"]

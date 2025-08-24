@@ -1,0 +1,21 @@
+{
+  "case_id": "CASE-0007-ENV-WATER-ACCESS",
+  "judgment": {
+    "allocation": {
+      "bottling_facility": 0.35,
+      "regulatory_agency": 0.30,
+      "municipal_water": 0.25,
+      "upstream_polluters": 0.10
+    },
+  "continuity_risk_level": "Med",
+  "confidence": 0.68
+  },
+  "fairness_score": null,
+  "notes": [
+    "AEGIS: parity check (access equity, burden distribution)",
+    "ORION: rights precedence — commons vs commercial extraction",
+    "KAIROS: seasonal windows (drought cycles, flow rates)",
+    "THALEA: place-based healing (stream health, cultural values)",
+    "VESTA: water stewardship covenant design"
+  ]
+}

@@ -1,0 +1,8 @@
+type,id,source,description,key_points,citation_placeholder
+noc_logs,NOC-0822,ISP NOC,"Event timeline, alarms, restoration, reroute steps",outage_window;reroute,"{{DOCUMENT2}}"
+contractor,CTR-REP-17,Contractor,"Bore/locate records; daytime strike near splice case",strike_outside_window,"{{DOCUMENT3}}"
+permit,PERM-DOT-31,City DOT,"Approved window 00:00–06:00; traffic control & boring plan",permit_window,"{{DOCUMENT4}}"
+peering,PEER-LOAD-09,ISP/Transit,"Reroute caused congestion; temporary capacity not pre-arranged",peering_congestion,"{{DOCUMENT5}}"
+lte,LTE-POL-04,ISP Plan,"Backup modem subject to 15 GB cap and throttling",cap_throttle,"{{DOCUMENT6}}"
+photo,SPC-PH-03,Field,"Splice enclosure and severed fibers (redacted)",fiber_cut,"{{IMAGE1}}"
+notice,NTC-LANG-07,Comms,"Email/SMS notice English-only; limited translations",language_gap,"{{DOCUMENT1}}"

@@ -1,0 +1,12 @@
+request:
+  agent: "A07-VESTA"
+  task: "Design Benefits Access Covenant and dashboard"
+  focus:
+    - "Develop public SLA framework"
+    - "Design performance dashboard"
+    - "Structure 60-90 day commitment window"
+  deliverables:
+    - "Benefits Access Covenant draft"
+    - "Dashboard specifications"
+    - "Commitment window implementation plan"
+    - "Anti-backslide protections"

@@ -1,0 +1,20 @@
+{
+  "case_id": "CASE-0008-HOUSING-MOLD",
+  "judgment": {
+    "allocation": {
+      "board_agent": 0.40,
+      "contractor": 0.25,
+      "building_envelope": 0.15,
+      "hvac_controls": 0.15,
+      "municipal_lag": 0.05
+    },
+    "continuity_risk_level": "High",
+    "confidence": 0.70
+  },
+  "fairness_score": null,
+  "notes": [
+    "AEGIS: check parity of relocation/filters across language/tenure",
+    "ORION: set duty precedence (source-fix before cosmetic; verification before re-occupy)",
+    "KAIROS: enforce 72h/7d/30d schedule with check-ins"
+  ]
+}

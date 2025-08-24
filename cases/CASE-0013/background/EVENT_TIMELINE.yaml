@@ -1,0 +1,17 @@
+date: "2025-08-22"
+local_tz: "America/New_York"
+sequence:
+  - t: "Week -2"
+    event: "Permit issuance for corridor works; TCP lacks ADA detour module"
+    cites: ["{{DOCUMENT3}}"]
+  - t: "Week -1"
+    event: "Scooter cluster spike near transit; slow rebalancing"
+    cites: ["{{DOCUMENT5}}"]
+  - t: "Day -1"
+    event: "Rain + trash-day cause corner encroachments"
+    cites: ["{{DOCUMENT6}}"]
+  - t: "Day 0"
+    event: "Multiple blocked ramps; APS/LPI gaps observed at crossings"
+    cites: ["{{DOCUMENT2}}","{{DOCUMENT4}}","{{IMAGE1}}"]
+post:
+  - "Community petitions for accessible detours and ramp/APS installation."

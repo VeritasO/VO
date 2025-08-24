@@ -1,0 +1,17 @@
+date: "2025-08-20"
+local_tz: "Europe/Stockholm"
+sequence:
+  - t: "Pre-term"
+    event: "Accommodation approved; DS ticket opened"
+    cites: ["{{DOCUMENT1}}","{{DOCUMENT3}}"]
+  - t: "Week 1"
+    event: "Registrar batch schedules; accessibility flag bypassed"
+    cites: ["{{DOCUMENT2}}","{{IMAGE1}}"]
+  - t: "Week 2"
+    event: "Dept posts single make-up slot colliding with therapy"
+    cites: ["{{DOCUMENT4}}"]
+  - t: "Week 3"
+    event: "LMS captions posted 48h late; session missed"
+    cites: ["{{DOCUMENT5}}"]
+post:
+  - "Student requests remedy; risk of grade penalty noted."

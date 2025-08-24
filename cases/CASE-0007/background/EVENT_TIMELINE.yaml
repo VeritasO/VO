@@ -1,0 +1,17 @@
+date: "2025-08-21"
+local_tz: "Europe/Stockholm"
+sequence:
+  - t: "Day -2"
+    event: "Variance drafted; hydrology model update pending"
+    cites: ["{{DOCUMENT1}}"]
+  - t: "Day 0"
+    event: "Variance active; extraction step-up begins"
+    cites: ["{{DOCUMENT2}}"]
+  - t: "Day +3"
+    event: "School boil advisory; nitrate trend observed"
+    cites: ["{{DOCUMENT5}}"]
+  - t: "Day +5"
+    event: "Cultural stream at low-flow threshold"
+    cites: ["{{DOCUMENT4}}","{{IMAGE1}}"]
+post:
+  - "Community petitions for throttle; regulator schedules review."

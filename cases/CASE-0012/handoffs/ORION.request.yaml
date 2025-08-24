@@ -1,0 +1,10 @@
+route: "A05-ORION"
+request_type: "duty_precedence"
+context:
+  - "Duty to warn/withdraw vs commercial friction"
+  - "Food safety vs sell-through concerns"
+  - "Consumer protection baseline"
+principles:
+  - "Safety before efficiency"
+  - "Transparency before convenience"
+  - "Protection before profit"

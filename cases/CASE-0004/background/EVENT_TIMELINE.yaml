@@ -1,0 +1,17 @@
+date: "2025-08-16"
+local_tz: "Europe/Stockholm"
+sequence:
+  - t: "09:12"  # initial
+    event: "Uploader posts synthetic image on Platform P"
+    cites: ["{{DOCUMENT2}}","{{IMAGE1}}"]
+  - t: "10:02–15:30"
+    event: "Amplifiers repost/edit; report volume increases"
+    cites: ["{{DOCUMENT2}}"]
+  - t: "16:05"
+    event: "Platform escalates; partial removals begin"
+    cites: ["{{DOCUMENT2}}"]
+  - t: "18:45"
+    event: "Primary post removed; hash added to de-duplication list"
+    cites: ["{{DOCUMENT2}}","{{IMAGE1}}"]
+post:
+  - "Correction statement drafted; bookings reconsideration pending."

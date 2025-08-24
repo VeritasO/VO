@@ -1,0 +1,7 @@
+type,id,source,description,key_points,citation_placeholder
+ridership,STOP-UTIL-21,Transit,"Stop-level boardings/transfers; off-peak mobility dependence high",mobility_dependence,"{{DOCUMENT2}}"
+access_review,ADA-CHK-09,Consultant/DOT,"New stop lacks curb ramp; cross-slope > accepted; longer exposure",missing_ramp;steeper_path,"{{DOCUMENT3}}"
+paratransit,PARA-OTP-13,Authority/Vendor,"On-time performance dipped; capacity shortfall during changeover",otp_drop;capacity_gap,"{{DOCUMENT4}}"
+proximity,PROX-CL-SCH-05,Planner,"Removed stop served clinic/school within 200m; new stop >450m",lost_proximity,"{{DOCUMENT5}}"
+photo,FIELD-PH-07,Field,"Image shows missing ramp & pooled water near new stop",field_issue,"{{IMAGE1}}"
+policy,ACC-POL-01,Authority,"Access-before-efficiency guideline (draft); not applied at launch",policy_gap,"{{DOCUMENT1}}"

@@ -1,0 +1,7 @@
+type,id,source,description,key_points,citation_placeholder
+registrar,REG-LOG-31,Registrar,"Room/time auto-allocation skipped 'accessibility-required' flag",flag_ignored;auto_alloc,"{{DOCUMENT2}}"
+ds_ticket,DS-042,Disability Services,"Ticket opened prior to term; escalation not triggered",no_escalation,"{{DOCUMENT3}}"
+dept_notice,DEP-NOT-7,Department,"Announced single make-up slot colliding with therapy",conflict_slot,"{{DOCUMENT4}}"
+lms,LMS-ACC-12,LMS,"Auto-caption job delayed; posted 48h later",late_captions,"{{DOCUMENT5}}"
+portal,PRT-SCR-09,Screenshot,"Portal warning: 'conflict with approved accommodation' shown",explicit_conflict_warn,"{{IMAGE1}}"
+policy,POL-LEARN-CTY,Institution,"Continuity-of-learning guidance; low-burden student path",continuity_policy,"{{DOCUMENT4}}"

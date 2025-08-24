@@ -1,0 +1,8 @@
+DOCUMENT1: "background/CASE_NARRATIVE.md#incident-overview"
+DOCUMENT2: "background/EVIDENCE_TABLE.csv#dashcam-footage"
+DOCUMENT3: "background/EVIDENCE_TABLE.csv#lot-camera"
+DOCUMENT4: "background/RIGHTS_CONTEXT.md#wildlife-corridor"
+DOCUMENT5: "background/CASE_NARRATIVE.md#impact-assessment"
+IMAGE1: "background/EVIDENCE_TABLE.csv#scene-photos"
+HISTORY1: "background/CASE_NARRATIVE.md#prior-history"
+JUNO_FINDINGS: "to-be-produced/JUNO.findings.json"

@@ -1,3 +1,15 @@
 {
-  "cycles": ["CYCLE-0001"]
+  "current_cycle": "0003",
+  "cases_recorded": 2,
+  "next_audit_at": 5,
+  "status": "in_progress",
+  "cycles": {
+    "0001": "completed",
+    "0002": "completed",
+    "0003": {
+      "status": "in_progress",
+      "cases": ["CASE-0011", "CASE-0012"],
+      "remaining": 3
+    }
+  }
 }

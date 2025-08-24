@@ -1,0 +1,17 @@
+date: "2025-08-18"
+local_tz: "Europe/Stockholm"
+sequence:
+  - t: "18:01 CEST" 
+    event: "KYC collision flagged at T=0.86; auto-freeze issued"
+    cites: ["{{DOCUMENT2}}","{{DOCUMENT1}}"]
+  - t: "18:19 CEST"
+    event: "Resident attempts pharmacy purchase; decline 1 (processor UTC time shows 16:19)"
+    cites: ["{{DOCUMENT4}}"]
+  - t: "18:51–20:42 CEST"
+    event: "Further declines; pharmacist attempts override; blocked (needs bank code)"
+    cites: ["{{DOCUMENT5}}","{{DOCUMENT4}}"]
+  - t: "21:03 CEST"
+    event: "Manual review clears mismatch; freeze lifted"
+    cites: ["{{DOCUMENT1}}"]
+post:
+  - "Bank fee reversals queued; no medication dispensed during window."

@@ -1,0 +1,18 @@
+{
+  "case_id": "CASE-0006-EDU-ACCOM-SCHED",
+  "judgment": {
+    "allocation": {
+      "registrar": 0.40,
+      "disability_services": 0.25,
+      "department": 0.20,
+      "lms_it": 0.15
+    },
+  "continuity_risk_level": "Med",
+  "confidence": 0.71
+  },
+  "fairness_score": null,
+  "notes": [
+    "AEGIS: parity check (disability, language, international status)",
+    "ORION: rights precedence - accommodation vs batch scheduling"
+  ]
+}

@@ -1,0 +1,7 @@
+type,id,source,description,key_points,citation_placeholder
+logs,LOG-CTRL-71,Controller syslog,"Errors E217/E901 immediately post-OTA; auto lock-safe; watchdog resets",error_post_ota;lock_safe,"{{DOCUMENT2}}"
+release,REL-NOTE-4.8,Vendor bulletin,"Known issue: rare inverter handshake delay; rollback instructions provided",known_issue;rollback_path,"{{DOCUMENT3}}"
+sla,SLA-OP-VND-01,SLA doc,"Vendor must support staged rollout + canary + rollback (<10 min)",staged_rollout_required,"{{DOCUMENT4}}"
+policy,COLD-INS-STD,Public health,"Insulin storage 2–8°C; excursion >2h requires replacement",cold_chain_critical,"{{DOCUMENT5}}"
+image,THERM-RM-01,Thermal cam,"Rack hotspot at 14:07; cooling fan failover nominal",thermal_spike;no_fire,"{{IMAGE1}}"
+history,HIST-18M,Ops log,"Two minor prior firmware faults; 9 and 23 minutes",prior_faults,"{{HISTORY1}}"

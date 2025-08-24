@@ -1,0 +1,7 @@
+type,id,source,description,key_points,citation_placeholder
+mod_log,MOD-112,Platform P,"Post timestamps; report count; moderation actions; decision codes",takedown_delay;report_volume,"{{DOCUMENT2}}"
+forensics,FX-IMG-71,Independent,"Error artifacts around earrings/hair; model fingerprint suggests synthetic",artifact_edges;model_fingerprint,"{{DOCUMENT3}}"
+policy,POL-SYN-IMP,Platform P,"Policy forbids impersonation/synthetic harm; expedited takedown SLAs",policy_violation;expedite_SLA,"{{DOCUMENT4}}"
+hash,IMG-HASH-1,Hash-only,"SHA-256 and perceptual hashes stored for de-duplication",hashready;no_raw_image,"{{IMAGE1}}"
+econ,LEDGER-07,Claimant,"Lost work and deposit ledger; ranges not yet verified",loss_range,"{{DOCUMENT5}}"
+history,HIST-PR-02,Platform/Claimant,"Aggregate prior impersonation attempts with takedown times",prior_moderation,"{{HISTORY1}}"

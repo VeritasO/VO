@@ -1,0 +1,20 @@
+date: "2025-08-22"
+local_tz: "America/New_York"
+sequence:
+  - t: "Day -14"
+    event: "Recert notice delivered; portal attempts begin; selfie loop"
+    cites: ["{{DOCUMENT1}}","{{DOCUMENT3}}","{{IMAGE1}}"]
+  - t: "Day -10"
+    event: "Docs mailed; mail-intake backlog grows"
+    cites: ["{{DOCUMENT4}}"]
+  - t: "Day -7"
+    event: "Client calls; 47-min hold; interpreter not available"
+    cites: ["{{DOCUMENT5}}"]
+  - t: "Day -1"
+    event: "Auto-closure queued despite active recert"
+    cites: ["{{DOCUMENT1}}"]
+  - t: "Day 0"
+    event: "Benefits terminated; CBO files appeal"
+    cites: ["{{DOCUMENT1}}"]
+post:
+  - "Household requests reinstatement under presumptive continuity."

@@ -1,6 +1,13 @@
 {
   "case_id": "CASE-0002",
-  "juno_summary": "to-be-filled",
-  "aegis_score": null,
-  "orion_deltas": []
+  "legacy_backup": {
+    "juno_summary": "to-be-filled",
+    "aegis_score": null,
+    "orion_deltas": []
+  },
+  "judgment": {
+    "allocation": {},
+    "continuity_risk_level": "Unknown",
+    "confidence": 0.0
+  }
 }

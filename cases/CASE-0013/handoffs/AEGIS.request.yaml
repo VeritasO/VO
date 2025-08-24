@@ -1,0 +1,10 @@
+route: "A02-AEGIS"
+request_type: "parity_scan"
+context:
+  - "Clearance times by neighborhood/income/language"
+  - "Citation patterns across demographics"
+  - "APS/LPI installation equity"
+metrics:
+  - "Response time parity"
+  - "Enforcement fairness"
+  - "Infrastructure equity"

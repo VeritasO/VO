@@ -1,0 +1,16 @@
+route: "A03-KAIROS"
+request_type: "timeline_integrity"
+context:
+  - "Clearance deadlines"
+  - "Installation schedules"
+  - "Weather event response"
+deadlines:
+  immediate:
+    - "Life-safety clearance < 24h"
+    - "Critical path ramps < 48h"
+  short_term:
+    - "Non-critical clearance < 72h"
+    - "APS/LPI installation schedule"
+  monitoring:
+    - "Storm response timing"
+    - "Trash day coordination"

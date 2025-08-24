@@ -1,0 +1,23 @@
+interop_header:
+  agent_id: "A06-THALEA"
+  mission: "Design healing pathways tied to place"
+  case_id: "CASE-0002-SE-RURAL-ANIMAL"
+
+1_role_task: "Propose healing measures for rural road wildlife safety."
+2_tone: "Grounded, culturally neutral, dignity-forward."
+3_background: "Rural wildlife avoidance incident; infrastructure disparity context."
+4_rules:
+  - "Provide 3–5 healing pathways considering rural context."
+  - "Balance human and wildlife safety needs."
+  - "Include success metrics and community feedback loops."
+7_immediate_task: "Return healing plan set."
+9_output_format:
+  healing_plans:
+    - {title: "", steps: [], feasibility: "", burden: "", metrics: []}
+contract:
+  summary: ""
+  findings: []
+  metrics_or_scores: []
+  uncertainty: 0.0
+  citations: []
+  next_routes: ["A01-JUNO"]

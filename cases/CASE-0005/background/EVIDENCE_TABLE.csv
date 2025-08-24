@@ -1,0 +1,7 @@
+type,id,source,description,key_points,citation_placeholder
+kyc,KYC-CL-881,Vend-KYC,"Template collision at threshold T=0.86; manual review not invoked",collision;no_manual_review,"{{DOCUMENT2}}"
+broker,BRK-NOT-22,Data Broker,"Leak notice lists resident phone+address+merchant graph sold onward",pii_leak;downstream_sales,"{{DOCUMENT3}}"
+proc_log,PRC-UTC-17,Processor,"Declines logged in UTC; merchant auth retries offset by -60m (CEST)",utc_vs_cest;replay_needed,"{{DOCUMENT4}}"
+clock,CLK-DS-04,Ops diag,"NTP stratum misconfig; drift 37s between subsystems",clock_drift,"{{IMAGE1}}"
+policy,PH-OVR-01,Pharmacy,"Continuity-of-care override policy exists; not triggered without bank code",override_blocked,"{{DOCUMENT5}}"
+history,HIST-MM-02,Bank,"Two prior mismatches (<T=0.80) cleared quickly",low_sev_history,"{{HISTORY1}}"

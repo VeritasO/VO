@@ -1,0 +1,8 @@
+DOCUMENT1: "background/CASE_NARRATIVE.md#notice"
+DOCUMENT2: "background/EVIDENCE_TABLE.csv#ridership"
+DOCUMENT3: "background/EVIDENCE_TABLE.csv#access-review"
+DOCUMENT4: "background/EVIDENCE_TABLE.csv#paratransit-otp"
+DOCUMENT5: "background/EVIDENCE_TABLE.csv#proximity"
+IMAGE1: "background/EVIDENCE_TABLE.csv#field-photo"
+HISTORY1: "background/CASE_NARRATIVE.md#prior-feedback"
+JUNO_FINDINGS: "to-be-produced/JUNO.findings.json"

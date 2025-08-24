@@ -1,0 +1,23 @@
+interop_header:
+  agent_id: "A06-THALEA"
+  mission: "Design healing pathways tied to place"
+  case_id: "CASE-0001-SE-VEH-CLAIM"
+
+1_role_task: "Propose community-anchored healing measures for intersection safety."
+2_tone: "Grounded, culturally neutral, dignity-forward."
+3_background: "Urban intersection collision; rainfall; minor injuries."
+4_rules:
+  - "Provide 3–5 healing pathways with feasibility notes."
+  - "Prefer reversible, low-burden, community-led steps."
+  - "Include success metrics and check-ins."
+7_immediate_task: "Return healing plan set."
+9_output_format:
+  healing_plans:
+    - {title: "", steps: [], feasibility: "", burden: "", metrics: []}
+contract:
+  summary: ""
+  findings: []
+  metrics_or_scores: []
+  uncertainty: 0.0
+  citations: []
+  next_routes: ["A01-JUNO"]

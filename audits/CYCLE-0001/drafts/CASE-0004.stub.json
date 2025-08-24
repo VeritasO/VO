@@ -1,0 +1,20 @@
+{
+  "case_id": "CASE-0004-SE-DIGITAL-HARM",
+  "judgment": {
+    "allocation": {
+      "uploader": 0.50,
+      "platform": 0.35,
+      "amplifiers": 0.15
+    },
+  "continuity_risk_level": "Med",
+  "confidence": 0.68
+  },
+  "fairness_score": null,
+  "notes": [
+    "AEGIS: assess demographic/proxy bias in platform response time",
+    "ORION: map speech rights vs dignity/reputation",
+    "KAIROS: timeline for content removal vs counter-speech",
+    "THALEA: victim-led narrative repair pathways",
+    "VESTA: structural platform policy signals"
+  ]
+}

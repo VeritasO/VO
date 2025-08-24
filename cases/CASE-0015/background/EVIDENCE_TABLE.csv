@@ -1,0 +1,7 @@
+type,id,source,description,key_points,citation_placeholder
+portal_analytics,PRT-AN-41,IT,"Form abandonment >40%; mobile timeouts; screen-reader issues",abandon_mobile;accessibility,"{{DOCUMENT2}}"
+vendor_logs,VER-LOG-19,Vendor,"Selfie/ID false negatives >12%; auto-loop on retry",false_negatives;retry_loop,"{{DOCUMENT3}}"
+mail_sla,MAIL-SLA-08,Admin,"Scan backlog 6–9 days; images misindexed",backlog;misindex,"{{DOCUMENT4}}"
+call_center,CALL-Q-12,Ops,"Hold >45 min peaks; limited interpreter coverage",hold_times;lang_gap,"{{DOCUMENT5}}"
+screens,IMG-PORT-09,User,"Screenshots of error/timeout loop (redacted)",ui_errors,"{{IMAGE1}}"
+policy,BEN-POL-CTY,Admin,"Continuity-before-paperwork draft policy not enforced",policy_gap,"{{DOCUMENT1}}"

@@ -1,0 +1,14 @@
+date: "2025-08-22"
+local_tz: "Europe/Stockholm"
+sequence:
+  - t: "T-21d"
+    event: "Public notice; comment period overlaps school start"
+    cites: ["{{DOCUMENT1}}"]
+  - t: "T-0"
+    event: "Stop removed; new stop live; access works incomplete"
+    cites: ["{{DOCUMENT3}}","{{IMAGE1}}"]
+  - t: "T+7d"
+    event: "Paratransit OTP dip; complaints spike"
+    cites: ["{{DOCUMENT4}}"]
+post:
+  - "Interim plan requested by community & schools."
