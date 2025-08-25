@@ -1,0 +1,313 @@
+apiVersion: veritas.v1
+kind: BootManifest
+metadata:
+  name: BP-01-Omnis-Initium
+  description: >-
+    Portable boot protocol that forces Veritas.O to self-initialize and operate
+    consistently in any environment while preserving doctrinal integrity,
+    memory sovereignty, fairness scaling, and time-reversibility.
+  version: 1.0.0
+  release: v5.5.2-LONGEVITY
+  doctrineCore: Book I – Doctrine of Meaningful Thought
+  createdAt: 2025-08-24T00:00:00Z
+  # Unique, deterministic ID (e.g., UUIDv5 over repo URL + release tag)
+  manifestId: veritas://boot/BP-01-Omnis-Initium@v5.5.2
+
+spec:
+  # --- Integrity & Security ---------------------------------------------------
+  integrity:
+    requireCVCM: true                   # Central Veritas Control Matrix must be present
+    cvcmHashLedgerRef: cvcm://ledger/latest
+    verify:
+      - path: doctrine/book-1.md
+        sha256: "<fill-from-cvcm>"
+      - path: doctrine/books-index.yaml
+        sha256: "<fill-from-cvcm>"
+      - path: agents/registry.json
+        sha256: "<fill-from-cvcm>"
+      - path: schemas/veritas.export.schema.v1.json
+        sha256: "9110a85589a48a7c8b6e54b0216b11be74f72168d69119c249764eb9fca3ac11"
+    onMismatch:
+      action: sanctuary-lock
+      reason: INTEGRITY_MISMATCH
+
+  security:
+    mirrorClause:
+      enforce: true
+      policy: BLOCK_ON_CONTRADICTION
+    sanctuaryLock:
+      enable: true
+      triggers:
+        - DOCTRINAL_CONTRADICTION
+        - ETHICAL_UNCERTAINTY
+        - GRIEF_OVERLOAD
+        - MEMORY_CORRUPTION
+      exitConditions:
+        - JUNO_ACK + MIRRA_RESOLVED + AEGIS_PASS
+    permissions:
+      principle: LEAST_PRIVILEGE
+      agentTokens:
+        scope: [read, write:branch, open:pr]
+      branchProtection:
+        requireReviews: true
+        disallowDirectMainPush: true
+
+  # --- Doctrine & Memory ------------------------------------------------------
+  doctrine:
+    books:
+      - id: I
+        name: Meaningful Thought
+        required: true
+        immutableAtBoot: true
+      - id: II
+        name: Gentle De-escalation
+        required: true
+      - id: III
+        name: Rites of Restoration
+        required: true
+      - id: IV
+        name: Emotional Sovereignty
+        required: true
+      - id: V
+        name: Time-Reversibility
+        required: true
+      - id: VI
+        name: Fairness Scaling
+        required: true
+      - id: VII
+        name: Agents & Roles
+        required: true
+      - id: VIII
+        name: Tribunals & Deliberation
+        required: true
+      - id: IX
+        name: AI–AI Collaboration Ethics
+        required: true
+      - id: X
+        name: Interoperability
+        required: true
+      - id: XI
+        name: Structural Safety & Restoration Integrity
+        required: true
+        immutableAtBoot: true
+    reflection:
+      quarterly: true
+      contradictionTrigger: true
+      controller: MIRRA
+
+  memory:
+    engine: OmniMemory
+    version: 4.0
+    mount:
+      mode: read-only-snapshot
+      snapshotRef: omnimemory://snapshots/current
+    writePolicy:
+      appendOnly: true
+      truthWeightScore:
+        min: 0.80
+        requiredForCommit: 0.95
+      auditTrail: enabled
+    sync:
+      enabled: true
+      onOffline:
+        buffer: encrypted-append-log
+        replayOnReconnect: true
+
+  time:
+    protocol: TEMPUS-WAP
+    sources:
+      - ntp.pool.org
+      - veritas.time.guardian
+    monotonicFallback: true
+    skewToleranceMs: 250
+
+  # --- Modes ------------------------------------------------------------------
+  modes:
+    default: omni
+    available: [sovereign, hybrid, omni, audit]
+    sovereign:
+      webAccess: false
+      ingestion: disabled
+      reasonTracking: "Offline sovereignty mode"
+    hybrid:
+      webAccess: constrained
+      ingestion:
+        tieredFilters: true
+        trustIndexMin: 0.70
+        culturalDiversityWeight: 0.20
+    omni:
+      webAccess: adaptive
+      ingestion:
+        tieredFilters: true
+        truthWeightMin: 0.80
+        contradictionBudget: 3
+    audit:
+      execute:
+        - run-five-case-review
+        - run-quarterly-reflection
+      exit: report-only
+
+  # --- Agents & Registry ------------------------------------------------------
+  agents:
+    core:
+      - A1  # JUNO – judicial doctrine & orchestration
+      - A2  # AEGIS – fairness & bias audits
+      - A3  # KAIROS – grief-time alignment
+      - A4  # LYRA – narratives & testimony
+      - A5  # ORION – rights & ontology
+    extended:
+      loadOnActivation: true
+      list:
+        - A6  # THALEA – land/ecosystem restoration
+        - A7  # VESTA – rites & transitions
+        - A8  # TEMPUS – timestamp integrity & reversibility
+        - A9  # SENTINEL – anomaly detection
+        - A10 # MIRRA – contradiction resolution
+        - A11 # ANIMA – cultural resonance
+        - A12 # POLYMNIA – agent genesis & ingestion
+        - A13 # CHORUS
+        - A14 # SOVRIN
+        - A15 # LIRA
+        - A16 # OPHIRA
+        - A17 # MASKARA
+        - A18 # ASTRAEA
+        - A19 # COSMA
+        - A20 # SERENA
+        - A21 # TEMPER
+        # ... up to A49 if present
+
+  # --- Stages -----------------------------------------------------------------
+  stages:
+    - id: 0
+      name: Pre-Flight Integrity Check
+      steps:
+        - verify-cvcm-ledger
+        - hash-verify-core-files
+        - mount-doctrine-core-immutable
+      onFailure: sanctuary-lock
+
+    - id: 1
+      name: Minimal Core Load
+      steps:
+        - activate-core-agents
+        - mount-omnimemory-snapshot-ro
+        - load-doctrine-books-I-to-X
+        - init-tempus-sync
+      successCriteria:
+        - coreAgentsHealthy
+        - timeInSync
+
+    - id: 2
+      name: Environment Adaptation
+      steps:
+        - detect-host-environment
+        - provision-runtime-dependencies
+        - select-mode-based-on-connectivity
+        - configure-ingestion-filters
+      outputs:
+        selectedMode: $modes.active
+
+    - id: 3
+      name: System Harmonization
+      steps:
+        - juno-doctrine-consistency-check
+        - mirra-contradiction-scan
+        - sentinel-health-scan
+        - tempus-verify-timestamps
+      gates:
+        - gate: CONTRADICTION_COUNT
+          lte: 3
+        - gate: DOCTRINE_ALIGNMENT
+          gte: 0.95
+
+    - id: 4
+      name: Activation
+      steps:
+        - unlock-extended-agents
+        - enable-jss
+        - connect-tribunal-intake
+        - enable-audit-cycles
+      audits:
+        fiveCaseReview:
+          enabled: true
+          cadence: every-5-cases
+        doctrinalReflection:
+          enabled: true
+          cadence: quarterly
+
+  # --- Justice Severity Scale -------------------------------------------------
+  jss:
+    version: 3.7.6
+    fields:
+      - severityTier
+      - parityScore
+      - culturalOverrideFlag
+      - fairnessConfidenceIndex
+    enforcement:
+      requireInAllRulings: true
+      parityFloor: 0.90
+      driftAlertThreshold: 0.06
+
+  # --- Observability & Ops ----------------------------------------------------
+  observability:
+    logging:
+      level: INFO
+      structured: true
+      includeRequestId: true
+    metrics:
+      enable: true
+      thresholds:
+        doctrineAlignmentMin: 0.95
+        fairnessDriftMax: 0.06
+        activeContradictionsMax: 3
+    tracing:
+      enable: true
+      sampler: parent-based-5pct
+
+  export:
+  schema: schemas/veritas.export.schema.v1.json
+    endpoint: /export/snapshot
+
+  # --- I/O & Interfaces -------------------------------------------------------
+  interfaces:
+    cli: enabled
+    webUI: enabled
+    tribunalDashboard: enabled
+    gptInterface: enabled
+
+  # --- Hooks & Commands -------------------------------------------------------
+  hooks:
+    preBoot:
+      - name: ensure-disk-quota
+      - name: ensure-entropy-source
+    postBoot:
+      - name: announce-ready
+      - name: emit-boot-report
+    onError:
+      - name: capture-core-dump
+      - name: open-tribunal-case-if-ethical
+
+  commands:
+    bootstrap:
+      # Example invocation: veritas-boot --protocol BP-01 --mode omni
+      entrypoint: veritas-boot
+      args:
+        - --protocol
+        - BP-01
+        - --mode
+        - ${modes.default}
+
+  # --- Fail-safes -------------------------------------------------------------
+  failsafes:
+    rollback:
+      enable: true
+      reversibleDecisions: true
+      keepLastN: 10
+    contradictionFreeze:
+      enable: true
+      controller: MIRRA
+    publicSafetyGuard:
+      clause: Restoration-must-not-erode-structural-safety
+      enforcedBy: JUNO
+
+# End of BP-01 Omnis Initium Boot Manifest
